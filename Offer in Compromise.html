@@ -3,6 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/webp" href="assets/img/favicon.webp">
+<script>(function(){try{if(localStorage.getItem('ptr-theme')==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}})();</script>
 
 <!-- ===================== SEO (preserved from source) ===================== -->
 <title>IRS Offer in Compromise Services - Priority Tax Relief</title>
@@ -32,8 +34,8 @@
     <div class="container subhero__inner">
       <div class="subhero__text">
         <nav class="breadcrumb reveal" aria-label="Breadcrumb">
-          <a href="index.html">Home</a> ›
-          <a href="index.html">Services</a> ›
+          <a href="Services Page.html">Home</a> ›
+          <a href="Services Page.html">Services</a> ›
           <span aria-current="page">Offer in Compromise</span>
         </nav>
         <h1 class="reveal" data-d="1">Offer In Compromise Services</h1>
@@ -92,10 +94,9 @@
   <section class="cta-band">
     <div class="container">
       <div class="cta-inner">
-        <p class="eyebrow reveal">Get Your Free Consultation</p>
         <h2 class="reveal" data-d="1">Book your free consultation now</h2>
         <a class="btn btn--lg reveal" data-d="2" href="#contact">Get Started</a>
-        <a class="cta-link reveal" data-d="2" href="https://www.prioritytaxrelief.com/services/money-back-guarantee-policy/">Click here to learn more about our money-back guarantee policy</a>
+        <a class="cta-link reveal" data-d="2" href="https://www.prioritytaxrelief.com/services/money-back-guarantee-policy/">Learn about our money-back guarantee</a>
         <p class="cta-sub reveal" data-d="2"><strong><a href="https://prioritytaxrelief.com/contact/">Contact Priority Tax Relief</a> at 888-708-2872 to learn more about Offer In Compromise and schedule a consultation.</strong></p>
       </div>
     </div>
@@ -139,17 +140,16 @@
             <div class="field"><label for="lf-phone">Phone</label><input id="lf-phone" name="phone" type="tel" autocomplete="tel" placeholder="(555) 555-5555" required><span class="err">Please enter a valid phone number.</span></div>
             <div class="field"><label for="lf-email">Email</label><input id="lf-email" name="email" type="email" autocomplete="email" placeholder="you@example.com" required><span class="err">Please enter a valid email.</span></div>
           </div>
-          <div class="field">
-            <label for="lf-debt">Estimated tax debt</label>
-            <select id="lf-debt" name="debt" required>
-              <option value="" selected disabled>Select an amount</option>
-              <option>Less than $10,000</option>
-              <option>$10,000 – $25,000</option>
-              <option>$25,000 – $50,000</option>
-              <option>$50,000 – $100,000</option>
-              <option>More than $100,000</option>
-            </select>
-            <span class="err">Please choose an estimate.</span>
+          <div class="field field--slider">
+            <div class="field__labelrow">
+              <label for="lf-debt">Estimated tax debt</label>
+              <output id="lf-debt-out" for="lf-debt" class="debt-slider__val">$25,000</output>
+            </div>
+            <div class="debt-slider__wrap">
+              <div class="debt-slider__rule" aria-hidden="true"></div>
+              <input type="range" id="lf-debt" name="debt" class="debt-slider" min="0" max="100000" step="500" value="25000" aria-describedby="lf-debt-out">
+            </div>
+            <div class="debt-slider__scale"><span>$0</span><span>$25k</span><span>$50k</span><span>$75k</span><span>$100k+</span></div>
           </div>
           <div class="field">
             <label for="lf-msg">How can we help? <span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--color-base-400)">(optional)</span></label>

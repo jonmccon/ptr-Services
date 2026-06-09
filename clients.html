@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/webp" href="assets/img/favicon.webp">
+<script>(function(){try{if(localStorage.getItem('ptr-theme')==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}})();</script>
+
+<title>Client Portal — Priority Tax Relief</title>
+<meta name="description" content="Check the status of your case with Priority Tax Relief. See where things stand, what's needed from you, and the latest updates from your resolution team — all in one place.">
+<meta name="robots" content="noindex, nofollow">
+
+<link rel="stylesheet" href="assets/css/site.css">
+<link rel="stylesheet" href="assets/css/pages.css">
+<link rel="stylesheet" href="assets/css/portal.css">
+</head>
+<body data-layout="editorial" data-page="clients">
+
+<div id="chrome-header"></div>
+
+<main class="portal">
+
+  <!-- ============================ SCREEN 1 — LOGIN ============================ -->
+  <section class="pscreen pscreen--auth show portal--auth" data-screen="login" data-screen-label="Login">
+    <div class="container auth-wrap">
+      <div class="auth-card">
+        <div class="auth-card__flag"><img src="assets/img/logo/ptr-mark.png" alt="Priority Tax Relief"></div>
+        <h1 class="auth-card__title">Check the status of your case.</h1>
+        <p class="auth-card__sub">Sign in with your email — no password needed. We'll send a one-time code to confirm it's you.</p>
+        <form class="auth-form" id="loginForm" novalidate>
+          <div class="field">
+            <label for="login-email">Email address</label>
+            <input id="login-email" name="email" type="email" autocomplete="email" placeholder="you@example.com" required>
+            <span class="err">Please enter your email address.</span>
+          </div>
+          <button type="submit" class="btn btn--lg auth-submit" id="loginBtn">
+            <span class="auth-submit__label">Send me a code</span>
+            <span class="auth-submit__spin"></span>
+          </button>
+        </form>
+        <p class="auth-card__foot">Trouble signing in? <a href="Contact.html">Contact support</a> &nbsp;·&nbsp; <a href="https://www.prioritytaxrelief.com/privacy-policy/">Privacy</a></p>
+      </div>
+      <p class="auth-aside">Your information is protected. We never share your details with third parties for marketing purposes.</p>
+    </div>
+  </section>
+
+  <!-- ============================ SCREEN 2 — EMAIL PIN ============================ -->
+  <section class="pscreen pscreen--auth portal--auth" data-screen="pin" data-screen-label="Verify code" hidden>
+    <div class="container auth-wrap">
+      <div class="auth-card">
+        <button class="auth-back" id="pinBack" type="button">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+          Change email
+        </button>
+        <div class="auth-card__flag"><img src="assets/img/logo/ptr-mark.png" alt="Priority Tax Relief"></div>
+        <h1 class="auth-card__title">Enter your code</h1>
+        <p class="auth-card__sub">We sent a 6-digit code to <strong id="maskedEmail">j•••@email.com</strong></p>
+        <form class="auth-form" id="pinForm" novalidate>
+          <div class="pin-row" id="pinRow" role="group" aria-label="6-digit verification code">
+            <input class="pin-box" inputmode="numeric" autocomplete="one-time-code" maxlength="1" aria-label="Digit 1">
+            <input class="pin-box" inputmode="numeric" maxlength="1" aria-label="Digit 2">
+            <input class="pin-box" inputmode="numeric" maxlength="1" aria-label="Digit 3">
+            <input class="pin-box" inputmode="numeric" maxlength="1" aria-label="Digit 4">
+            <input class="pin-box" inputmode="numeric" maxlength="1" aria-label="Digit 5">
+            <input class="pin-box" inputmode="numeric" maxlength="1" aria-label="Digit 6">
+          </div>
+          <p class="pin-err" id="pinErr" hidden>Please enter all 6 digits to continue.</p>
+          <button type="submit" class="btn btn--lg auth-submit" id="verifyBtn">
+            <span class="auth-submit__label">Verify</span>
+            <span class="auth-submit__spin"></span>
+          </button>
+        </form>
+        <p class="auth-card__foot">Didn't get it? <button class="linkbtn" id="resendBtn" type="button">Resend code</button> <span class="resend-timer" id="resendTimer" hidden></span></p>
+      </div>
+      <p class="auth-aside">For your security, the code expires after 10 minutes. You can request a new one anytime.</p>
+    </div>
+  </section>
+
+  <!-- ============================ SCREEN 3 — CASE DASHBOARD ============================ -->
+  <section class="pscreen dash" data-screen="dashboard" data-screen-label="Case dashboard" hidden>
+    <div class="container">
+
+      <!-- A · Welcome header -->
+      <div class="dash-head">
+        <div>
+          <h1 class="dash-head__hi">Hi James</h1>
+          <div class="dash-head__meta">
+            <span class="dash-head__ref">
+              <img src="assets/img/logo/ptr-mark.png" alt="">
+              Case #PTR-2024-0847
+            </span>
+            <span class="dash-head__updated">Updated 2 hours ago</span>
+          </div>
+        </div>
+        <button class="dash-head__signout" id="signOut" type="button">Sign out</button>
+      </div>
+
+      <!-- B · Status tracker (the pizza tracker) -->
+      <div class="panel tracker-card">
+        <p class="tracker-card__eyebrow">Case progress</p>
+        <div class="tracker" style="--steps:5; --current:1">
+          <div class="tracker__rail"><div class="tracker__fill"></div></div>
+          <ol class="tracker__steps">
+            <li class="tstep is-done">
+              <span class="tstep__node"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
+              <span class="tstep__text"><span class="tstep__label">Investigation</span><span class="tstep__state">Done</span></span>
+            </li>
+            <li class="tstep is-current">
+              <span class="tstep__node"><span class="tstep__num">2</span></span>
+              <span class="tstep__text"><span class="tstep__label">Document Review</span><span class="tstep__state">In progress</span></span>
+            </li>
+            <li class="tstep">
+              <span class="tstep__node"><span class="tstep__num">3</span></span>
+              <span class="tstep__text"><span class="tstep__label">Resolution</span><span class="tstep__state">Upcoming</span></span>
+            </li>
+            <li class="tstep">
+              <span class="tstep__node"><span class="tstep__num">4</span></span>
+              <span class="tstep__text"><span class="tstep__label">Finalizing</span><span class="tstep__state">Upcoming</span></span>
+            </li>
+            <li class="tstep">
+              <span class="tstep__node"><span class="tstep__num">5</span></span>
+              <span class="tstep__text"><span class="tstep__label">Complete</span><span class="tstep__state">Upcoming</span></span>
+            </li>
+          </ol>
+          <div class="tracker__status">
+            <span class="tracker__status-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"></path><circle cx="12" cy="12" r="3"></circle></svg></span>
+            <p><b>Your case is currently in review by our services team.</b> We're going through your documents now — there's nothing you need to do unless we ask.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- C · Next step / action banner (action-needed state) -->
+      <div class="action" id="actionBanner" style="margin-bottom:26px">
+        <span class="action__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg></span>
+        <div class="action__body">
+          <span class="action__chip">Action needed</span>
+          <p class="action__title">Please upload your signed authorization form.</p>
+          <p class="action__sub">We need this to keep moving on your case. It only takes a minute.</p>
+        </div>
+        <button class="btn" id="actionUpload" type="button">Upload form</button>
+      </div>
+
+      <!-- Two-column body -->
+      <div class="dash-grid">
+
+        <!-- MAIN column -->
+        <div class="dash-col">
+
+          <!-- D · Documents -->
+          <div class="panel">
+            <div class="panel__head">
+              <h3 class="panel__title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
+                Your documents
+              </h3>
+            </div>
+            <div class="panel__body">
+              <div class="doc-group">
+                <p class="doc-group__label">
+                  <svg class="ok" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  Submitted <span class="panel__count" id="submittedCount">3 items</span>
+                </p>
+                <div class="doc-list" id="docsSubmitted">
+                  <div class="doc doc--done">
+                    <span class="doc__mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
+                    <div class="doc__info"><div class="doc__name">IRS Form 2848 — Power of Attorney</div><div class="doc__meta">Received Jun 3, 2026</div></div>
+                  </div>
+                  <div class="doc doc--done">
+                    <span class="doc__mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
+                    <div class="doc__info"><div class="doc__name">2023 Federal Tax Return</div><div class="doc__meta">Received Jun 3, 2026</div></div>
+                  </div>
+                  <div class="doc doc--done">
+                    <span class="doc__mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
+                    <div class="doc__info"><div class="doc__name">Wage &amp; Income Transcript</div><div class="doc__meta">Received Jun 5, 2026</div></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="doc-group">
+                <p class="doc-group__label">
+                  <svg class="up" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"></path><polyline points="7 8 12 3 17 8"></polyline><line x1="5" y1="21" x2="19" y2="21"></line></svg>
+                  Still needed <span class="panel__count" id="neededCount">2 items</span>
+                </p>
+                <div class="doc-list" id="docsNeeded">
+                  <div class="doc doc--needed" data-key="auth">
+                    <span class="doc__mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"></path><polyline points="7 8 12 3 17 8"></polyline><line x1="5" y1="21" x2="19" y2="21"></line></svg></span>
+                    <div class="doc__info"><div class="doc__name">Signed Authorization Form (Form 8821)</div><div class="doc__meta">Needed to continue · drag a file here or</div></div>
+                    <button class="doc__upload" type="button">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"></path><polyline points="7 8 12 3 17 8"></polyline><line x1="5" y1="21" x2="19" y2="21"></line></svg>
+                      Upload
+                    </button>
+                    <input type="file" hidden>
+                  </div>
+                  <div class="doc doc--needed" data-key="bank">
+                    <span class="doc__mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"></path><polyline points="7 8 12 3 17 8"></polyline><line x1="5" y1="21" x2="19" y2="21"></line></svg></span>
+                    <div class="doc__info"><div class="doc__name">Bank Statements — last 3 months</div><div class="doc__meta">Drag a file here or</div></div>
+                    <button class="doc__upload" type="button">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"></path><polyline points="7 8 12 3 17 8"></polyline><line x1="5" y1="21" x2="19" y2="21"></line></svg>
+                      Upload
+                    </button>
+                    <input type="file" hidden>
+                  </div>
+                </div>
+                <div class="doc-empty" id="docsEmpty" hidden>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  You're all caught up — nothing to submit.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- E · Latest updates -->
+          <div class="panel">
+            <div class="panel__head">
+              <h3 class="panel__title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+                Latest updates
+              </h3>
+            </div>
+            <div class="panel__body">
+              <ul class="feed">
+                <li class="feed__item feed__item--latest">
+                  <div class="feed__date">Jun 8, 2026</div>
+                  <p class="feed__msg">We've received your documents and begun our review.</p>
+                </li>
+                <li class="feed__item">
+                  <div class="feed__date">Jun 5, 2026</div>
+                  <p class="feed__msg">Your case has been assigned to Marcus Reyes, a senior resolution specialist.</p>
+                </li>
+                <li class="feed__item">
+                  <div class="feed__date">Jun 3, 2026</div>
+                  <p class="feed__msg">Case opened — your dedicated team is now in place.</p>
+                </li>
+                <li class="feed__item is-hidden" data-extra>
+                  <div class="feed__date">Jun 2, 2026</div>
+                  <p class="feed__msg">Welcome to Priority Tax Relief. Your intake call is complete.</p>
+                </li>
+                <li class="feed__item is-hidden" data-extra>
+                  <div class="feed__date">May 30, 2026</div>
+                  <p class="feed__msg">We received your free consultation request. Thanks for reaching out.</p>
+                </li>
+              </ul>
+              <button class="linkbtn feed-toggle" id="feedToggle" data-expanded="false" type="button">Show all updates</button>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- SIDE column -->
+        <div class="dash-col dash-col--side">
+
+          <!-- C(b) · Estimated timeline -->
+          <div class="panel">
+            <div class="panel__head">
+              <h3 class="panel__title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><polyline points="12 8 12 12 15 13"></polyline></svg>
+                Estimated timeline
+              </h3>
+            </div>
+            <div class="panel__body">
+              <div class="est__num">8–10 <span>weeks</span></div>
+              <p class="est__label">Estimated time to completion</p>
+              <p class="est__note">This is typical for cases at the document-review stage. We'll refine it as your case moves forward.</p>
+            </div>
+          </div>
+
+          <!-- F · Contact box -->
+          <div class="panel">
+            <div class="panel__head">
+              <h3 class="panel__title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8z"></path></svg>
+                Have a question?
+              </h3>
+            </div>
+            <div class="panel__body">
+              <div class="rep">
+                <div class="rep__photo" style="position:relative">
+                  <img class="fallback-mark" src="assets/img/logo/ptr-mark.png" alt="">
+                  <img src="https://www.prioritytaxrelief.com/wp-content/uploads/2025/04/DSC_1503-scaled.jpg" alt="Marcus Reyes" loading="lazy" onerror="this.remove()" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+                </div>
+                <div>
+                  <div class="rep__name">Marcus Reyes</div>
+                  <div class="rep__role">Senior Resolution Specialist</div>
+                  <div class="rep__hours">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><polyline points="12 8 12 12 15 13"></polyline></svg>
+                    Mon–Fri · 7am–5pm PT
+                  </div>
+                </div>
+              </div>
+              <form class="note-form" id="noteForm" novalidate>
+                <div class="note-form__fields">
+                  <div class="field">
+                    <label for="note-msg">Send us a note</label>
+                    <textarea id="note-msg" name="message" rows="4" placeholder="Ask a question or share an update…"></textarea>
+                  </div>
+                  <button type="submit" class="btn btn--green" style="width:100%">Send note</button>
+                </div>
+                <div class="note-confirm">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <div><strong>Got it — message sent.</strong>Someone from your team will reply soon, usually the same day.</div>
+                </div>
+              </form>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<div id="chrome-footer"></div>
+
+<script src="assets/js/chrome.js"></script>
+<script src="assets/js/site.js"></script>
+<script src="assets/js/portal.js"></script>
+</body>
+</html>

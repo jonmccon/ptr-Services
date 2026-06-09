@@ -19,19 +19,19 @@
     { title: "Currently Not Collectible (CNC)", icon: "assets/img/services/currently-not-collectible.png",
       desc: "Feeling overwhelmed by tax debt and unable to make payments? Our Currently Not Collectible (CNC) service is designed to help you find immediate relief from IRS collections. By proving your financial hardship, our experienced team can help you temporarily halt all IRS collection activities, giving you the breathing room you need to get back on your feet.",
       url: "Currently Not Collectible.html" },
-    { title: "Installment Agreement", icon: ICON + "installment-agreement-icon-1024x1024.jpg",
+    { title: "Installment Agreement", icon: "assets/img/services/installment-agreement.png",
       desc: "Are you struggling to manage your tax debt all at once? Our Installment Agreement service offers a practical solution by allowing you to break down your tax payments into manageable monthly installments. Our team of tax experts will work with the IRS on your behalf to secure a payment plan that fits your financial situation, ensuring you stay on track without overwhelming your budget.",
       url: "Installment Agreement.html" },
-    { title: "Stop Wage Garnishment", icon: ICON + "stop-wage-garnishment-icon-1024x1024.jpg",
+    { title: "Stop Wage Garnishment", icon: "assets/img/services/stop-wage-garnishment.png",
       desc: "Are you facing wage garnishment and struggling to make ends meet? Our Stop Wage Garnishment service is here to provide you with immediate relief. Our experienced team will work tirelessly on your behalf to negotiate with the IRS and put an end to the garnishment of your wages, allowing you to regain control of your finances.",
       url: "Stop Wage Garnishment.html" },
-    { title: "Bank Levy Release", icon: ICON + "bank-levy-release-icon-1024x1024.jpg",
+    { title: "Bank Levy Release", icon: "assets/img/services/bank-levy-release.png",
       desc: "Is your bank account frozen due to an IRS levy, leaving you struggling to access your funds? Our Bank Levy Release service is here to provide you with immediate relief. Our team of skilled tax professionals will negotiate directly with the IRS to release the levy on your bank account, helping you regain control of your finances quickly and efficiently.",
       url: "Bank Levy Release.html" },
-    { title: "Back Payroll Taxes", icon: ICON + "bank-sales-tax-icon-1-1024x1024.jpg",
+    { title: "Back Payroll Taxes", icon: "assets/img/services/back-payroll-taxes.png",
       desc: "Are you overwhelmed by the complexity of managing payroll taxes for your business? Our Back Payroll Taxes service is designed to simplify the process and ensure compliance, saving you time and reducing stress. Our team of experts will handle all aspects of your payroll taxes, from accurate calculations to timely submissions, allowing you to focus on what you do best\u2014running your business.",
       url: "Back Payroll Taxes.html" },
-    { title: "Back Sales Tax", icon: ICON + "bank-sales-tax-icon-1024x1024.jpg",
+    { title: "Back Sales Tax", icon: "assets/img/services/back-sales-tax.png",
       desc: "Are overdue sales taxes putting your business at risk and causing unnecessary stress? Our Back Sales Taxes service is here to help you get back on track. Our team of tax experts will work diligently to resolve your outstanding sales tax issues, negotiate with tax authorities on your behalf, and implement a strategy to prevent future liabilities. Don\u2019t let back sales taxes jeopardize your business\u2014contact us today to learn how we can help you settle your debt and secure a stable financial future. Take the first step towards peace of mind and financial stability with our expert assistance!",
       url: null /* page missing — dead link */ }
   ];
@@ -191,11 +191,58 @@
         f.classList.toggle("invalid", bad);
         if (bad) ok = false;
       });
-      if (ok) { form.classList.add("sent"); form.scrollIntoView ? null : null; }
+      if (ok) {
+        /* Show inline confirmation, then route to the Thank You page. */
+        form.classList.add("sent");
+        window.location.assign("Thank You.html");
+      }
     });
     form.addEventListener("input", function (e) {
       if (e.target.classList.contains("invalid")) e.target.classList.remove("invalid");
     });
+
+    /* Estimated tax debt slider — live value readout ($500 steps) */
+    var debt = document.getElementById("lf-debt");
+    var debtOut = document.getElementById("lf-debt-out");
+    if (debt && debtOut) {
+      var fmtDebt = function (n) {
+        n = +n;
+        var label = "$" + n.toLocaleString("en-US");
+        if (n >= +debt.max) label += "+";
+        return label;
+      };
+      var updDebt = function () { debtOut.textContent = fmtDebt(debt.value); };
+      debt.addEventListener("input", updDebt);
+      updDebt();
+    }
   }
+
+  /* ----- Dark-mode floating toggle -----
+     Built here so it works on every page regardless of whether the header is
+     hand-written (Services Page) or injected by chrome.js. Floats at top-right,
+     just below the header (the Clients button), per design. */
+  (function () {
+    var root = document.documentElement;
+    function theme() { return root.getAttribute("data-theme") === "dark" ? "dark" : "light"; }
+    var legacy = document.getElementById("themeToggle");
+    if (legacy) legacy.remove(); /* drop any in-header instance to avoid duplicates */
+    var btn = document.createElement("button");
+    btn.id = "themeToggle";
+    btn.type = "button";
+    btn.className = "theme-toggle";
+    btn.setAttribute("aria-label", "Toggle dark mode");
+    btn.innerHTML =
+      '<svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>' +
+      '<svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><line x1="12" y1="2" x2="12" y2="4"></line><line x1="12" y1="20" x2="12" y2="22"></line><line x1="4.93" y1="4.93" x2="6.34" y2="6.34"></line><line x1="17.66" y1="17.66" x2="19.07" y2="19.07"></line><line x1="2" y1="12" x2="4" y2="12"></line><line x1="20" y1="12" x2="22" y2="12"></line><line x1="6.34" y1="17.66" x2="4.93" y2="19.07"></line><line x1="19.07" y1="4.93" x2="17.66" y2="6.34"></line></svg>';
+    function syncPressed() { btn.setAttribute("aria-pressed", theme() === "dark" ? "true" : "false"); }
+    btn.addEventListener("click", function () {
+      var next = theme() === "dark" ? "light" : "dark";
+      root.setAttribute("data-theme", next);
+      try { localStorage.setItem("ptr-theme", next); } catch (e) {}
+      syncPressed();
+    });
+    document.body.appendChild(btn);
+    syncPressed();
+  })();
 
 })();
