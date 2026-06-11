@@ -1,10 +1,25 @@
-# Priority Tax Relief — Static Site
+# What is this
 
-A self-contained static build of the Priority Tax Relief marketing site,
-ready to publish on **GitHub Pages**. No build step, no server, no
-dependencies to install — just static HTML, CSS, JS and images.
+Basically I downloaded the rendered pages from the existing website, dragged them through claude, added a design component system, and tried to keep all the exisiting page architecture and content as consistent as I could. Then output a bunch of static html files that are this repo. Implementation plan is stil TBD on whether we're going to rebuild this all in WP or drop in the completed page into a WP container. BUT the goal is to carry through the existing work from Rise either way. There is a migration analysis document available to provide a starting point for what was changed. 
 
-## What's in here
+[Original rendered WP pages](/PTR-Pages-Download/)
+
+[Migration doc](migration-audit-services.md)
+
+If there are any questions or just want to talk through this lemme know jmcconnell@taxresolutionteam.com
+
+cheers, 
+J
+
+---
+
+
+
+
+#### Priority Tax Relief — Static Site
+
+A self-contained static build of the Priority Tax Relief marketing site
+
 
 ```
 index.html                  ← site landing (the Services page)
@@ -21,20 +36,7 @@ assets/                     ← css / js / img (logos, badges, photos, icons)
 .nojekyll                   ← tells GitHub Pages to skip Jekyll processing
 ```
 
-## Deploy to GitHub Pages
-
-1. Create a new repository and push the **contents of this folder** to the
-   repo root (so `index.html` sits at the top level of the repo).
-2. In the repo, go to **Settings → Pages**.
-3. Under **Build and deployment → Source**, choose **Deploy from a branch**.
-4. Pick your branch (e.g. `main`) and folder **`/ (root)`**, then **Save**.
-5. Wait ~1 minute. Your site goes live at
-   `https://<username>.github.io/<repo>/`.
-
-> The included `.nojekyll` file is important — it stops GitHub from running
-> Jekyll, which can otherwise interfere with file serving.
-
-## Notes
+#### Notes
 
 - **Filenames contain spaces** (e.g. `Offer in Compromise.html`). This is
   intentional and works on GitHub Pages — every internal link already matches.
