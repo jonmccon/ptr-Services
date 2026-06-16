@@ -248,6 +248,25 @@
     form.addEventListener("input", clearInvalid);
     form.addEventListener("change", clearInvalid);
 
+    /* "How did you hear about us?" — reveal a text field when "Other" is picked */
+    var hearSel = document.getElementById("lf-hear");
+    var hearOtherField = document.getElementById("lf-hear-other-field");
+    var hearOtherInput = document.getElementById("lf-hear-other");
+    if (hearSel && hearOtherField && hearOtherInput) {
+      hearSel.addEventListener("change", function () {
+        var isOther = hearSel.value === "Other (Please specify)";
+        hearOtherField.hidden = !isOther;
+        if (isOther) {
+          hearOtherInput.setAttribute("required", "");
+          hearOtherInput.focus();
+        } else {
+          hearOtherInput.removeAttribute("required");
+          hearOtherInput.value = "";
+          hearOtherInput.classList.remove("invalid");
+        }
+      });
+    }
+
     showStep(1);
   }
 

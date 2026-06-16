@@ -162,14 +162,23 @@
               <label for="lf-hear">How did you hear about us?</label>
               <select id="lf-hear" name="hear" required>
                 <option value="" disabled selected hidden>Select one</option>
+                <option>Google / Bing</option>
                 <option>TV</option>
-                <option>Radio</option>
-                <option>Searching for Help</option>
-                <option>Referred by friend/family</option>
-                <option>Social media</option>
-                <option>Other</option>
+                <option>Radio / Satellite Radio / Podcast</option>
+                <option>Billboard</option>
+                <option>Friend / Word of Mouth</option>
+                <option>AI Chat</option>
+                <option>Social Media</option>
+                <option>Review or Finance Website</option>
+                <option>Email</option>
+                <option>Other (Please specify)</option>
               </select>
               <span class="err">Please select an option.</span>
+            </div>
+            <div class="field" id="lf-hear-other-field" hidden>
+              <label for="lf-hear-other">Please specify</label>
+              <input id="lf-hear-other" name="hearOther" type="text" placeholder="Tell us how you heard about us">
+              <span class="err">Please tell us how.</span>
             </div>
             <button type="button" class="btn btn--lg" data-step-next style="width:100%">Next</button>
           </div>
