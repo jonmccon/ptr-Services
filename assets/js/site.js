@@ -175,46 +175,80 @@
     });
   }
 
-  /* ----- Lead form validation ----- */
+  /* ----- Lead form: 3-step pre-qualify ----- */
   var form = document.getElementById("leadForm");
   if (form) {
     var emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     var phoneRe = /[0-9]{7,}/;
-    form.addEventListener("submit", function (e) {
-      e.preventDefault();
+    var steps = Array.prototype.slice.call(form.querySelectorAll(".form-step"));
+
+    function showStep(n) {
+      steps.forEach(function (s) {
+        s.classList.toggle("is-active", +s.getAttribute("data-step") === n);
+      });
+    }
+
+    function fieldBad(f) {
+      var v = (f.value || "").trim();
+      var bad = !v;
+      if (!bad && f.type === "email") bad = !emailRe.test(v);
+      if (!bad && f.type === "tel") bad = !phoneRe.test(v.replace(/\D/g, ""));
+      return bad;
+    }
+
+    function validateStep(stepEl) {
       var ok = true;
-      form.querySelectorAll("input[required], select[required]").forEach(function (f) {
-        var v = (f.value || "").trim();
-        var bad = !v;
-        if (!bad && f.type === "email") bad = !emailRe.test(v);
-        if (!bad && f.type === "tel") bad = !phoneRe.test(v.replace(/\D/g, ""));
+      stepEl.querySelectorAll("input[required], select[required]").forEach(function (f) {
+        var bad = fieldBad(f);
         f.classList.toggle("invalid", bad);
+        if (f.type === "hidden") {
+          var grp = stepEl.querySelector('.toggle-group');
+          if (grp) grp.classList.toggle("invalid", bad);
+        }
         if (bad) ok = false;
       });
-      if (ok) {
-        /* Show inline confirmation, then route to the Thank You page. */
-        form.classList.add("sent");
-        window.location.assign("Thank You.html");
-      }
-    });
-    form.addEventListener("input", function (e) {
-      if (e.target.classList.contains("invalid")) e.target.classList.remove("invalid");
+      return ok;
+    }
+
+    /* Toggle buttons (e.g. Unfiled returns Yes/No) feed a hidden input */
+    form.querySelectorAll(".toggle-btn").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var name = btn.getAttribute("data-toggle");
+        form.querySelectorAll('.toggle-btn[data-toggle="' + name + '"]').forEach(function (b) {
+          var on = b === btn;
+          b.classList.toggle("is-active", on);
+          b.setAttribute("aria-checked", on ? "true" : "false");
+        });
+        var hidden = document.getElementById("lf-" + name);
+        if (hidden) { hidden.value = btn.getAttribute("data-value"); hidden.classList.remove("invalid"); }
+        var grp = btn.closest(".toggle-group");
+        if (grp) grp.classList.remove("invalid");
+      });
     });
 
-    /* Estimated tax debt slider — live value readout ($500 steps) */
-    var debt = document.getElementById("lf-debt");
-    var debtOut = document.getElementById("lf-debt-out");
-    if (debt && debtOut) {
-      var fmtDebt = function (n) {
-        n = +n;
-        var label = "$" + n.toLocaleString("en-US");
-        if (n >= +debt.max) label += "+";
-        return label;
-      };
-      var updDebt = function () { debtOut.textContent = fmtDebt(debt.value); };
-      debt.addEventListener("input", updDebt);
-      updDebt();
+    /* Next buttons validate the current step, then advance */
+    form.querySelectorAll("[data-step-next]").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var cur = btn.closest(".form-step");
+        if (!validateStep(cur)) return;
+        showStep(+cur.getAttribute("data-step") + 1);
+      });
+    });
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      if (!validateStep(steps[steps.length - 1])) return;
+      form.classList.add("sent");
+      window.location.assign("Thank You.html");
+    });
+
+    function clearInvalid(e) {
+      if (e.target.classList && e.target.classList.contains("invalid")) e.target.classList.remove("invalid");
     }
+    form.addEventListener("input", clearInvalid);
+    form.addEventListener("change", clearInvalid);
+
+    showStep(1);
   }
 
   /* ----- Dark-mode floating toggle -----

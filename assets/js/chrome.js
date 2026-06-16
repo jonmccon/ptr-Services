@@ -57,7 +57,7 @@
           '<span>Tax Help Hotline (866)&nbsp;708-2872</span>' +
           '<img class="hotline__icon" src="assets/img/icons8-call.gif" alt="">' +
         '</a>' +
-        '<a class="btn" href="clients.html">Clients</a>' +
+        '<a class="btn" href="clients.html" style="color:#000">Clients</a>' +
         '<button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">' +
           '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>' +
         '</button>' +
@@ -70,7 +70,7 @@
       '<a href="Careers.html">Careers</a>' +
       '<div class="mobile-nav__actions">' +
         '<a class="hotline" href="tel:18667082872">Tax Help Hotline (866)&nbsp;708-2872</a>' +
-        '<a class="btn" href="clients.html">Clients</a>' +
+        '<a class="btn" href="clients.html" style="color:#000">Clients</a>' +
       '</div>' +
     '</nav>' +
   '</header>';
@@ -92,26 +92,47 @@
           '<li>' + CHECK + ' 3-day money-back guarantee</li>' +
         '</ul>' +
       '</div>' +
-      '<form class="lead-form reveal" data-d="1" id="leadForm" novalidate>' +
+      '<form class="lead-form lead-form--steps reveal" data-d="1" id="leadForm" novalidate style="width: 500px">' +
         '<div class="lead-form__fields">' +
-          '<div class="row">' +
-            '<div class="field"><label for="lf-first">First name</label><input id="lf-first" name="first" type="text" autocomplete="given-name" required><span class="err">Please enter your first name.</span></div>' +
-            '<div class="field"><label for="lf-last">Last name</label><input id="lf-last" name="last" type="text" autocomplete="family-name" required><span class="err">Please enter your last name.</span></div>' +
+          '<h3 class="lead-form__title">Pre-Qualify for Forgiveness Today</h3>' +
+          '<div class="form-step is-active" data-step="1">' +
+            '<div class="field"><label for="lf-owe">How much do they say you owe?</label>' +
+              '<select id="lf-owe" name="owe" required>' +
+                '<option value="" disabled selected hidden>Select an amount</option>' +
+                '<option>Under $4,999</option>' +
+                '<option>$5,000 - $9,999</option>' +
+                '<option>$10,000 - $19,999</option>' +
+                '<option>$20,000 - $49,999</option>' +
+                '<option>$50,000 +</option>' +
+              '</select><span class="err">Please select an amount.</span></div>' +
+            '<button type="button" class="btn btn--lg" data-step-next style="width:100%">Get Started</button>' +
           '</div>' +
-          '<div class="row">' +
-            '<div class="field"><label for="lf-phone">Phone</label><input id="lf-phone" name="phone" type="tel" autocomplete="tel" placeholder="(555) 555-5555" required><span class="err">Please enter a valid phone number.</span></div>' +
-            '<div class="field"><label for="lf-email">Email</label><input id="lf-email" name="email" type="email" autocomplete="email" placeholder="you@example.com" required><span class="err">Please enter a valid email.</span></div>' +
+          '<div class="form-step" data-step="2">' +
+            '<div class="field"><label>Do you have any Unfiled Tax Returns?</label>' +
+              '<div class="toggle-group" role="radiogroup" aria-label="Do you have any Unfiled Tax Returns?">' +
+                '<button type="button" class="toggle-btn" data-toggle="unfiled" data-value="No" role="radio" aria-checked="false">No</button>' +
+                '<button type="button" class="toggle-btn" data-toggle="unfiled" data-value="Yes" role="radio" aria-checked="false">Yes</button>' +
+              '</div>' +
+              '<input type="hidden" id="lf-unfiled" name="unfiled" required><span class="err">Please choose one.</span></div>' +
+            '<div class="field"><label for="lf-hear">How did you hear about us?</label>' +
+              '<select id="lf-hear" name="hear" required>' +
+                '<option value="" disabled selected hidden>Select one</option>' +
+                '<option>TV</option>' +
+                '<option>Radio</option>' +
+                '<option>Searching for Help</option>' +
+                '<option>Referred by friend/family</option>' +
+                '<option>Social media</option>' +
+                '<option>Other</option>' +
+              '</select><span class="err">Please select an option.</span></div>' +
+            '<button type="button" class="btn btn--lg" data-step-next style="width:100%">Next</button>' +
           '</div>' +
-          '<div class="field field--slider"><div class="field__labelrow"><label for="lf-debt">Estimated tax debt</label><output id="lf-debt-out" for="lf-debt" class="debt-slider__val">$25,000</output></div>' +
-            '<div class="debt-slider__wrap"><div class="debt-slider__rule" aria-hidden="true"></div>' +
-            '<input type="range" id="lf-debt" name="debt" class="debt-slider" min="0" max="100000" step="500" value="25000" aria-describedby="lf-debt-out"></div>' +
-            '<div class="debt-slider__scale"><span>$0</span><span>$25k</span><span>$50k</span><span>$75k</span><span>$100k+</span></div>' +
+          '<div class="form-step" data-step="3">' +
+            '<div class="field"><label for="lf-first">Contact Information <span class="req">*</span></label><input id="lf-first" name="first" type="text" autocomplete="given-name" placeholder="First Name" required><span class="err">Please enter your name.</span></div>' +
+            '<div class="field"><label for="lf-phone">Phone Number <span class="req">*</span></label><input id="lf-phone" name="phone" type="tel" autocomplete="tel" placeholder="(555) 123-4567" required><span class="err">Please enter a valid phone number.</span></div>' +
+            '<div class="field"><label for="lf-email">Email Address</label><input id="lf-email" name="email" type="email" autocomplete="email" placeholder="your.email@example.com"><span class="err">Please enter a valid email.</span></div>' +
+            '<p class="consent">' + CONSENT + '</p>' +
+            '<button type="submit" class="btn btn--lg" style="width:100%">Prequalify Now</button>' +
           '</div>' +
-          '<div class="field"><label for="lf-msg">How can we help? <span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--color-base-400)">(optional)</span></label>' +
-            '<textarea id="lf-msg" name="message" rows="3" placeholder="Briefly describe your tax situation"></textarea>' +
-          '</div>' +
-          '<p class="consent">' + CONSENT + '</p>' +
-          '<button type="submit" class="btn btn--lg" style="width:100%">Pre-Qualify Now</button>' +
         '</div>' +
         '<div class="form-success">Thank you \u2014 your request has been received. A tax professional will reach out shortly.</div>' +
       '</form>' +

@@ -54,32 +54,80 @@
     </div>
   </section>
 
-  <!-- ============================ WHY JOIN ============================ -->
-  <section class="section section--bone">
+  <!-- ============================ TEAM CAROUSEL ============================ -->
+  <section class="section section--tight" id="life" aria-labelledby="life-h">
     <div class="container">
       <div class="section__head reveal">
-        <p class="eyebrow eyebrow--green">Why join us</p>
-        <h2>A winning culture, built by people who’ve been on the field</h2>
+        <p class="eyebrow">Life at Priority</p>
+        <h2 id="life-h">This is the team you’d be joining</h2>
+        <p class="section__intro">We work hard, we win for our clients — and we don’t take ourselves too seriously. A look at the people behind Priority Tax Relief.</p>
       </div>
-      <div class="points">
-        <div class="point reveal">
-          <hr class="point__rule">
-          <h3>We play as a team</h3>
-          <p>We’re the Coach, the QB and the Linebacker — the client is the Receiver. Everyone has a role, and everyone moves the ball forward.</p>
+
+      <div class="tcar reveal" data-tcar>
+        <button class="tcar__nav tcar__nav--prev" type="button" aria-label="Previous" data-tcar-prev>
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg>
+        </button>
+        <div class="tcar__track" data-tcar-track>
+          <figure class="tcar__card"><img src="assets/img/careers/team-1.png" alt="Two Priority Tax Relief teammates in PTR volleyball jerseys giving a thumbs up" loading="lazy"></figure>
+          <figure class="tcar__card"><img src="assets/img/careers/team-4.png" alt="Two Priority Tax Relief teammates working the phones in the office" loading="lazy"></figure>
+          <figure class="tcar__card"><img src="assets/img/careers/team-2.png" alt="A teammate in the office, captioned The Fixer" loading="lazy"></figure>
+          <figure class="tcar__card"><img src="assets/img/careers/team-3.png" alt="A teammate practicing putting in the office, captioned The Tax Terminator" loading="lazy"></figure>
+          <figure class="tcar__card"><img src="assets/img/careers/team-6.png" alt="A teammate in a Bigfoot costume meeting with a colleague in the conference room" loading="lazy"></figure>
+          <figure class="tcar__card"><img src="assets/img/careers/team-5.png" alt="A teammate at his desk wearing a party hat and blowing a party horn" loading="lazy"></figure>
         </div>
-        <div class="point reveal" data-d="1">
-          <hr class="point__rule">
-          <h3>Extreme ownership</h3>
-          <p>No excuses. No blame. We own the outcome — and we go above and beyond to get the job done for the people who count on us.</p>
-        </div>
-        <div class="point reveal" data-d="2">
-          <hr class="point__rule">
-          <h3>Room to grow</h3>
-          <p>2x revenue growth year over year and 175+ employees across WA, CA, NJ and MA. When the team wins, careers move fast.</p>
-        </div>
+        <button class="tcar__nav tcar__nav--next" type="button" aria-label="Next" data-tcar-next>
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"></path></svg>
+        </button>
       </div>
     </div>
   </section>
+
+  <script>
+  (function () {
+    document.querySelectorAll('[data-tcar]').forEach(function (car) {
+      var track = car.querySelector('[data-tcar-track]');
+      var prev = car.querySelector('[data-tcar-prev]');
+      var next = car.querySelector('[data-tcar-next]');
+      var anim = null;
+      function step() {
+        var card = track.querySelector('.tcar__card');
+        if (!card) return track.clientWidth;
+        var gap = parseFloat(getComputedStyle(track).columnGap || getComputedStyle(track).gap || 0) || 0;
+        return card.getBoundingClientRect().width + gap;
+      }
+      function maxScroll() { return track.scrollWidth - track.clientWidth; }
+      function update() {
+        prev.disabled = track.scrollLeft <= 2;
+        next.disabled = track.scrollLeft >= maxScroll() - 2;
+      }
+      function glide(to) {
+        if (anim) { clearInterval(anim); anim = null; }
+        to = Math.max(0, Math.min(to, maxScroll()));
+        var from = track.scrollLeft, dist = to - from, t = 0, steps = 22;
+        if (!dist) return;
+        track.style.scrollSnapType = 'none';
+        anim = setInterval(function () {
+          t++;
+          var p = t / steps;
+          var e = 1 - Math.pow(1 - p, 3);
+          track.scrollLeft = from + dist * e;
+          update();
+          if (t >= steps) {
+            clearInterval(anim); anim = null;
+            track.scrollLeft = to;
+            track.style.scrollSnapType = '';
+            update();
+          }
+        }, 16);
+      }
+      prev.addEventListener('click', function () { glide(track.scrollLeft - step()); });
+      next.addEventListener('click', function () { glide(track.scrollLeft + step()); });
+      track.addEventListener('scroll', update, { passive: true });
+      window.addEventListener('resize', update);
+      update();
+    });
+  })();
+  </script>
 
   <!-- ============================ OPEN POSITIONS ============================ -->
   <section class="section" id="openings">
@@ -87,53 +135,141 @@
       <div class="section__head reveal">
         <p class="eyebrow">Open positions</p>
         <h2>Find your role on the team</h2>
-        <p class="section__intro">A sample of the roles we hire for. Don’t see a perfect fit? Send us your resume — we’re always looking for great people.</p>
+        <p class="section__intro">Every role we’re hiring for right now, straight from our recruiting system. Search by title, department, or location. Don’t see a perfect fit? Send us your resume — we’re always looking for great people.</p>
       </div>
 
-      <div class="jobs">
-        <article class="job reveal">
-          <div>
-            <h3 class="job__title">Tax Attorney</h3>
-            <div class="job__meta"><span class="job__tag">Legal</span><span class="job__tag">Spokane, WA</span><span class="job__tag">Full-time</span></div>
-          </div>
-          <a class="btn" href="https://www.prioritytaxrelief.com/careers-new/" target="_blank" rel="noopener">Apply</a>
-        </article>
-        <article class="job reveal">
-          <div>
-            <h3 class="job__title">Enrolled Agent</h3>
-            <div class="job__meta"><span class="job__tag">Resolution</span><span class="job__tag">Remote</span><span class="job__tag">Full-time</span></div>
-          </div>
-          <a class="btn" href="https://www.prioritytaxrelief.com/careers-new/" target="_blank" rel="noopener">Apply</a>
-        </article>
-        <article class="job reveal">
-          <div>
-            <h3 class="job__title">Certified Public Accountant (CPA)</h3>
-            <div class="job__meta"><span class="job__tag">Accounting</span><span class="job__tag">San Francisco, CA</span><span class="job__tag">Full-time</span></div>
-          </div>
-          <a class="btn" href="https://www.prioritytaxrelief.com/careers-new/" target="_blank" rel="noopener">Apply</a>
-        </article>
-        <article class="job reveal">
-          <div>
-            <h3 class="job__title">Tax Negotiator</h3>
-            <div class="job__meta"><span class="job__tag">Resolution</span><span class="job__tag">Spokane, WA</span><span class="job__tag">Full-time</span></div>
-          </div>
-          <a class="btn" href="https://www.prioritytaxrelief.com/careers-new/" target="_blank" rel="noopener">Apply</a>
-        </article>
-        <article class="job reveal">
-          <div>
-            <h3 class="job__title">Client Success Associate</h3>
-            <div class="job__meta"><span class="job__tag">Client Support</span><span class="job__tag">Remote</span><span class="job__tag">Full-time</span></div>
-          </div>
-          <a class="btn" href="https://www.prioritytaxrelief.com/careers-new/" target="_blank" rel="noopener">Apply</a>
-        </article>
-        <article class="job reveal">
-          <div>
-            <h3 class="job__title">Tax Relief Sales Consultant</h3>
-            <div class="job__meta"><span class="job__tag">Sales</span><span class="job__tag">Los Angeles, CA</span><span class="job__tag">Full-time</span></div>
-          </div>
-          <a class="btn" href="https://www.prioritytaxrelief.com/careers-new/" target="_blank" rel="noopener">Apply</a>
-        </article>
+      <!-- =================================================================
+           OPEN POSITIONS — styled recreation of the Paycor Recruiting widget.
+           Faked-in to match the live third-party embed (search + grouped
+           listings + "powered by Paycor"). Listings mirror the current
+           Paycor feed; update the <li data-*> rows when roles change, or
+           swap this whole block back to the live iframe later.
+           The previous hand-curated list is preserved at
+           "Careers (curated openings).html".
+      ==================================================================== -->
+      <div class="pc reveal" id="pc-widget">
+        <form class="pc__search" onsubmit="return false;" aria-label="Search open positions">
+          <input class="pc__input" type="search" id="pc-q" placeholder="Search Job Title or Job Description" autocomplete="off">
+          <select class="pc__select" id="pc-dept" aria-label="Department">
+            <option value="">All Departments</option>
+            <option>Additional Services</option>
+            <option>Client Services</option>
+            <option>Finance and Payments</option>
+            <option>Recruiting</option>
+            <option>Resolution Services</option>
+            <option>Sales Origination</option>
+            <option>Tax Preparation</option>
+            <option>Technology</option>
+          </select>
+          <select class="pc__select" id="pc-state" aria-label="State">
+            <option value="">All States</option>
+            <option value="CA">California</option>
+            <option value="MA">Massachusetts</option>
+            <option value="NJ">New Jersey</option>
+            <option value="WA">Washington</option>
+          </select>
+          <select class="pc__select pc__select--muted" id="pc-city" aria-label="City" disabled>
+            <option value="">All Cities</option>
+          </select>
+          <button class="pc__btn" type="button" id="pc-search">Search</button>
+        </form>
+
+        <div class="pc__results" id="pc-results">
+          <section class="pc__group" data-state="NJ">
+            <h3 class="pc__loc">Fairfield, NJ</h3>
+            <ul class="pc__jobs">
+              <li data-dept="Client Services"><a href="https://www.prioritytaxrelief.com/careers-new/" target="_blank" rel="noopener">Client Relations Advisor</a><span>Client Services</span></li>
+              <li data-dept="Resolution Services"><a href="https://www.prioritytaxrelief.com/careers-new/" target="_blank" rel="noopener">EA Assistant</a><span>Resolution Services</span></li>
+              <li data-dept="Resolution Services"><a href="https://www.prioritytaxrelief.com/careers-new/" target="_blank" rel="noopener">Enrolled Agent</a><span>Resolution Services</span></li>
+              <li data-dept="Sales Origination"><a href="https://www.prioritytaxrelief.com/careers-new/" target="_blank" rel="noopener">Sales Consultant</a><span>Sales Origination</span></li>
+              <li data-dept="Tax Preparation"><a href="https://www.prioritytaxrelief.com/careers-new/" target="_blank" rel="noopener">Tax Preparer</a><span>Tax Preparation</span></li>
+            </ul>
+          </section>
+
+          <section class="pc__group" data-state="MA">
+            <h3 class="pc__loc">Dedham, MA</h3>
+            <ul class="pc__jobs">
+              <li data-dept="Technology"><a href="https://www.prioritytaxrelief.com/careers-new/" target="_blank" rel="noopener">Fullstack Software Engineer</a><span>Technology</span></li>
+            </ul>
+          </section>
+
+          <section class="pc__group" data-state="CA">
+            <h3 class="pc__loc">Sherman Oaks, CA</h3>
+            <ul class="pc__jobs">
+              <li data-dept="Resolution Services"><a href="https://www.prioritytaxrelief.com/careers-new/" target="_blank" rel="noopener">EA Assistant</a><span>Resolution Services</span></li>
+              <li data-dept="Resolution Services"><a href="https://www.prioritytaxrelief.com/careers-new/" target="_blank" rel="noopener">Enrolled Agent</a><span>Resolution Services</span></li>
+            </ul>
+          </section>
+
+          <section class="pc__group" data-state="WA">
+            <h3 class="pc__loc">Spokane, WA</h3>
+            <ul class="pc__jobs">
+              <li data-dept="Additional Services"><a href="https://www.prioritytaxrelief.com/careers-new/" target="_blank" rel="noopener">Office Administrative Assistant</a><span>Additional Services</span></li>
+              <li data-dept="Additional Services"><a href="https://www.prioritytaxrelief.com/careers-new/" target="_blank" rel="noopener">Paralegal</a><span>Additional Services</span></li>
+              <li data-dept="Additional Services"><a href="https://www.prioritytaxrelief.com/careers-new/" target="_blank" rel="noopener">Payroll Analyst</a><span>Additional Services</span></li>
+              <li data-dept="Client Services"><a href="https://www.prioritytaxrelief.com/careers-new/" target="_blank" rel="noopener">Client Relations Advisor</a><span>Client Services</span></li>
+              <li data-dept="Finance and Payments"><a href="https://www.prioritytaxrelief.com/careers-new/" target="_blank" rel="noopener">Finance &amp; Payments Department Officer II</a><span>Finance and Payments</span></li>
+              <li data-dept="Recruiting"><a href="https://www.prioritytaxrelief.com/careers-new/" target="_blank" rel="noopener">Talent Acquisition Specialist</a><span>Recruiting</span></li>
+              <li data-dept="Resolution Services"><a href="https://www.prioritytaxrelief.com/careers-new/" target="_blank" rel="noopener">EA Assistant</a><span>Resolution Services</span></li>
+              <li data-dept="Resolution Services"><a href="https://www.prioritytaxrelief.com/careers-new/" target="_blank" rel="noopener">Enrolled Agent</a><span>Resolution Services</span></li>
+              <li data-dept="Sales Origination"><a href="https://www.prioritytaxrelief.com/careers-new/" target="_blank" rel="noopener">Sales Consultant</a><span>Sales Origination</span></li>
+              <li data-dept="Tax Preparation"><a href="https://www.prioritytaxrelief.com/careers-new/" target="_blank" rel="noopener">Bookkeeper</a><span>Tax Preparation</span></li>
+              <li data-dept="Tax Preparation"><a href="https://www.prioritytaxrelief.com/careers-new/" target="_blank" rel="noopener">Tax Admin Assistant</a><span>Tax Preparation</span></li>
+              <li data-dept="Tax Preparation"><a href="https://www.prioritytaxrelief.com/careers-new/" target="_blank" rel="noopener">Tax Preparer</a><span>Tax Preparation</span></li>
+              <li data-dept="Tax Preparation"><a href="https://www.prioritytaxrelief.com/careers-new/" target="_blank" rel="noopener">Tax Preparer Assistant</a><span>Tax Preparation</span></li>
+            </ul>
+          </section>
+
+          <p class="pc__empty" id="pc-empty" hidden>No open positions match your search.</p>
+        </div>
+
+        <div class="pc__powered">
+          <span>powered by</span>
+          <svg class="pc__paycor" viewBox="0 0 132 34" role="img" aria-label="Paycor, a Paychex Company">
+            <text x="0" y="22" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#6b6f76" letter-spacing="-0.5">Paycor</text>
+            <path d="M104 5 l9 -3 -3 7 z" fill="#f07f1a"></path>
+            <text x="0" y="32" font-family="Arial, sans-serif" font-size="6" font-weight="700" fill="#5b3f8c" letter-spacing="0.3">A Paychex® Company</text>
+          </svg>
+        </div>
       </div>
+
+      <script>
+      (function () {
+        var root = document.getElementById('pc-widget');
+        if (!root) return;
+        var q = document.getElementById('pc-q');
+        var dept = document.getElementById('pc-dept');
+        var state = document.getElementById('pc-state');
+        var empty = document.getElementById('pc-empty');
+        var groups = Array.prototype.slice.call(root.querySelectorAll('.pc__group'));
+
+        function apply() {
+          var term = (q.value || '').trim().toLowerCase();
+          var d = dept.value;
+          var s = state.value;
+          var anyVisible = false;
+          groups.forEach(function (g) {
+            var groupVisible = false;
+            g.querySelectorAll('.pc__jobs > li').forEach(function (li) {
+              var title = (li.querySelector('a').textContent || '').toLowerCase();
+              var ok = (!term || title.indexOf(term) !== -1) &&
+                       (!d || li.getAttribute('data-dept') === d) &&
+                       (!s || g.getAttribute('data-state') === s);
+              li.hidden = !ok;
+              if (ok) groupVisible = true;
+            });
+            g.hidden = !groupVisible;
+            if (groupVisible) anyVisible = true;
+          });
+          empty.hidden = anyVisible;
+        }
+
+        document.getElementById('pc-search').addEventListener('click', apply);
+        q.addEventListener('input', apply);
+        dept.addEventListener('change', apply);
+        state.addEventListener('change', apply);
+      })();
+      </script>
     </div>
   </section>
 
