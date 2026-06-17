@@ -126,6 +126,7 @@ html[data-theme="dark"] .job__tag { background: var(--surface-2); }
   aspect-ratio: 9 / 16;
 }
 .tcar__card img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.tcar__card iframe { width: 100%; height: 100%; border: 0; display: block; }
 .tcar__nav {
   flex: 0 0 auto;
   display: grid; place-items: center;

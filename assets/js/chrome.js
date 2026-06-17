@@ -87,9 +87,9 @@
         '<h2>See if you pre-qualify for tax relief</h2>' +
         '<p>Tell us a little about your situation and a licensed tax professional will reach out \u2014 usually the same day.</p>' +
         '<ul class="lead__list">' +
-          '<li>' + CHECK + ' No obligation, no upfront commitment</li>' +
+          '<li>' + CHECK + ' No cost call with IRS and our tax expert on your first call</li>' +
           '<li>' + CHECK + ' CPAs, tax attorneys &amp; Enrolled Agents on your side</li>' +
-          '<li>' + CHECK + ' 3-day money-back guarantee</li>' +
+          '<li>' + CHECK + ' Money-back guarantee</li>' +
         '</ul>' +
       '</div>' +
       '<form class="lead-form lead-form--steps reveal" data-d="1" id="leadForm" novalidate style="width: 500px">' +
@@ -115,7 +115,7 @@
               '</div>' +
               '<input type="hidden" id="lf-unfiled" name="unfiled" required><span class="err">Please choose one.</span></div>' +
             '<div class="field"><label for="lf-hear">How did you hear about us?</label>' +
-              '<select id="lf-hear" name="hear" required>' +
+              '<select id="lf-hear" name="hear">' +
                 '<option value="" disabled selected hidden>Select one</option>' +
                 '<option>Google / Bing</option>' +
                 '<option>TV</option>' +
@@ -133,9 +133,9 @@
             '<button type="button" class="btn btn--lg" data-step-next style="width:100%">Next</button>' +
           '</div>' +
           '<div class="form-step" data-step="3">' +
-            '<div class="field"><label for="lf-first">Contact Information <span class="req">*</span></label><input id="lf-first" name="first" type="text" autocomplete="given-name" placeholder="First Name" required><span class="err">Please enter your name.</span></div>' +
+            '<div class="field"><label for="lf-first">Contact Information <span class="req">*</span></label><input id="lf-first" name="first" type="text" autocomplete="given-name" placeholder="My Name is" required><span class="err">Please enter your name.</span></div>' +
             '<div class="field"><label for="lf-phone">Phone Number <span class="req">*</span></label><input id="lf-phone" name="phone" type="tel" autocomplete="tel" placeholder="(555) 123-4567" required><span class="err">Please enter a valid phone number.</span></div>' +
-            '<div class="field"><label for="lf-email">Email Address</label><input id="lf-email" name="email" type="email" autocomplete="email" placeholder="your.email@example.com"><span class="err">Please enter a valid email.</span></div>' +
+            '<div class="field"><label for="lf-email">Email Address</label><input id="lf-email" name="email" type="email" autocomplete="email" placeholder="My Email is"><span class="err">Please enter a valid email.</span></div>' +
             '<p class="consent">' + CONSENT + '</p>' +
             '<button type="submit" class="btn btn--lg" style="width:100%">Prequalify Now</button>' +
           '</div>' +

@@ -246,6 +246,11 @@ img { max-width: 100%; display: block; }
   margin: 0 0 32px;
 }
 .hero__cta { display: flex; gap: 14px; flex-wrap: wrap; }
+.hero__cta--icon { flex-wrap: nowrap; align-items: center; gap: 22px; }
+.hero__cta--icon .hero__cta-icon { flex: 0 0 auto; width: auto; height: 124px; object-fit: contain; }
+.hero__cta--icon .hero__cta-btns { display: flex; flex-direction: column; gap: 12px; align-items: stretch; }
+.hero__cta--icon .hero__cta-btns .btn { justify-content: center; }
+@media (max-width: 560px) { .hero__cta--icon { gap: 16px; } .hero__cta--icon .hero__cta-icon { height: 92px; } }
 .hero__media {
   position: relative;
   border-radius: var(--radius-box);

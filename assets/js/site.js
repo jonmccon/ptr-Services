@@ -257,10 +257,8 @@
         var isOther = hearSel.value === "Other (Please specify)";
         hearOtherField.hidden = !isOther;
         if (isOther) {
-          hearOtherInput.setAttribute("required", "");
           hearOtherInput.focus();
         } else {
-          hearOtherInput.removeAttribute("required");
           hearOtherInput.value = "";
           hearOtherInput.classList.remove("invalid");
         }
