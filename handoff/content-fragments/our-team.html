@@ -1,0 +1,271 @@
+<!-- ============================================================
+  PTR CONTENT FRAGMENT — Our Team
+  Target slug: /our-team/
+  This is page CONTENT ONLY. No <html>/<head>, no site header,
+  no footer. Paste into the WP page body (Custom HTML block / page
+  template the_content). The theme supplies header, footer, <head>
+  + SEO, and enqueues assets/css/site.css + assets/js/site.js.
+  Body attributes on the source page (apply to <body> via theme):
+    class="" data-layout="editorial" data-page="about"
+============================================================ -->
+
+<!-- Page-specific SVG defs (keep — visual filters) -->
+<svg width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute;width:0;height:0;overflow:hidden">
+  <filter id="ptr-bw" color-interpolation-filters="sRGB">
+    <feColorMatrix type="matrix" values="0.299 0.587 0.114 0 0
+                                          0.299 0.587 0.114 0 0
+                                          0.299 0.587 0.114 0 0
+                                          0     0     0     1 0"></feColorMatrix>
+  </filter>
+</svg>
+
+<!-- ============================ HERO ============================ -->
+  <section class="subhero">
+    <div class="container">
+      <nav class="breadcrumb reveal" aria-label="Breadcrumb">
+        <a href="About.html">About</a> ›
+        <span aria-current="page">Our Team</span>
+      </nav>
+      <h1 class="reveal" data-d="1" style="max-width:16ch">Our Team</h1>
+      <p class="subhero__sub reveal" data-d="1" style="max-width:30ch">The people behind every resolution</p>
+      <p class="hero__lead reveal" data-d="2" style="max-width:64ch">At Priority Tax Relief, we're dedicated problem-solvers committed to finding effective solutions for your tax challenges. Our team members are the <strong class="emph">backbone of the organization</strong> — we can't deliver for clients without their expertise and dedication.</p>
+    </div>
+  </section>
+
+  <!-- ============================ CREDENTIALS STRIP ============================ -->
+  <section class="section section--tight section--bone" style="padding: 20px 0px; height: 175px">
+    <div class="container">
+      <div class="creds-grid">
+        <div class="stat reveal"><div class="stat__num" data-count="5">5</div><div class="stat__label">Tax Attorneys</div></div>
+        <div class="stat reveal" data-d="1"><div class="stat__num" data-count="11">11</div><div class="stat__label">Enrolled Agents</div></div>
+        <div class="stat reveal" data-d="2"><div class="stat__num" data-count="8">8</div><div class="stat__label">CPAs &amp; Accountants</div></div>
+        <div class="stat reveal" data-d="3"><div class="stat__num" data-count="175">175<span class="suffix">+</span></div><div class="stat__label">Team Members</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ THE ROSTER ============================ -->
+  <section class="section roster" id="roster">
+    <div class="container">
+      <div class="section__head reveal">
+        <p class="eyebrow eyebrow--green">The roster</p>
+        <h2>One game plan, four departments</h2>
+      </div>
+      <div class="roster__intro reveal" data-d="1">
+        <p>Our comprehensive team is built from specialized departments — tax consultants who analyze complex situations, accounting professionals who ensure accuracy and compliance, client care specialists who provide compassionate support, and resolution experts who negotiate with tax authorities to secure the best possible outcome for you.</p>
+      </div>
+
+      <!-- org chart: leadership group → 4 directors -->
+      <div class="org reveal" data-d="1">
+        <div class="org__coach">
+          <article class="coach bw">
+            <div class="coach__photo"><img src="https://www.prioritytaxrelief.com/wp-content/uploads/2025/04/DSC_1467-scaled.jpg" alt="Marcus Holloway" loading="lazy"></div>
+            <p class="coach__eyebrow">Leadership</p>
+            <h3 class="coach__name">Marcus Holloway</h3>
+            <p class="coach__title">Managing Director</p>
+            <p class="coach__line">Sets the game plan and stands between every client and the IRS — the only scoreboard that matters is your outcome.</p>
+          </article>
+          <article class="coach bw">
+            <div class="coach__photo"><img src="https://www.prioritytaxrelief.com/wp-content/uploads/2025/04/DSC_1462-scaled.jpg" alt="Grace Whitman" loading="lazy"></div>
+            <p class="coach__eyebrow">Leadership</p>
+            <h3 class="coach__name">Grace Whitman</h3>
+            <p class="coach__title">Founder &amp; Principal</p>
+            <p class="coach__line">Built the firm around one rule: treat every case like it's our own money on the line.</p>
+          </article>
+          <article class="coach bw">
+            <div class="coach__photo"><img src="https://www.prioritytaxrelief.com/wp-content/uploads/2025/04/DSC_1503-scaled.jpg" alt="Daniel Okafor" loading="lazy"></div>
+            <p class="coach__eyebrow">Leadership</p>
+            <h3 class="coach__name">Daniel Okafor</h3>
+            <p class="coach__title">Chief Operating Officer</p>
+            <p class="coach__line">Keeps every department moving in sync so nothing about your case ever falls through the cracks.</p>
+          </article>
+          <article class="coach bw">
+            <div class="coach__photo"><img src="https://www.prioritytaxrelief.com/wp-content/uploads/2025/04/DSC_1479-scaled.jpg" alt="Renee Castillo" loading="lazy"></div>
+            <p class="coach__eyebrow">Leadership</p>
+            <h3 class="coach__name">Renee Castillo</h3>
+            <p class="coach__title">Chief Compliance Officer</p>
+            <p class="coach__line">Guards the line between aggressive advocacy and airtight compliance on every filing we touch.</p>
+          </article>
+        </div>
+        <div class="org__rail" id="dirRail"></div>
+      </div>
+
+      <!-- department rosters -->
+      <div class="depts" id="depts"></div>
+    </div>
+  </section>
+
+  <!-- ============================ VALUES / CULTURE ============================ -->
+  <section class="values">
+    <div class="container">
+      <div class="values__head reveal">
+        <p class="eyebrow">How we play</p>
+        <h2>The standards every department is held to.</h2>
+      </div>
+      <div class="values__grid">
+        <div class="value reveal">
+          <h3>Protect the Client</h3>
+          <hr class="value__rule">
+          <p>We stand between you and the IRS. Your outcome is the only scoreboard that matters.</p>
+        </div>
+        <div class="value reveal" data-d="1">
+          <h3>Extreme Ownership</h3>
+          <hr class="value__rule">
+          <p>No excuses. No blame. We own the case from the first call to the final resolution.</p>
+        </div>
+        <div class="value reveal" data-d="2">
+          <h3>Speed Wins</h3>
+          <hr class="value__rule">
+          <p>If it matters, we move now. You hear back from a real person — usually the same day.</p>
+        </div>
+        <div class="value reveal" data-d="3">
+          <h3>Straight Answers</h3>
+          <hr class="value__rule">
+          <p>No jargon. No black boxes. You always know exactly where your case stands.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ LOCATIONS ============================ -->
+  <section class="section">
+    <div class="container">
+      <div class="section__head reveal">
+        <p class="eyebrow">Nationwide</p>
+        <h2>Where the team works</h2>
+      </div>
+      <div class="loc-grid reveal" data-d="1">
+        <div class="loc"><span class="loc__pin"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg></span><div><div class="loc__city">San Francisco</div><div class="loc__type">Head Quarters</div></div></div>
+        <div class="loc"><span class="loc__pin"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg></span><div><div class="loc__city">Spokane</div><div class="loc__type">Business Hub</div></div></div>
+        <div class="loc"><span class="loc__pin"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg></span><div><div class="loc__city">Los Angeles</div><div class="loc__type">Branch Office</div></div></div>
+        <div class="loc"><span class="loc__pin"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg></span><div><div class="loc__city">Boston</div><div class="loc__type">Branch Office</div></div></div>
+        <div class="loc"><span class="loc__pin"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg></span><div><div class="loc__city">New Jersey</div><div class="loc__type">Branch Office</div></div></div>
+        <div class="loc"><span class="loc__pin"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg></span><div><div class="loc__city">Florida</div><div class="loc__type">Branch Office</div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ JOIN THE TEAM ============================ -->
+  <section class="join">
+    <div class="container">
+      <p class="eyebrow">Now recruiting</p>
+      <h2>We're always looking for people who play to win.</h2>
+      <p>140+ employees across WA, CA, NJ and MA — and growing. If you want to do the best work of your career on a team that has each other's backs, we should talk.</p>
+      <a class="btn btn--lg" href="Careers.html">See open roles</a>
+    </div>
+  </section>
+
+<!-- Page-specific inline script(s): render dynamic content (consider CMS-driving). -->
+<script>
+
+(function () {
+  "use strict";
+
+  /* Reference-page team portraits, reused as B&W placeholders. */
+  var PHOTOS = [
+    "DSC_1462","DSC_1503","DSC_1479","DSC_1502","DSC_1470","DSC_1490",
+    "DSC_1520","DSC_1460","DSC_1570","DSC_1489","DSC_1435","DSC_1547",
+    "DSC_1440"
+  ].map(function (id) {
+    var m = id === "DSC_1573" ? "2025/05" : "2025/04";
+    return "https://www.prioritytaxrelief.com/wp-content/uploads/" + m + "/" + id + "-scaled.jpg";
+  });
+  PHOTOS.push("https://www.prioritytaxrelief.com/wp-content/uploads/2025/05/DSC_1573-scaled.jpg");
+  var pi = 0;
+  function photo() { var u = PHOTOS[pi % PHOTOS.length]; pi++; return u; }
+
+  /* Placeholder name pools. */
+  var FIRST = ["James","Maria","David","Linda","Robert","Patricia","Michael","Jennifer","William","Elizabeth",
+    "Carlos","Nicole","Anthony","Karen","Daniel","Sandra","Joseph","Ashley","Thomas","Emily",
+    "Brian","Monica","Kevin","Rachel","Steven","Laura","Eric","Diana","Jason","Teresa",
+    "Sofia","Hector","Grace","Omar","Renee","Victor","Janet","Luis","Paula","Derek",
+    "Nadia","Theo","Carmen","Marcus","Gina","Curtis","Yusuf","Bianca"];
+  var LAST = ["Anderson","Bennett","Carter","Diaz","Espinoza","Fletcher","Garcia","Hughes","Ibarra","Jensen",
+    "Kowalski","Lambert","Mercado","Nguyen","Owens","Patel","Quinn","Reyes","Salazar","Tran",
+    "Underwood","Vargas","Walsh","Xiong","Young","Zimmerman","Brooks","Castillo","Donovan","Ellison",
+    "Franklin","Gonzalez","Harper","Iverson","Jacobs"];
+  var fi = 3, li = 7;
+  function name() { var n = FIRST[fi % FIRST.length] + " " + LAST[li % LAST.length]; fi += 1; li += 3; return n; }
+
+  function esc(s) { return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
+
+  function proCard(cred, lead) {
+    var nm = name();
+    return '' +
+      '<figure class="pro reveal' + (lead ? ' pro--lead' : '') + '">' +
+        (lead ? '<span class="pro__badge">Lead</span>' : '') +
+        '<div class="pro__photo bw"><img src="' + photo() + '" alt="' + esc(nm) + '" loading="lazy"></div>' +
+        '<figcaption>' +
+          '<div class="pro__name">' + esc(nm) + '</div>' +
+          '<div class="pro__cred">' + esc(cred) + '</div>' +
+        '</figcaption>' +
+      '</figure>';
+  }
+  function grid(n, creds) {
+    var out = "";
+    for (var i = 0; i < n; i++) { out += proCard(creds[i % creds.length], i === 0); }
+    return '<div class="pro-grid">' + out + '</div>';
+  }
+
+  var FLAG = '<svg viewBox="0 0 98 140" fill="currentColor"><path d="M89.5 89.4 0 0c1 2.9 3.5 10.5 6.8 20.1.4 1.3 1.1 2.4 2 3.3l64.1 64.1-4.1 2.9L11.1 32.7c2 6 4.1 12.2 6.2 18.3.8 2.5 2.2 4.7 4 6.5l38.9 38.9-4.1 2.9-33.9-33.9c2.2 6.5 4.1 12.2 5.5 16.2 1.3 3.8 3.4 7.2 6.2 10l1.1 1.1c7.7 7.7 10.5 19 7.3 29.4l-5.5 17.6 34.6-31.3c4.7-4.1 11.8-3.9 16.2.5l7.2 7.2c5-7.6 4-17.6-2.4-24l-2.9-2.9z"></path></svg>';
+
+  /* Departments. The first (Resolution) fans into 3 sub-departments;
+     the other three each run a single team. */
+  var DEPTS = [
+    { name: "Tax Resolution", dir: "Dana Reyes", title: "Director of Tax Resolution", tag: "3 departments",
+      subs: [
+        { title: "Negotiation & Appeals", creds: ["Tax Attorney", "Enrolled Agent"], n: 6 },
+        { title: "Compliance & Filing",   creds: ["Enrolled Agent", "Tax Preparer"], n: 6 },
+        { title: "Case Management",        creds: ["Case Manager", "Resolution Analyst"], n: 6 }
+      ] },
+    { name: "Accounting", dir: "Priya Sundaram", title: "Director of Accounting",
+      creds: ["CPA", "Staff Accountant"], n: 8 },
+    { name: "Client Care", dir: "Tovah Klein", title: "Director of Client Care",
+      creds: ["Client Care Specialist", "Case Coordinator"], n: 8 },
+    { name: "Intake & Strategy", dir: "Andre Boucher", title: "Director of Intake & Strategy",
+      creds: ["Tax Consultant", "Intake Specialist"], n: 8 }
+  ];
+
+  /* Render director cards into the org rail. */
+  var rail = document.getElementById("dirRail");
+  if (rail) {
+    rail.innerHTML = DEPTS.map(function (d) {
+      return '' +
+        '<div class="org__node">' +
+          '<article class="dir bw">' +
+            '<div class="dir__photo"><img src="' + photo() + '" alt="' + esc(d.dir) + '" loading="lazy"></div>' +
+            '<h3 class="dir__name">' + esc(d.dir) + '</h3>' +
+            '<p class="dir__title">' + esc(d.title) + '</p>' +
+            (d.tag ? '<span class="dir__tag">' + esc(d.tag) + '</span>' : '') +
+          '</article>' +
+        '</div>';
+    }).join("");
+  }
+
+  /* Render department rosters. */
+  var depts = document.getElementById("depts");
+  if (depts) {
+    depts.innerHTML = DEPTS.map(function (d) {
+      var body;
+      if (d.subs) {
+        body = d.subs.map(function (s) {
+          return '<div class="subdept"><p class="subdept__title">' + esc(s.title) + '</p>' + grid(s.n, s.creds) + '</div>';
+        }).join("");
+      } else {
+        body = grid(d.n, d.creds);
+      }
+      return '' +
+        '<section class="dept">' +
+          '<div class="dept__head reveal">' +
+            '<p class="dept__eyebrow">Department</p>' +
+            '<h3 class="dept__name">' + esc(d.name) + '</h3>' +
+            '<hr class="dept__rule">' +
+            '<p class="dept__lead">Led by <b>' + esc(d.dir) + '</b><br>' + esc(d.title) + '</p>' +
+          '</div>' +
+          '<div class="dept__body reveal" data-d="1">' + body + '</div>' +
+        '</section>';
+    }).join("");
+  }
+})();
+
+</script>

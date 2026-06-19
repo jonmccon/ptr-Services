@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<channel>
+  <generator>https://formidableforms.com</generator>
+  <frm_version>6.0</frm_version>
+  <form>
+    <id>2001</id>
+    <form_key>ptr-pre-qualify</form_key>
+    <name><![CDATA[Pre-Qualify for Forgiveness]]></name>
+    <description><![CDATA[]]></description>
+    <created_at>2024-01-01 00:00:00</created_at>
+    <is_template>0</is_template>
+    <default_template>0</default_template>
+    <status>published</status>
+    <logged_in>0</logged_in>
+    <editable>0</editable>
+    <options><![CDATA[a:6:{s:12:"submit_value";s:14:"Prequalify Now";s:14:"success_action";s:7:"message";s:11:"success_msg";s:95:"<p>Thank you — your request has been received. A tax professional will reach out shortly.</p>";s:9:"show_form";i:1;s:7:"akismet";s:0:"";s:7:"no_save";i:0;}]]></options>
+    <field>
+      <id>1001</id>
+      <field_key>owe</field_key>
+      <name><![CDATA[How much do they say you owe?]]></name>
+      <description><![CDATA[]]></description>
+      <type>select</type>
+      <default_value><![CDATA[s:0:"";]]></default_value>
+      <options><![CDATA[a:5:{i:0;s:12:"Under $4,999";i:1;s:15:"$5,000 - $9,999";i:2;s:17:"$10,000 - $19,999";i:3;s:17:"$20,000 - $49,999";i:4;s:9:"$50,000 +";}]]></options>
+      <field_options><![CDATA[a:3:{s:11:"placeholder";s:16:"Select an amount";s:5:"blank";s:24:"Please select an amount.";s:7:"classes";s:0:"";}]]></field_options>
+      <field_order>1</field_order>
+      <required>1</required>
+      <form_id>2001</form_id>
+    </field>
+    <field>
+      <id>1002</id>
+      <field_key>pb_started</field_key>
+      <name><![CDATA[]]></name>
+      <description><![CDATA[]]></description>
+      <type>break</type>
+      <default_value><![CDATA[s:0:"";]]></default_value>
+      <options><![CDATA[a:0:{}]]></options>
+      <field_options><![CDATA[a:3:{s:10:"next_label";s:11:"Get Started";s:10:"prev_label";s:0:"";s:11:"form_select";s:0:"";}]]></field_options>
+      <field_order>2</field_order>
+      <required>0</required>
+      <form_id>2001</form_id>
+    </field>
+    <field>
+      <id>1003</id>
+      <field_key>unfiled</field_key>
+      <name><![CDATA[Do you have any Unfiled Tax Returns?]]></name>
+      <description><![CDATA[]]></description>
+      <type>radio</type>
+      <default_value><![CDATA[s:0:"";]]></default_value>
+      <options><![CDATA[a:2:{i:0;s:2:"No";i:1;s:3:"Yes";}]]></options>
+      <field_options><![CDATA[a:2:{s:5:"blank";s:18:"Please choose one.";s:7:"classes";s:0:"";}]]></field_options>
+      <field_order>3</field_order>
+      <required>1</required>
+      <form_id>2001</form_id>
+    </field>
+    <field>
+      <id>1004</id>
+      <field_key>hear</field_key>
+      <name><![CDATA[How did you hear about us?]]></name>
+      <description><![CDATA[]]></description>
+      <type>select</type>
+      <default_value><![CDATA[s:0:"";]]></default_value>
+      <options><![CDATA[a:10:{i:0;s:13:"Google / Bing";i:1;s:2:"TV";i:2;s:33:"Radio / Satellite Radio / Podcast";i:3;s:9:"Billboard";i:4;s:22:"Friend / Word of Mouth";i:5;s:7:"AI Chat";i:6;s:12:"Social Media";i:7;s:25:"Review or Finance Website";i:8;s:5:"Email";i:9;s:22:"Other (Please specify)";}]]></options>
+      <field_options><![CDATA[a:2:{s:11:"placeholder";s:10:"Select one";s:7:"classes";s:0:"";}]]></field_options>
+      <field_order>4</field_order>
+      <required>0</required>
+      <form_id>2001</form_id>
+    </field>
+    <field>
+      <id>1005</id>
+      <field_key>hear_other</field_key>
+      <name><![CDATA[Please specify]]></name>
+      <description><![CDATA[]]></description>
+      <type>text</type>
+      <default_value><![CDATA[s:0:"";]]></default_value>
+      <options><![CDATA[a:0:{}]]></options>
+      <field_options><![CDATA[a:3:{s:11:"placeholder";s:30:"Tell us how you heard about us";s:7:"classes";s:0:"";s:5:"blank";s:19:"Please tell us how.";}]]></field_options>
+      <field_order>5</field_order>
+      <required>0</required>
+      <form_id>2001</form_id>
+    </field>
+    <field>
+      <id>1006</id>
+      <field_key>pb_next</field_key>
+      <name><![CDATA[]]></name>
+      <description><![CDATA[]]></description>
+      <type>break</type>
+      <default_value><![CDATA[s:0:"";]]></default_value>
+      <options><![CDATA[a:0:{}]]></options>
+      <field_options><![CDATA[a:3:{s:10:"next_label";s:4:"Next";s:10:"prev_label";s:0:"";s:11:"form_select";s:0:"";}]]></field_options>
+      <field_order>6</field_order>
+      <required>0</required>
+      <form_id>2001</form_id>
+    </field>
+    <field>
+      <id>1007</id>
+      <field_key>first</field_key>
+      <name><![CDATA[Contact Information]]></name>
+      <description><![CDATA[]]></description>
+      <type>text</type>
+      <default_value><![CDATA[s:0:"";]]></default_value>
+      <options><![CDATA[a:0:{}]]></options>
+      <field_options><![CDATA[a:3:{s:11:"placeholder";s:10:"My Name is";s:5:"blank";s:23:"Please enter your name.";s:7:"classes";s:0:"";}]]></field_options>
+      <field_order>7</field_order>
+      <required>1</required>
+      <form_id>2001</form_id>
+    </field>
+    <field>
+      <id>1008</id>
+      <field_key>phone</field_key>
+      <name><![CDATA[Phone Number]]></name>
+      <description><![CDATA[]]></description>
+      <type>phone</type>
+      <default_value><![CDATA[s:0:"";]]></default_value>
+      <options><![CDATA[a:0:{}]]></options>
+      <field_options><![CDATA[a:4:{s:11:"placeholder";s:14:"(555) 123-4567";s:5:"blank";s:34:"Please enter a valid phone number.";s:6:"format";s:0:"";s:7:"classes";s:0:"";}]]></field_options>
+      <field_order>8</field_order>
+      <required>1</required>
+      <form_id>2001</form_id>
+    </field>
+    <field>
+      <id>1009</id>
+      <field_key>email</field_key>
+      <name><![CDATA[Email Address]]></name>
+      <description><![CDATA[]]></description>
+      <type>email</type>
+      <default_value><![CDATA[s:0:"";]]></default_value>
+      <options><![CDATA[a:0:{}]]></options>
+      <field_options><![CDATA[a:2:{s:11:"placeholder";s:11:"My Email is";s:7:"classes";s:0:"";}]]></field_options>
+      <field_order>9</field_order>
+      <required>0</required>
+      <form_id>2001</form_id>
+    </field>
+    <field>
+      <id>1010</id>
+      <field_key>consent</field_key>
+      <name><![CDATA[Consent]]></name>
+      <description><![CDATA[<p class="consent">By clicking “Pre-Qualify Now," I am consenting to and providing my electronic signature as express written consent for Priority Tax Relief to contact me regarding tax payment options by email, text or calls at the phone number and email provided using any automated or automatic telephone dialing device or system, prerecorded/artificial voice and/or artificial technology (Data and msg rates may apply, msg frequency varies: Text HELP for help; STOP to cancel) even if my telephone number is listed on any state or federal Do-Not-Call registry. This consent will not be shared with third parties for their marketing purposes. I may revoke this consent anytime and consent is not required as a condition to speak with Priority Tax, I can email: info@prioritytaxrelief.com</p>]]></description>
+      <type>html</type>
+      <default_value><![CDATA[s:0:"";]]></default_value>
+      <options><![CDATA[a:0:{}]]></options>
+      <field_options><![CDATA[a:1:{s:7:"classes";s:0:"";}]]></field_options>
+      <field_order>10</field_order>
+      <required>0</required>
+      <form_id>2001</form_id>
+    </field>
+  </form>
+</channel>

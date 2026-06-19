@@ -1,0 +1,46 @@
+<!-- ============================================================
+  PTR THEME PARTIAL — SITE FOOTER
+  Source of truth: assets/js/chrome.js (FOOTER string) + the inline
+  <footer> on Services Page.html. JS-injected into <div id="chrome-footer">
+  in the static build; should be the THEME footer (footer.php / footer
+  block) in WordPress.
+
+  WORDPRESS NOTES
+  • Footer link columns should be a WP nav menu, not hardcoded <a>s.
+  • PHONE NUMBER: footer shows 888-708-2872 / tel:18887082872 — differs
+    from the header's (866) number. CONFIRM primary number (Open Q6).
+  • The full TCPA/consent paragraph below is duplicated from the lead
+    form's consent text — keep it identical to whatever the form uses.
+  • Policy links (FAQs, Terms, Privacy, DNC/TCPA) point at the live
+    prioritytaxrelief.com pages by design — repoint to the WP equivalents.
+============================================================ -->
+<footer class="site-footer">
+  <div class="container footer-call-row">
+    <p class="footer-call">Not a current client and need help with your back taxes?<br>Call <a href="tel:18887082872">888-708-2872</a></p>
+  </div>
+  <div class="container footer-top">
+    <div class="footer-brand">
+      <a class="brand" href="/" aria-label="Priority Tax Relief home">
+        <img class="footer-flag" src="assets/img/logo/ptr-flag-footer.png" alt="Priority Tax Relief">
+      </a>
+      <img class="footer-bbb" src="assets/img/badges/bbb-accredited.svg" alt="BBB A+ Accredited Business" onerror="this.style.display='none'">
+    </div>
+    <div class="footer-col">
+      <ul>
+        <li><a href="/about/">About</a></li>
+        <li><a href="/contact/">Contact</a></li>
+        <li><a href="https://www.prioritytaxrelief.com/faqs/">FAQs</a></li>
+        <li><a href="https://www.prioritytaxrelief.com/priority-tax-terms-and-conditions/">Terms &amp; Conditions</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <ul>
+        <li><a href="https://www.prioritytaxrelief.com/privacy-policy/">Privacy Policy</a></li>
+        <li><a href="https://www.prioritytaxrelief.com/dnc-tcpa/">DNC / TCPA</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="container footer-legal">
+    <p>By clicking &ldquo;Pre-Qualify Now," I am consenting to and providing my electronic signature as express written consent for Priority Tax Relief to contact me regarding tax payment options by email, text or calls at the phone number and email provided using any automated or automatic telephone dialing device or system, prerecorded/artificial voice and/or artificial technology (Data and msg rates may apply, msg frequency varies: Text HELP for help; STOP to cancel) even if my telephone number is listed on any state or federal Do-Not-Call registry. This consent will not be shared with third parties for their marketing purposes. I may revoke this consent anytime and consent is not required as a condition to speak with Priority Tax, I can email: info@prioritytaxrelief.com</p>
+  </div>
+</footer>

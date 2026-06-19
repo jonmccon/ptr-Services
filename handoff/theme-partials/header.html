@@ -1,0 +1,92 @@
+<!-- ============================================================
+  PTR THEME PARTIAL — SITE HEADER
+  Source of truth: assets/js/chrome.js (HEADER string) + the inline
+  <header> on Services Page.html. In the static build this is injected
+  by JS into <div id="chrome-header">. In WordPress this should become
+  the THEME header (header.php / a header block), NOT JS-injected.
+
+  WORDPRESS NOTES
+  • The two dropdowns (Services, Tax News) should be a WP nav menu
+    (Appearance ▸ Menus) with sub-items, not hardcoded <a>s. The
+    markup below is the visual/structural contract — match its classes
+    so assets/css/site.css styles it.
+  • Sticky behavior + on-scroll shadow + mobile toggle live in
+    assets/js/site.js (#siteHeader, #navToggle, #mobileNav).
+  • Active state: source pages set <body data-page="services|tax-news|
+    about|careers"> and chrome.js adds aria-current. In WP, use the menu
+    system's current-menu-item class (or replicate the data-page logic).
+  • PHONE NUMBER: header shows (866) 708-2872 / tel:18667082872. Footer
+    shows 888-708-2872. CONFIRM the correct primary number (Open Q6).
+  • assets/img/icons8-call.gif is a third-party (icons8) asset — confirm
+    license before shipping (Open Q9).
+  • Logo / "Clients" button: in the live site the brand links to the WP
+    home; here it points at Services Page.html. Repoint to home_url().
+============================================================ -->
+<header class="site-header" id="siteHeader">
+  <div class="container header-inner">
+    <a class="brand" href="/" aria-label="Priority Tax Relief home">
+      <img class="brand__logo" src="assets/img/logo/ptr-logo.png" alt="Priority Tax Relief">
+    </a>
+
+    <nav class="main-nav" aria-label="Primary">
+      <div class="nav-item has-dropdown">
+        <a href="/services/" aria-haspopup="true" aria-expanded="false">Services</a>
+        <div class="nav-dropdown">
+          <div class="nav-dropdown__panel" role="menu" aria-label="Services">
+            <a href="/services/settle-back-taxes-with-irs-offer-in-compromise/" role="menuitem">Offer in Compromise</a>
+            <a href="/services/settle-back-taxes-with-irs-penalty-abatement/" role="menuitem">Penalty Abatement</a>
+            <a href="/services/innocent-spouse-relief-for-back-taxes/" role="menuitem">Innocent Spouse Relief</a>
+            <a href="/services/currently-not-collectible/" role="menuitem">Currently Not Collectible</a>
+            <a href="/services/installment-agreement-help-for-back-taxes/" role="menuitem">Installment Agreement</a>
+            <a href="/services/stop-wage-garnishment-for-irs-or-state-taxes/" role="menuitem">Stop Wage Garnishment</a>
+            <a href="/services/settle-bank-levy-for-irs-or-state-taxes/" role="menuitem">Bank Levy Release</a>
+            <a href="/services/settle-back-payroll-tax/" role="menuitem">Back Payroll Taxes</a>
+            <!-- Back Sales Tax: page missing in build — mis-linked in source. See Open Q7. -->
+            <a href="/services/#services" role="menuitem">Back Sales Tax</a>
+          </div>
+        </div>
+      </div>
+      <div class="nav-item has-dropdown">
+        <a href="/tax-news/" aria-haspopup="true" aria-expanded="false">Tax News</a>
+        <div class="nav-dropdown">
+          <div class="nav-dropdown__panel" role="menu" aria-label="Tax News categories">
+            <a href="/tax-news/?cat=irs-audit-negotiation" role="menuitem">IRS Audit &amp; Negotiation</a>
+            <a href="/tax-news/?cat=irs-forms" role="menuitem">IRS Forms</a>
+            <a href="/tax-news/?cat=irs-letters-notices" role="menuitem">IRS Letters &amp; Notices</a>
+            <a href="/tax-news/?cat=tax-compliance-and-strategy" role="menuitem">Tax Compliance &amp; Strategy</a>
+            <a href="/tax-news/?cat=tax-fraud-legal-issues" role="menuitem">Tax Fraud &amp; Legal Issues</a>
+            <a href="/tax-news/?cat=tax-planning" role="menuitem">Tax Planning</a>
+            <a href="/tax-news/?cat=tax-relief" role="menuitem">Tax Relief</a>
+            <a href="/tax-news/?cat=professional-advice" role="menuitem">Professional Advice</a>
+            <a href="/tax-news/?cat=state-taxes" role="menuitem">State Taxes</a>
+            <a href="/tax-news/" role="menuitem">View All</a>
+          </div>
+        </div>
+      </div>
+      <a href="/about/">About</a>
+      <a href="/careers/">Careers</a>
+    </nav>
+
+    <div class="header-actions">
+      <a class="hotline" href="tel:18667082872">
+        <span>Tax Help Hotline (866)&nbsp;708-2872</span>
+        <img class="hotline__icon" src="assets/img/icons8-call.gif" alt="">
+      </a>
+      <a class="btn" href="/clients/" style="color:#000">Clients</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <nav class="mobile-nav" id="mobileNav" aria-label="Mobile">
+    <a href="/services/">Services</a>
+    <a href="/tax-news/">Tax News</a>
+    <a href="/about/">About</a>
+    <a href="/careers/">Careers</a>
+    <div class="mobile-nav__actions">
+      <a class="hotline" href="tel:18667082872">Tax Help Hotline (866)&nbsp;708-2872</a>
+      <a class="btn" href="/clients/" style="color:#000">Clients</a>
+    </div>
+  </nav>
+</header>

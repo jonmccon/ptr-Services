@@ -1,0 +1,121 @@
+<!-- ============================================================
+  PTR THEME PARTIAL — SHARED LEAD / PRE-QUALIFY FORM
+  Source of truth: assets/js/chrome.js (LEADFORM string). Appears on the
+  landing page (inline) and is injected into <div id="chrome-leadform">
+  on most sub-pages. Wherever a content fragment shows
+    <!-- PTR-PARTIAL: insert shared Lead Form here -->
+  drop this block in (ideally as ONE reusable block / shortcode so there
+  is a single implementation).
+
+  ⚠️ THIS IS A FRONT-END DEMO. It validates and shows a success state but
+  does NOT submit anywhere.
+
+  ➜ PRODUCTION: this is being rebuilt in **Formidable Forms**. Do NOT port
+    this markup as-is — follow `lead-form-formidable.md` (field map, behavior,
+    confirmation, tracking) and enqueue `lead-form-formidable.css` to keep this
+    look. This HTML stays only as the visual/behavioral reference.
+
+  For production (Open Q3):
+  • Rebuild as a real form (Gravity Forms / CF7 / HubSpot / etc.) OR wire
+    this markup to a real endpoint.
+  • Route notifications to the correct inbox / CRM; add spam protection.
+  • Fire the form-submit conversion event (GA4 / Google Ads / Meta) on
+    success (Open Q4).
+  • Multi-step behavior, the No/Yes toggle, the "Other" reveal, and the
+    success swap are handled by assets/js/site.js (#leadForm).
+============================================================ -->
+<section class="section lead" id="contact">
+  <div class="container lead__grid">
+    <div class="lead__copy reveal">
+      <p class="eyebrow eyebrow--green">Free, confidential consultation</p>
+      <h2>See if you pre-qualify for tax relief</h2>
+      <p>Tell us a little about your situation and a licensed tax professional will reach out &mdash; usually the same day.</p>
+      <ul class="lead__list">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> No cost call with IRS and our tax expert on your first call</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> CPAs, tax attorneys &amp; Enrolled Agents on your side</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Money-back guarantee</li>
+      </ul>
+    </div>
+
+    <form class="lead-form lead-form--steps reveal" data-d="1" id="leadForm" novalidate style="width: 500px">
+      <div class="lead-form__fields">
+        <h3 class="lead-form__title">Pre-Qualify for Forgiveness Today</h3>
+
+        <!-- Step 1 — amount owed -->
+        <div class="form-step is-active" data-step="1">
+          <div class="field">
+            <label for="lf-owe">How much do they say you owe?</label>
+            <select id="lf-owe" name="owe" required>
+              <option value="" disabled selected hidden>Select an amount</option>
+              <option>Under $4,999</option>
+              <option>$5,000 - $9,999</option>
+              <option>$10,000 - $19,999</option>
+              <option>$20,000 - $49,999</option>
+              <option>$50,000 +</option>
+            </select>
+            <span class="err">Please select an amount.</span>
+          </div>
+          <button type="button" class="btn btn--lg" data-step-next style="width:100%">Get Started</button>
+        </div>
+
+        <!-- Step 2 — unfiled returns + source -->
+        <div class="form-step" data-step="2">
+          <div class="field">
+            <label>Do you have any Unfiled Tax Returns?</label>
+            <div class="toggle-group" role="radiogroup" aria-label="Do you have any Unfiled Tax Returns?">
+              <button type="button" class="toggle-btn" data-toggle="unfiled" data-value="No" role="radio" aria-checked="false">No</button>
+              <button type="button" class="toggle-btn" data-toggle="unfiled" data-value="Yes" role="radio" aria-checked="false">Yes</button>
+            </div>
+            <input type="hidden" id="lf-unfiled" name="unfiled" required>
+            <span class="err">Please choose one.</span>
+          </div>
+          <div class="field">
+            <label for="lf-hear">How did you hear about us?</label>
+            <select id="lf-hear" name="hear">
+              <option value="" disabled selected hidden>Select one</option>
+              <option>Google / Bing</option>
+              <option>TV</option>
+              <option>Radio / Satellite Radio / Podcast</option>
+              <option>Billboard</option>
+              <option>Friend / Word of Mouth</option>
+              <option>AI Chat</option>
+              <option>Social Media</option>
+              <option>Review or Finance Website</option>
+              <option>Email</option>
+              <option>Other (Please specify)</option>
+            </select>
+            <span class="err">Please select an option.</span>
+          </div>
+          <div class="field" id="lf-hear-other-field" hidden>
+            <label for="lf-hear-other">Please specify</label>
+            <input id="lf-hear-other" name="hearOther" type="text" placeholder="Tell us how you heard about us">
+            <span class="err">Please tell us how.</span>
+          </div>
+          <button type="button" class="btn btn--lg" data-step-next style="width:100%">Next</button>
+        </div>
+
+        <!-- Step 3 — contact info -->
+        <div class="form-step" data-step="3">
+          <div class="field">
+            <label for="lf-first">Contact Information <span class="req">*</span></label>
+            <input id="lf-first" name="first" type="text" autocomplete="given-name" placeholder="My Name is" required>
+            <span class="err">Please enter your name.</span>
+          </div>
+          <div class="field">
+            <label for="lf-phone">Phone Number <span class="req">*</span></label>
+            <input id="lf-phone" name="phone" type="tel" autocomplete="tel" placeholder="(555) 123-4567" required>
+            <span class="err">Please enter a valid phone number.</span>
+          </div>
+          <div class="field">
+            <label for="lf-email">Email Address</label>
+            <input id="lf-email" name="email" type="email" autocomplete="email" placeholder="My Email is">
+            <span class="err">Please enter a valid email.</span>
+          </div>
+          <p class="consent">By clicking &ldquo;Pre-Qualify Now," I am consenting to and providing my electronic signature as express written consent for Priority Tax Relief to contact me regarding tax payment options by email, text or calls at the phone number and email provided using any automated or automatic telephone dialing device or system, prerecorded/artificial voice and/or artificial technology (Data and msg rates may apply, msg frequency varies: Text HELP for help; STOP to cancel) even if my telephone number is listed on any state or federal Do-Not-Call registry. This consent will not be shared with third parties for their marketing purposes. I may revoke this consent anytime and consent is not required as a condition to speak with Priority Tax, I can email: info@prioritytaxrelief.com</p>
+          <button type="submit" class="btn btn--lg" style="width:100%">Prequalify Now</button>
+        </div>
+      </div>
+      <div class="form-success">Thank you &mdash; your request has been received. A tax professional will reach out shortly.</div>
+    </form>
+  </div>
+</section>

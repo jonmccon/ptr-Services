@@ -1,0 +1,87 @@
+/* ============================================================
+   PTR — Formidable Forms skin for the Pre-Qualify lead form
+   Enqueue ALONGSIDE site.css. It maps Formidable's markup onto
+   the build's look: 2px fields, 4px radius, green button, the
+   Yes/No toggle, hidden progress bar.
+
+   SCOPE: everything is scoped to `.ptr-lead`. Add that class to
+   the form — Formidable form builder ▸ Settings ▸ "Form classes"
+   (or wrap the [formidable] shortcode in a <div class="ptr-lead">).
+   If you can't add a class, replace `.ptr-lead` below with the
+   form container id, e.g. #frm_form_17_container.
+
+   Colors mirror the PTR tokens in site.css. If site.css exposes
+   :root vars (--ptr-green etc.) you can swap the literals for those.
+   ============================================================ */
+
+.ptr-lead .frm_forms,
+.ptr-lead.frm_forms { --green:#047B44; --green-deep:#036037; --ink:#141515; --ink-2:#33332F; --line:#B9B9B2; --err:#FB8A88; --err-ink:#4D0218; }
+
+/* ---- Field wrapper + label ---- */
+.ptr-lead .frm_form_field { margin-bottom:16px; }
+.ptr-lead .frm_primary_label {
+  display:block; font-weight:600; font-size:15px; color:var(--ink); margin-bottom:6px;
+}
+.ptr-lead .frm_required { color:var(--green); margin-left:2px; }
+
+/* ---- Text / email / tel / select ---- */
+.ptr-lead input[type=text],
+.ptr-lead input[type=email],
+.ptr-lead input[type=tel],
+.ptr-lead select,
+.ptr-lead textarea {
+  width:100%; box-sizing:border-box;
+  padding:13px 14px; font-size:16px; font-family:inherit; color:var(--ink);
+  background:#fff; border:2px solid var(--line); border-radius:4px;
+  transition:border-color .14s ease;
+}
+.ptr-lead select { appearance:none; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%2333332F' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 12px center; padding-right:40px; }
+.ptr-lead input:focus,
+.ptr-lead select:focus,
+.ptr-lead textarea:focus { outline:none; border-color:var(--green); }
+
+/* ---- Yes/No radio rendered as a 2-button toggle ---- */
+.ptr-lead .frm_radio { display:inline-block; margin:0 8px 0 0; }
+.ptr-lead .frm_opt_container { display:flex; gap:10px; }
+.ptr-lead .frm_radio input[type=radio] { position:absolute; opacity:0; pointer-events:none; }
+.ptr-lead .frm_radio label {
+  display:flex; align-items:center; justify-content:center;
+  min-width:96px; padding:12px 22px; cursor:pointer;
+  font-weight:600; color:var(--ink); background:#fff;
+  border:2px solid var(--line); border-radius:4px;
+  transition:border-color .14s ease, background .14s ease, color .14s ease;
+}
+.ptr-lead .frm_radio input[type=radio]:checked + label {
+  border-color:var(--green); background:var(--green); color:#fff;
+}
+.ptr-lead .frm_radio input[type=radio]:focus-visible + label { outline:2px solid var(--green); outline-offset:2px; }
+
+/* ---- Submit + page-nav buttons ---- */
+/* (You can also add `btn btn--lg` as button CSS classes in the editor and
+    delete this block — site.css will then style them directly.) */
+.ptr-lead .frm_button_submit,
+.ptr-lead .frm_prev_page {
+  display:inline-flex; align-items:center; justify-content:center;
+  width:100%; padding:15px 22px; font-size:16px; font-weight:600; font-family:inherit;
+  color:#fff; background:var(--green); border:2px solid var(--green);
+  border-radius:4px; cursor:pointer; transition:background .14s ease, transform .08s ease;
+}
+.ptr-lead .frm_button_submit:hover { background:var(--green-deep); border-color:var(--green-deep); }
+.ptr-lead .frm_button_submit:active { transform:scale(.98); }
+.ptr-lead .frm_prev_page { background:#fff; color:var(--ink); border-color:var(--line); width:auto; }
+.ptr-lead .frm_submit { margin-top:4px; }
+
+/* ---- Errors (announced, not color-only) ---- */
+.ptr-lead .frm_blank_field input,
+.ptr-lead .frm_blank_field select { border-color:var(--err); }
+.ptr-lead .frm_error { color:var(--err-ink); font-size:13px; margin-top:5px; }
+
+/* ---- HTML/consent block ---- */
+.ptr-lead .frm_description,
+.ptr-lead .frm_html_container p { font-size:12px; line-height:1.5; color:var(--ink-2); }
+
+/* ---- Hide the multi-step progress bar (build has none) ---- */
+.ptr-lead .frm_rootline,
+.ptr-lead .frm_rootline_group,
+.ptr-lead .frm_pages_complete,
+.ptr-lead .frm_progress_bar { display:none !important; }

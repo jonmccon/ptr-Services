@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PTR Services — WordPress Engineering Handoff</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=Newsreader:ital,opsz,wght@1,6..72,300;1,6..72,400&family=Source+Code+Pro:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#141515; --ink-2:#33332F; --grey:#B9B9B2; --bone:#EBEBDC; --paper:#FFFFFF;
+    --green:#047B44; --green-deep:#013017; --orange:#FE5000;
+    --line:#e3e3da; --radius:8px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:Inter,system-ui,sans-serif;color:var(--ink);background:var(--bone);line-height:1.55;-webkit-font-smoothing:antialiased}
+  a{color:var(--green);text-decoration:none}
+  a:hover{color:var(--green-deep);text-decoration:underline}
+  code,.mono{font-family:"Source Code Pro",monospace;font-size:.92em}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 32px}
+
+  /* Masthead */
+  header.mast{background:var(--green);color:#fff;padding:64px 0 56px}
+  .mast .wrap{display:flex;flex-direction:column;gap:18px}
+  .flag{width:190px;height:auto}
+  .eyebrow{font-size:11px;letter-spacing:.18em;text-transform:uppercase;font-weight:600;color:#bfe6cf;margin:0}
+  h1{font-size:clamp(34px,5vw,58px);line-height:1.02;letter-spacing:-.01em;font-weight:800;margin:0;max-width:18ch}
+  h1 .accent{color:var(--orange)}
+  .mast p.lead{font-size:19px;max-width:62ch;margin:6px 0 0;color:#e4f1e9;font-weight:300}
+  .quicklinks{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+  .chip{display:inline-flex;align-items:center;gap:7px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.28);color:#fff;padding:9px 15px;border-radius:6px;font-size:14px;font-weight:500;transition:background .14s ease}
+  .chip:hover{background:rgba(255,255,255,.22);color:#fff;text-decoration:none}
+  .chip--solid{background:var(--orange);border-color:var(--orange)}
+  .chip--solid:hover{background:#e84800}
+
+  main{padding:84px 0 80px}
+  section{margin-bottom:52px}
+  h2{font-size:13px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--green);margin:0 0 18px;padding-bottom:10px;border-bottom:2px solid var(--line)}
+  h3{font-size:20px;font-weight:700;margin:0 0 6px;letter-spacing:-.01em}
+  p{margin:0 0 14px;max-width:72ch}
+
+  /* model cards */
+  .model{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .card{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:22px}
+  .card .tag{font-family:"Source Code Pro",monospace;font-size:11px;font-weight:500;color:#fff;background:var(--ink);padding:3px 8px;border-radius:4px;display:inline-block;margin-bottom:12px}
+  .card.green .tag{background:var(--green)}
+  .card.orange .tag{background:var(--orange)}
+  .card p{font-size:14.5px;margin:0;color:var(--ink-2)}
+  .card p + p{margin-top:8px}
+
+  /* table */
+  .tablecard{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+  table{width:100%;border-collapse:collapse;font-size:14px}
+  th,td{text-align:left;padding:12px 16px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{background:#fafaf7;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);font-weight:700}
+  tr:last-child td{border-bottom:none}
+  td .slug{font-family:"Source Code Pro",monospace;font-size:12px;color:var(--ink-2)}
+  .links{display:flex;gap:12px;white-space:nowrap}
+  .badge{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:2px 8px;border-radius:999px}
+  .badge.miss{background:#FB8A88;color:#4D0218}
+  .badge.demo{background:#F8E59D;color:#793205}
+  .badge.wip{background:#BFE1F6;color:#325DBE}
+  .rowname{font-weight:600}
+  tr.row-muted > td{background:#edece4;color:var(--ink-2)}
+
+  /* partials */
+  .partials{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .partials .card h3{font-size:16px}
+  .partials .card p{font-size:13.5px;margin-top:8px}
+  .partials .arrow{color:var(--orange);font-weight:700}
+
+  /* open questions */
+  .oq{background:var(--paper);border:1px solid var(--line);border-left:4px solid var(--orange);border-radius:var(--radius);padding:22px 26px}
+  .oq ul{margin:0;padding-left:20px}
+  .oq li{margin-bottom:9px;font-size:14.5px;color:var(--ink-2)}
+  .oq li b{color:var(--ink)}
+
+  .note{font-size:13.5px;color:var(--ink-2);font-style:italic;font-family:Newsreader,Georgia,serif}
+  footer.foot{border-top:1px solid var(--line);padding:26px 0;font-size:13px;color:var(--ink-2)}
+  footer.foot .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+
+  @media(max-width:780px){
+    .model,.partials{grid-template-columns:1fr}
+    .links{flex-direction:column;gap:4px}
+    .wrap{padding:0 20px}
+  }
+</style>
+</head>
+<body>
+
+<header class="mast">
+  <div class="wrap">
+    <img class="flag" src="../assets/img/logo/ptr-horizontal-white.svg" alt="Priority Tax Relief" onerror="this.style.display='none'">
+    <p class="eyebrow">ENGINEERING HANDOFF · 190626 · JONNY MCCONNELL</p>
+    <h1>Services pages, packaged for <span style="color: rgb(255, 255, 255)">WordPress.</span></h1>
+    <p class="lead">The approved static build, repackaged so a WordPress developer can lift the pieces into a theme without reverse-engineering the source. 
+Shared chrome → theme. 
+Page content → fragments. 
+Assets → enqueued once.</p>
+    <div class="quicklinks">
+      <a class="chip chip--solid" href="README.md" style="background:#fff;border-color:#fff;color:var(--orange)">📄 Integration guide (README)</a>
+      <a class="chip" href="seo/seo-manifest.md">SEO &amp; schema manifest</a>
+      <a class="chip" href="../Engineering Ticket - Services.html">Engineering ticket</a>
+      <a class="chip" href="../CONTENT-LOG.md">Content log</a>
+      <a class="chip" href="../index.html">Full static demo build</a>
+    </div>
+  </div>
+</header>
+
+<main class="wrap" style="margin: 30px 87px 0px">
+
+  <section>
+    <h2>The mental model</h2>
+    <p>The build has two layers — keep them separate in WordPress. Chrome is shared on every page and belongs in the theme; page content is unique and lives in a fragment; the CSS/JS/images are enqueued once and shared.</p>
+    <div class="model">
+      <div class="card green">
+        <span class="tag">→ THEME</span>
+        <h3>Chrome</h3>
+        <p>Header, footer, and the pre-qualify lead form. Injected by <code>chrome.js</code> in the static build; should become the WP theme header/footer + one reusable form block.</p>
+        <p><a href="#partials">See theme-partials ↓</a></p>
+      </div>
+      <div class="card orange">
+        <span class="tag" style="background:var(--green)">→ PAGE BODY</span>
+        <h3>Content</h3>
+        <p>Everything inside <code>&lt;main&gt;</code> — unique per page. Each <code>content-fragments/*.html</code> is exactly this, with no wrapper, head, header, or footer.</p>
+        <p><a href="#pages">See page inventory ↓</a></p>
+      </div>
+      <div class="card">
+        <span class="tag">→ ENQUEUE</span>
+        <h3>Assets</h3>
+        <p>One shared <a href="../assets/css/site.css"><code>site.css</code></a> + <a href="../assets/js/site.js"><code>site.js</code></a> power every page (carousel, accordions, reveals, sticky header, mobile nav, form, dark mode). <a href="../assets/css/pages.css"><code>pages.css</code></a> for Careers/Tax News; <a href="../assets/css/portal.css"><code>portal.css</code></a> + <a href="../assets/js/portal.js"><code>portal.js</code></a> for the portal.</p>
+        <p class="mono" style="font-size:12px;color:var(--ink-2)">../assets/</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="pages">
+    <h2>Page inventory &amp; content fragments</h2>
+    <p>Each <b>Fragment</b> is the content-only drop-in (no wrapper/header/footer). Each <b>Preview</b> is the full styled page for visual reference. Set each page's slug to the canonical and apply its SEO from the manifest.</p>
+    <div class="tablecard">
+      <table>
+        <thead>
+          <tr><th>Page</th><th>Canonical slug</th><th>Links</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="rowname">Services <span class="note">(landing)</span></td><td><span class="slug">/services/</span></td><td class="links"><a href="content-fragments/services.html">Fragment</a><a href="../Services Page.html">Preview</a></td></tr>
+          <tr><td class="rowname">Thank You</td><td><span class="slug">/thank-you/</span></td><td class="links"><a href="content-fragments/thank-you.html">Fragment</a><a href="../Thank You.html">Preview</a></td></tr>
+          <tr><td class="rowname">Offer in Compromise</td><td><span class="slug">/services/settle-back-taxes-with-irs-offer-in-compromise/</span></td><td class="links"><a href="content-fragments/offer-in-compromise.html">Fragment</a><a href="../Offer in Compromise.html">Preview</a></td></tr>
+          <tr><td class="rowname">Penalty Abatement</td><td><span class="slug">/services/settle-back-taxes-with-irs-penalty-abatement/</span></td><td class="links"><a href="content-fragments/penalty-abatement.html">Fragment</a><a href="../Penalty Abatement.html">Preview</a></td></tr>
+          <tr><td class="rowname">Innocent Spouse Relief</td><td><span class="slug">/services/innocent-spouse-relief-for-back-taxes/</span></td><td class="links"><a href="content-fragments/innocent-spouse-relief.html">Fragment</a><a href="../Innocent Spouse Relief.html">Preview</a></td></tr>
+          <tr><td class="rowname">Currently Not Collectible</td><td><span class="slug">/services/currently-not-collectible/</span></td><td class="links"><a href="content-fragments/currently-not-collectible.html">Fragment</a><a href="../Currently Not Collectible.html">Preview</a></td></tr>
+          <tr><td class="rowname">Installment Agreement</td><td><span class="slug">/services/installment-agreement-help-for-back-taxes/</span></td><td class="links"><a href="content-fragments/installment-agreement.html">Fragment</a><a href="../Installment Agreement.html">Preview</a></td></tr>
+          <tr><td class="rowname">Stop Wage Garnishment</td><td><span class="slug">/services/stop-wage-garnishment-for-irs-or-state-taxes/</span></td><td class="links"><a href="content-fragments/stop-wage-garnishment.html">Fragment</a><a href="../Stop Wage Garnishment.html">Preview</a></td></tr>
+          <tr><td class="rowname">Bank Levy Release</td><td><span class="slug">/services/settle-bank-levy-for-irs-or-state-taxes/</span></td><td class="links"><a href="content-fragments/bank-levy-release.html">Fragment</a><a href="../Bank Levy Release.html">Preview</a></td></tr>
+          <tr><td class="rowname">Back Payroll Taxes</td><td><span class="slug">/services/settle-back-payroll-tax/</span></td><td class="links"><a href="content-fragments/back-payroll-taxes.html">Fragment</a><a href="../Back Payroll Taxes.html">Preview</a></td></tr>
+          <tr><td class="rowname">Back Sales Tax</td><td><span class="slug">—</span></td><td class="links"><span class="note">No page in build; card mis-linked → dead. Open Q7.</span></td></tr>
+          <tr class="row-muted"><td class="rowname">About <span class="badge wip">WIP</span></td><td><span class="slug">/about/</span></td><td class="links"><a href="content-fragments/about.html">Fragment</a><a href="../About.html">Preview</a></td></tr>
+          <tr class="row-muted"><td class="rowname">Careers <span class="badge wip">WIP</span></td><td><span class="slug">/careers/</span></td><td class="links"><a href="content-fragments/careers.html">Fragment</a><a href="../Careers.html">Preview</a></td></tr>
+          <tr class="row-muted"><td class="rowname">Contact <span class="badge wip">WIP</span></td><td><span class="slug">/contact/</span></td><td class="links"><a href="content-fragments/contact.html">Fragment</a><a href="../Contact.html">Preview</a></td></tr>
+          <tr class="row-muted"><td class="rowname">Our Team <span class="badge wip">WIP</span></td><td><span class="slug">/our-team/</span></td><td class="links"><a href="content-fragments/our-team.html">Fragment</a><a href="../Our Team.html">Preview</a></td></tr>
+          <tr class="row-muted"><td class="rowname">Tax News <span class="badge wip">WIP</span></td><td><span class="slug">/tax-news/</span></td><td class="links"><a href="content-fragments/tax-news.html">Fragment</a><a href="../Tax News.html">Preview</a></td></tr>
+          <tr class="row-muted"><td class="rowname">Tax News article <span class="badge wip">WIP</span> <span class="note">(sample)</span></td><td><span class="slug">(blog post)</span></td><td class="links"><a href="content-fragments/uncommon-tax-deductions.html">Fragment</a><a href="../Uncommon Tax Deductions You Might Be Missing.html">Preview</a></td></tr>
+          <tr class="row-muted"><td class="rowname">Client portal <span class="badge demo">Demo</span></td><td><span class="slug">/clients/</span></td><td class="links"><span class="note">Front-end demo, no backend. Separate scoping — not a drop-in.</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note" style="margin-top:14px">Fragments are intentionally unstyled when opened on their own — they carry no <code>&lt;head&gt;</code> or CSS link. They render correctly only once pasted under a theme that enqueues <a href="../assets/css/site.css"><code>site.css</code></a>. Use the Preview column to see the finished page.</p>
+  </section>
+
+  <section id="partials">
+    <h2>Shared chrome → theme partials</h2>
+    <p>These three pieces repeat on every page. Build them once at the theme level rather than per page. Wherever a fragment shows <code>&lt;!-- PTR-PARTIAL: insert shared Lead Form here --&gt;</code>, drop in the form block.</p>
+    <div class="partials">
+      <div class="card green"><span class="arrow">→ header.php</span><h3>Header</h3><p>Logo, Services + Tax News dropdowns, About, Careers, hotline, Clients button, mobile nav. Convert nav to WP menus; keep classes.</p><p><a href="theme-partials/header.html">header.html</a></p></div>
+      <div class="card green"><span class="arrow">→ footer.php</span><h3>Footer</h3><p>"Not a current client" call row, brand + BBB, link columns, full TCPA legal text.</p><p><a href="theme-partials/footer.html">footer.html</a></p></div>
+      <div class="card orange"><span class="arrow">→ Formidable form</span><h3>Lead form</h3><p>Multi-step pre-qualify form. <b>Demo only</b> — being rebuilt in <b>Formidable Forms</b>. See the migration guide for the field map, behavior, CSS skin &amp; conversion tracking.</p><p><a href="theme-partials/lead-form.html">lead-form.html</a> · <a href="theme-partials/lead-form-formidable.md">Formidable guide</a> · <a href="theme-partials/lead-form-formidable.css">skin.css</a> · <a href="theme-partials/lead-form-formidable.xml">import.xml</a></p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Decisions needed before / during build</h2>
+    <div class="oq">
+      <ul>
+        <li><b>WordPress approach</b> — custom page template, Gutenberg pattern, or page-builder? Drives the whole estimate. <i>(Q1)</i></li>
+        <li><b>What's content-editable vs. hardcoded</b> — hero copy, the 9 service cards, accordion items, the team roster, the guarantee band? <i>(Q2)</i></li>
+        <li><b>Where the lead form submits</b> — which form plugin, CRM routing, spam protection. Today it's a front-end demo. <i>(Q3)</i></li>
+        <li><b>Tracking &amp; conversion</b> — GTM, GA4, Google Ads, Meta Pixel, CallRail, form-submit event, consent handling. <i>(Q4)</i></li>
+        <li><b>SEO structure</b> — keep the landing page's archive semantics (<code>CollectionPage</code> + <code>rel=next</code>, OG "Services Archive") or migrate to <code>WebPage</code>/<code>Service</code>? <i>(Q5)</i></li>
+        <li><b>Primary phone number</b> — header <code>(866) 708-2872</code> vs. footer <code>888-708-2872</code>. <i>(Q6)</i></li>
+        <li><b>Back Sales Tax</b> — author the missing page (copy + slug + video) or keep the card disabled? <i>(Q7)</i></li>
+        <li><b>Service-card icons</b> — keep referencing live WP media URLs, or migrate to managed assets? <i>(Q8)</i></li>
+        <li><b>Dark-mode toggle &amp; icons8 call GIF</b> — keep in production? Verify the GIF's license. <i>(Q9)</i></li>
+      </ul>
+      <p style="margin:16px 0 0"><a href="../Engineering Ticket - Services.html">Full detail, acceptance criteria &amp; QA / a11y checklists in the engineering ticket →</a></p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <span>Priority Tax Relief · Services WordPress handoff</span>
+    <span>Chrome → theme · Content → fragments · Assets → <span class="mono">../assets/</span></span>
+  </div>
+</footer>
+
+</body>
+</html>
