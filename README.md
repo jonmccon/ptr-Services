@@ -23,8 +23,17 @@ clients.html                ← client portal (status lookup)
 Thank You.html
 404.html                    ← branded not-found page
 assets/                     ← css / js / img (logos, badges, photos, icons)
+handoff/                    ← WordPress engineering handoff (published at /handoff/)
+                              open handoff/index.html — content fragments, theme
+                              partials, SEO manifest, Formidable form guide + XML
+Engineering Ticket - Services.html / .md   ← the WordPress build tickets (handoff ref)
+CONTENT-LOG.md              ← source-fidelity + known-issue log (handoff ref)
 .nojekyll                   ← tells GitHub Pages to skip Jekyll processing
 ```
+
+The whole package deploys as one folder: the live marketing demo at the root,
+and the engineering handoff under `/handoff/`. Open `handoff/index.html` for the
+integration guide; all of its links resolve within this build.
 
 ## Deploy to GitHub Pages
 
@@ -57,5 +66,9 @@ assets/                     ← css / js / img (logos, badges, photos, icons)
   they validate and show success states but don't submit to a backend.
 - The preview-only design **"Tweaks"** panel has been stripped from this
   production build; the page renders with its default hero/layout/accent.
-- Not included (internal/working files): `Engineering Ticket - Services.html`
-  and `Careers (curated openings).html`.
+- **Engineering handoff** lives under `handoff/` and is published alongside the
+  demo (e.g. `https://<username>.github.io/<repo>/handoff/`). It links to the
+  Engineering Ticket and Content Log, which are therefore included here too — if
+  this build is public and those should stay internal, remove `handoff/`, the
+  two `Engineering Ticket - Services.*` files, and `CONTENT-LOG.md` before publishing.
+- Not included (internal/working file): `Careers (curated openings).html`.

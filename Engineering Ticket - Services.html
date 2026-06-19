@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Engineering Ticket — PTR Services Pages (WordPress)</title>
+<link rel="stylesheet" href="_ds/ptr-daisy-design-system-019e2cea-ee39-704c-9992-a06235c8999a/colors_and_type.css">
+<style>
+  :root { --doc-w: 880px; --rule: #E3E3DA; }
+
+  * { box-sizing: border-box; }
+  html { background: #DBDBD2; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body {
+    margin: 0;
+    color: var(--ptr-ink);
+    font-family: var(--font-sans);
+    font-size: 15px;
+    line-height: 1.55;
+  }
+
+  /* ---------- Page sheet ---------- */
+  .sheet {
+    max-width: var(--doc-w);
+    margin: 40px auto;
+    background: var(--ptr-white);
+    box-shadow: var(--shadow-lg);
+    border-radius: var(--radius-box);
+    overflow: hidden;
+  }
+
+  /* ---------- Doc masthead ---------- */
+  .masthead {
+    background: var(--ptr-ink);
+    color: var(--ptr-white);
+    padding: 40px 56px 36px;
+  }
+  .masthead .kicker {
+    font-family: var(--font-spec);
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ptr-stone);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .masthead .flag { width: 13px; height: 18px; color: var(--ptr-orange); flex: none; }
+  .masthead h1 {
+    font-size: 34px;
+    line-height: 1.12;
+    letter-spacing: -0.01em;
+    font-weight: 600;
+    margin: 16px 0 10px;
+    color: var(--ptr-white);
+  }
+  .masthead p {
+    margin: 0;
+    max-width: 60ch;
+    color: var(--ptr-stone);
+    font-size: 15px;
+  }
+  .masthead .meta-row {
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255,255,255,0.14);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 28px 44px;
+    font-size: 13px;
+  }
+  .masthead .meta-row dt {
+    font-family: var(--font-spec);
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ptr-stone);
+    margin-bottom: 3px;
+  }
+  .masthead .meta-row dd { margin: 0; color: var(--ptr-white); font-weight: 500; }
+
+  /* ---------- Body ---------- */
+  .body { padding: 8px 56px 56px; }
+
+  /* ---------- Ticket card ---------- */
+  .ticket {
+    border: 1px solid var(--rule);
+    border-radius: var(--radius-box);
+    margin-top: 44px;
+    overflow: hidden;
+  }
+  .ticket__head {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 22px 28px;
+    background: #FAFAF7;
+    border-bottom: 1px solid var(--rule);
+  }
+  .ticket__key {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--color-primary);
+    background: #E7F0EA;
+    border: 1px solid #CFE0D5;
+    border-radius: 4px;
+    padding: 4px 9px;
+    white-space: nowrap;
+    flex: none;
+    margin-top: 3px;
+  }
+  .ticket__title { margin: 0; }
+  .ticket__title h2 {
+    font-size: 23px;
+    line-height: 1.2;
+    font-weight: 600;
+    letter-spacing: -0.005em;
+    margin: 0 0 4px;
+  }
+  .ticket__title .sub { font-size: 13px; color: var(--color-base-400); }
+
+  /* fields grid */
+  .fields {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--rule);
+    border-bottom: 1px solid var(--rule);
+  }
+  .fields > div { background: #fff; padding: 13px 18px; }
+  .fields dt {
+    font-family: var(--font-spec);
+    font-size: 9.5px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--color-base-400);
+    margin-bottom: 4px;
+  }
+  .fields dd { margin: 0; font-size: 13px; font-weight: 600; }
+
+  .ticket__body { padding: 8px 28px 28px; }
+
+  /* ---------- Sections inside ticket ---------- */
+  section.blk { padding-top: 26px; }
+  h3.lbl {
+    font-family: var(--font-spec);
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    margin: 0 0 12px;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+  }
+  h3.lbl::before {
+    content: "";
+    width: 9px; height: 13px;
+    background: var(--ptr-orange);
+    -webkit-mask: var(--flag-mask) center / contain no-repeat;
+    mask: var(--flag-mask) center / contain no-repeat;
+    flex: none;
+  }
+  .blk p { margin: 0 0 12px; }
+  .blk p:last-child { margin-bottom: 0; }
+
+  /* component breakdown list */
+  ul.comp { list-style: none; margin: 0; padding: 0; }
+  ul.comp li {
+    padding: 11px 0 11px 0;
+    border-bottom: 1px solid var(--rule);
+    display: grid;
+    grid-template-columns: 168px 1fr;
+    gap: 18px;
+    align-items: baseline;
+  }
+  ul.comp li:last-child { border-bottom: 0; }
+  ul.comp .name { font-weight: 600; font-size: 13.5px; }
+  ul.comp .desc { font-size: 13.5px; color: #444; }
+
+  /* acceptance criteria checkboxes */
+  ul.ac { list-style: none; margin: 0; padding: 0; }
+  ul.ac li {
+    position: relative;
+    padding: 8px 0 8px 30px;
+    font-size: 14px;
+    border-bottom: 1px dashed var(--rule);
+  }
+  ul.ac li:last-child { border-bottom: 0; }
+  ul.ac li::before {
+    content: "";
+    position: absolute;
+    left: 0; top: 9px;
+    width: 16px; height: 16px;
+    border: 2px solid var(--color-primary);
+    border-radius: 4px;
+  }
+
+  /* generic checklist (QA / a11y) */
+  ul.check { list-style: none; margin: 0; padding: 0; columns: 1; }
+  ul.check li {
+    position: relative;
+    padding: 7px 0 7px 28px;
+    font-size: 13.5px;
+    border-bottom: 1px solid #F1F1EC;
+  }
+  ul.check li:last-child { border-bottom: 0; }
+  ul.check li::before {
+    content: "";
+    position: absolute;
+    left: 2px; top: 9px;
+    width: 14px; height: 14px;
+    border: 1.5px solid var(--color-base-300);
+    border-radius: 3px;
+  }
+
+  /* tables (asset manifest) */
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  table th {
+    text-align: left;
+    font-family: var(--font-spec);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-base-400);
+    border-bottom: 2px solid var(--ptr-ink);
+    padding: 8px 12px 8px 0;
+    vertical-align: bottom;
+  }
+  table td {
+    padding: 9px 12px 9px 0;
+    border-bottom: 1px solid var(--rule);
+    vertical-align: top;
+  }
+  table td code, .mono { font-family: var(--font-mono); font-size: 12px; }
+  table tr:last-child td { border-bottom: 0; }
+  .tag {
+    display: inline-block;
+    font-family: var(--font-spec);
+    font-size: 10px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 2px 7px;
+    border-radius: 4px;
+    font-weight: 600;
+  }
+  .tag--keep { background: #E7F0EA; color: var(--color-success-content); }
+  .tag--swap { background: var(--color-warning); color: var(--color-warning-content); }
+  .tag--remote { background: var(--color-info); color: var(--color-info-content); }
+  .tag--missing { background: var(--color-error); color: var(--color-error-content); }
+  .tag--strip { background: #ECECEC; color: #555; }
+
+  /* open questions */
+  ol.oq { margin: 0; padding: 0; counter-reset: oq; list-style: none; }
+  ol.oq li {
+    position: relative;
+    padding: 14px 0 14px 42px;
+    border-bottom: 1px solid var(--rule);
+  }
+  ol.oq li:last-child { border-bottom: 0; }
+  ol.oq li::before {
+    counter-increment: oq;
+    content: "Q" counter(oq);
+    position: absolute;
+    left: 0; top: 13px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--ptr-orange);
+  }
+  ol.oq .q { font-weight: 600; font-size: 14px; display: block; margin-bottom: 3px; }
+  ol.oq .why { font-size: 13px; color: #555; }
+
+  .callout {
+    background: #FFF4EE;
+    border: 1px solid #FBD9C7;
+    border-left: 4px solid var(--ptr-orange);
+    border-radius: 6px;
+    padding: 14px 18px;
+    font-size: 13.5px;
+    margin-top: 4px;
+  }
+  .callout strong { color: var(--ptr-orange-deep); }
+
+  .note { font-size: 12.5px; color: var(--color-base-400); margin-top: 10px; }
+  strong { font-weight: 600; }
+  .body a { color: var(--ptr-green); }
+
+  /* doc footer */
+  .docfoot {
+    max-width: var(--doc-w);
+    margin: 0 auto 60px;
+    padding: 0 8px;
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--font-spec);
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #8C8C84;
+  }
+
+  @media print {
+    html { background: #fff; }
+    .sheet { box-shadow: none; margin: 0; max-width: none; border-radius: 0; }
+    .ticket { break-inside: avoid; }
+    section.blk { break-inside: avoid; }
+    .docfoot { margin: 12px auto; }
+  }
+  @media (max-width: 720px) {
+    .body, .masthead { padding-left: 22px; padding-right: 22px; }
+    .fields { grid-template-columns: repeat(2, 1fr); }
+    ul.comp li { grid-template-columns: 1fr; gap: 2px; }
+  }
+</style>
+</head>
+<body style="--flag-mask: url('data:image/svg+xml;utf8,&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 98 140&quot;&gt;&lt;path d=&quot;M89.5 89.4 0 0c1 2.9 3.5 10.5 6.8 20.1.4 1.3 1.1 2.4 2 3.3l64.1 64.1-4.1 2.9L11.1 32.7c2 6 4.1 12.2 6.2 18.3.8 2.5 2.2 4.7 4 6.5l38.9 38.9-4.1 2.9-33.9-33.9c2.2 6.5 4.1 12.2 5.5 16.2 1.3 3.8 3.4 7.2 6.2 10l1.1 1.1c7.7 7.7 10.5 19 7.3 29.4l-5.5 17.6 34.6-31.3c4.7-4.1 11.8-3.9 16.2.5l7.2 7.2c5-7.6 4-17.6-2.4-24l-2.9-2.9z&quot;/&gt;&lt;/svg&gt;');">
+
+<div class="sheet">
+
+  <!-- ============ MASTHEAD ============ -->
+  <header class="masthead">
+    <div class="kicker">
+      <svg class="flag" viewBox="0 0 98 140" fill="currentColor"><path d="M89.5 89.4 0 0c1 2.9 3.5 10.5 6.8 20.1.4 1.3 1.1 2.4 2 3.3l64.1 64.1-4.1 2.9L11.1 32.7c2 6 4.1 12.2 6.2 18.3.8 2.5 2.2 4.7 4 6.5l38.9 38.9-4.1 2.9-33.9-33.9c2.2 6.5 4.1 12.2 5.5 16.2 1.3 3.8 3.4 7.2 6.2 10l1.1 1.1c7.7 7.7 10.5 19 7.3 29.4l-5.5 17.6 34.6-31.3c4.7-4.1 11.8-3.9 16.2.5l7.2 7.2c5-7.6 4-17.6-2.4-24l-2.9-2.9z"/></svg>
+      Priority Tax Relief · Engineering · Jira-ready
+    </div>
+    <h1>Implement the new Services pages on WordPress</h1>
+    <p>Integrate the approved static build of the Services landing page and its service sub-pages into the production WordPress site at <span class="mono">prioritytaxrelief.com</span>. Two tickets: the landing page ships first; the sub-pages follow on the shared template established here.</p>
+    <dl class="meta-row">
+      <div><dt>Project</dt><dd>PTR Web</dd></div>
+      <div><dt>Epic</dt><dd>Services page rebuild</dd></div>
+      <div><dt>Tickets</dt><dd>2 (landing + sub-pages)</dd></div>
+      <div><dt>Source build</dt><dd>This project (HTML/CSS/JS)</dd></div>
+      <div><dt>Depth</dt><dd>Scope + acceptance criteria</dd></div>
+      <div><dt>Status</dt><dd>Ready for refinement</dd></div>
+    </dl>
+  </header>
+
+  <div class="body">
+
+    <!-- ===================================================== -->
+    <!-- TICKET 1 — LANDING PAGE                                -->
+    <!-- ===================================================== -->
+    <article class="ticket">
+      <div class="ticket__head">
+        <span class="ticket__key">PTR-WEB-1</span>
+        <div class="ticket__title">
+          <h2>Build &amp; integrate the Services landing page (<span class="mono">/services/</span>)</h2>
+          <div class="sub">Implement the redesigned Tax Relief Services page from the approved static build into WordPress.</div>
+        </div>
+      </div>
+
+      <dl class="fields">
+        <div><dt>Type</dt><dd>Story</dd></div>
+        <div><dt>Priority</dt><dd>High</dd></div>
+        <div><dt>Component</dt><dd>WordPress / Front-end</dd></div>
+        <div><dt>Est.</dt><dd>5–8 pts*</dd></div>
+        <div><dt>Labels</dt><dd>services, landing-page, seo, lead-form</dd></div>
+        <div><dt>Fix version</dt><dd>TBD</dd></div>
+        <div><dt>Blocks</dt><dd>PTR-WEB-2</dd></div>
+        <div><dt>Reporter</dt><dd>—</dd></div>
+      </dl>
+
+      <div class="ticket__body">
+
+        <section class="blk">
+          <h3 class="lbl">Description</h3>
+          <p>Take the approved static build of the Services landing page and stand it up as the live <span class="mono">/services/</span> page on WordPress. The build is a single HTML document plus shared CSS/JS and image assets (manifest below). The page must look and behave identically to the approved build, render correctly on mobile, and preserve the existing SEO metadata exactly.</p>
+          <p>The decision on <strong>how</strong> it should live in WordPress (custom page template vs. block pattern vs. page-builder layout) is unresolved — see Open Questions. Whatever the approach, the visible output and the interactive behaviors below are the contract.</p>
+        </section>
+
+        <section class="blk">
+          <h3 class="lbl">Components to build</h3>
+          <ul class="comp">
+            <li><span class="name">Header</span><span class="desc">Logo, primary nav with <strong>Services</strong> and <strong>Tax News</strong> dropdown menus, About, Careers, the Tax Help Hotline link, and a Clients button. Sticky with an on-scroll shadow; collapses to a hamburger + mobile nav panel under the breakpoint.</span></li>
+            <li><span class="name">Hero</span><span class="desc">Eyebrow, H1 with orange accent span, lead paragraph (with the 3-day money-back emphasis), dual CTA (“Contact us today” / “View our services”), trust badges (BBB, Google, Trustpilot) + “millions saved” callout, and a YouTube embed in the media panel.</span></li>
+            <li><span class="name">Our Services carousel</span><span class="desc">9 data-driven service cards (icon, title, description, “Learn More” link) rendered from a JS data array, with prev/next arrows and dot pagination. “Back Sales Tax” is a deliberate dead card — see Open Questions.</span></li>
+            <li><span class="name">How we help</span><span class="desc">50/50 split: a single-open accordion (4 steps) beside a “Book your consultation” CTA panel.</span></li>
+            <li><span class="name">Why choose us</span><span class="desc">Single-open accordion, 3 items, with H3 headings inside each summary.</span></li>
+            <li><span class="name">Money-back guarantee</span><span class="desc">Badge image + heading + body band.</span></li>
+            <li><span class="name">Lead / pre-qualify form</span><span class="desc">Name, phone, email, an estimated-tax-debt range slider with a live $ readout, optional message, the TCPA consent block, and submit. Client-side validation today; needs a real backend (see Open Questions).</span></li>
+            <li><span class="name">Footer</span><span class="desc">“Not a current client?” call row, brand + BBB, and two link columns (About, FAQs, Terms; Privacy, DNC/TCPA), plus the full legal/consent text.</span></li>
+            <li><span class="name">Global behaviors</span><span class="desc">Reveal-on-scroll entrance fades (additive — never hides content if JS fails), single-open accordion logic, sticky-header shadow, mobile-nav toggle, and a floating dark-mode toggle persisted to <span class="mono">localStorage</span>.</span></li>
+          </ul>
+        </section>
+
+        <section class="blk">
+          <h3 class="lbl">Acceptance criteria</h3>
+          <ul class="ac">
+            <li>The live <span class="mono">/services/</span> page renders visually identical to the approved build at desktop, tablet and mobile widths.</li>
+            <li>All 9 service cards render from the data source in the correct order with working “Learn More” links to their respective sub-page URLs (Back Sales Tax handled per the resolved Open Question).</li>
+            <li>Carousel arrows + dots navigate correctly; arrows disable at the track ends; keyboard and touch/swipe both work.</li>
+            <li>Both accordions enforce single-open behavior and are keyboard-operable.</li>
+            <li>The lead form validates required fields inline and submits to the agreed production backend (not the prototype redirect); a success/confirmation state is shown and the conversion event fires.</li>
+            <li>The estimated-debt slider updates its live dollar readout and submits its value with the form.</li>
+            <li>The YouTube hero embed lazy-loads and is responsive (no layout shift).</li>
+            <li>Header is sticky with on-scroll shadow; mobile nav opens/closes and traps focus appropriately.</li>
+            <li><strong>All SEO metadata is preserved exactly</strong> — see SEO note below — and validates in Google Rich Results / Schema validators.</li>
+            <li>All analytics/tracking and conversion pixels confirmed present and firing (GTM, GA4, Google Ads, Meta Pixel, CallRail, form-submit conversion) — see Open Questions.</li>
+            <li>No console errors; Core Web Vitals are not regressed versus the current page.</li>
+            <li>Page passes the QA and accessibility checklists below.</li>
+          </ul>
+        </section>
+
+        <section class="blk">
+          <h3 class="lbl">SEO — preserve exactly</h3>
+          <p>The build carries the page’s existing SEO verbatim. <strong>Do not regenerate or let a plugin overwrite these.</strong> Confirm the WordPress SEO setup (Yoast/Rank Math) outputs identical values:</p>
+          <ul class="check">
+            <li><span class="mono">&lt;title&gt;</span> “Tax Relief Services - Priority Tax Relief”, meta description, and <span class="mono">rel=canonical</span> → <span class="mono">/services/</span></li>
+            <li><span class="mono">rel="next"</span> pagination link — confirm whether this is still wanted (the build is a static page, not a paginated archive)</li>
+            <li><span class="mono">robots</span> directives (index, follow, max-image-preview:large, etc.)</li>
+            <li>Open Graph (locale, type=website, title “Services Archive”, description, url, site_name, image + dimensions) and Twitter card (summary_large_image, @TaxForgiveness)</li>
+            <li>Full JSON-LD <span class="mono">@graph</span>: CollectionPage, ImageObject, BreadcrumbList, WebSite, Organization</li>
+            <li>Heading hierarchy: exactly one H1 (hero), H2 section titles, H3 card/accordion titles</li>
+          </ul>
+          <p class="note">Note: OG title reads “Services Archive” and the JSON-LD type is <span class="mono">CollectionPage</span> with a <span class="mono">rel=next</span> — artifacts of the original WordPress archive. Confirm whether the new page should keep archive semantics or move to a standard <span class="mono">WebPage</span>/<span class="mono">Service</span> schema.</p>
+        </section>
+
+        <section class="blk">
+          <h3 class="lbl">Asset manifest / inventory</h3>
+          <table>
+            <thead><tr><th>Asset</th><th>Path</th><th>Notes</th></tr></thead>
+            <tbody>
+              <tr><td>Landing page markup</td><td><code>Services Page.html</code></td><td><span class="tag tag--keep">Port</span> Source of truth for structure &amp; copy</td></tr>
+              <tr><td>Site styles</td><td><code>assets/css/site.css</code></td><td><span class="tag tag--keep">Keep</span> + <code>ptr-tokens.css</code>, <code>pages.css</code></td></tr>
+              <tr><td>Interactions</td><td><code>assets/js/site.js</code></td><td><span class="tag tag--keep">Keep</span> Carousel, accordions, form, nav, theme</td></tr>
+              <tr><td>Service card data</td><td>inside <code>site.js</code> (<code>SERVICES[]</code>)</td><td>9 items — consider CMS-driving (see Open Q)</td></tr>
+              <tr><td>Logo + footer flag</td><td><code>assets/img/logo/</code></td><td><span class="tag tag--keep">Keep</span></td></tr>
+              <tr><td>Trust badges</td><td><code>assets/img/badges/</code></td><td>BBB, Google, Trustpilot, Authorized Partner</td></tr>
+              <tr><td>Service icons (×9)</td><td><code>assets/img/services/*.png</code></td><td><span class="tag tag--remote">Remote</span> JS references live WP media URLs (2023/06); local copies are fallbacks</td></tr>
+              <tr><td>Money-back badge</td><td><code>assets/img/money-back-guarantee.png</code></td><td><span class="tag tag--keep">Keep</span></td></tr>
+              <tr><td>Favicon</td><td><code>assets/img/favicon.webp</code></td><td><span class="tag tag--keep">Keep</span></td></tr>
+              <tr><td>Hotline icon</td><td><code>assets/img/icons8-call.gif</code></td><td><span class="tag tag--swap">Confirm</span> third-party (icons8) — verify license</td></tr>
+              <tr><td>Fonts</td><td>Google Fonts (Inter, Newsreader, Source Code Pro, Outfit)</td><td><span class="tag tag--keep">Keep</span> — or self-host for performance</td></tr>
+              <tr><td>YouTube embed</td><td><code>youtube.com/embed/3ePq3v7nxjQ</code></td><td>“Why hire Priority Tax Relief?”</td></tr>
+              <tr><td>Tweaks panel</td><td><code>tweaks-panel.jsx</code> + React/Babel scripts</td><td><span class="tag tag--strip">Strip</span> Preview-only — remove for production</td></tr>
+              <tr><td>Dark-mode toggle</td><td>built in <code>site.js</code></td><td><span class="tag tag--swap">Confirm</span> keep in production?</td></tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section class="blk">
+          <h3 class="lbl">QA checklist</h3>
+          <ul class="check">
+            <li>Visual parity with approved build at ≥1280px, ~768px, ~375px</li>
+            <li>Carousel: arrows, dots, swipe, end-of-track disable, resize re-sync</li>
+            <li>Accordions: single-open per group, open/close, keyboard</li>
+            <li>Form: required-field validation, email/phone format, slider readout, success state, real submission + confirmation</li>
+            <li>All links resolve (nav dropdowns, service cards, footer, hotline <span class="mono">tel:</span>, CTAs)</li>
+            <li>YouTube embed loads and is responsive; no CLS</li>
+            <li>Sticky header shadow; mobile nav open/close</li>
+            <li>Cross-browser: Chrome, Safari, Firefox, Edge; iOS Safari + Android Chrome</li>
+            <li>Tracking events fire (page view, form submit, call click) — verify in GTM preview + GA4 DebugView</li>
+            <li>SEO validators pass; no duplicate/competing meta from plugins</li>
+            <li>Tweaks/preview scaffolding fully removed; no console errors</li>
+            <li>Lighthouse: performance/SEO/a11y not regressed vs. current page</li>
+          </ul>
+        </section>
+
+        <section class="blk">
+          <h3 class="lbl">Accessibility requirements</h3>
+          <ul class="check">
+            <li>One H1; logical, sequential heading order (no skipped levels)</li>
+            <li>All interactive controls keyboard-reachable with a visible focus ring (2px primary, never the orange)</li>
+            <li>Carousel arrows/dots have <span class="mono">aria-label</span>s; accordions use native <span class="mono">&lt;details&gt;</span> semantics</li>
+            <li>Form inputs have associated <span class="mono">&lt;label&gt;</span>s; errors announced (not color-only)</li>
+            <li>Mobile nav toggle exposes <span class="mono">aria-expanded</span>; focus managed when open</li>
+            <li>All images have meaningful <span class="mono">alt</span> (or empty alt if decorative); YouTube iframe has a <span class="mono">title</span></li>
+            <li>Color contrast ≥ WCAG AA in both light and dark themes</li>
+            <li>Respect <span class="mono">prefers-reduced-motion</span> for reveal animations</li>
+            <li>Content fully usable with JavaScript disabled (reveals are additive, not hiding)</li>
+          </ul>
+        </section>
+
+        <section class="blk">
+          <h3 class="lbl">Open questions — needs decision before / during build</h3>
+          <ol class="oq">
+            <li><span class="q">How should this live in WordPress?</span><span class="why">Custom page template in the theme, a block / Gutenberg pattern, a page-builder (Elementor/Divi) layout, or keep the custom <span class="mono">Services</span> archive? This drives the whole approach — needs a call before estimating firmly.</span></li>
+            <li><span class="q">What needs to be content-team editable vs. hardcoded?</span><span class="why">Dev to recommend. Likely candidates: hero copy/CTAs, the 9 service cards (add/edit/reorder), accordion items, the guarantee band. Form fields and SEO/schema can stay developer-managed. Confirm the editing surface (ACF, blocks, theme options).</span></li>
+            <li><span class="q">Where does the lead form submit?</span><span class="why">Production should use the existing WP form plugin (Gravity Forms / CF7 / etc.) — confirm which, the notification routing/CRM, and the spam protection. Prototype currently just redirects to <span class="mono">Thank You.html</span>.</span></li>
+            <li><span class="q">Confirm tracking &amp; conversion scripts.</span><span class="why">Audit and wire/preserve: GTM container, GA4, Google Ads conversion, Meta Pixel, CallRail (dynamic number insertion vs. the hardcoded <span class="mono">tel:</span> links), and a form-submit conversion event. Confirm consent/cookie handling.</span></li>
+            <li><span class="q">SEO structure — archive or standard page?</span><span class="why">OG title is “Services Archive”, schema is <span class="mono">CollectionPage</span>, and there’s a <span class="mono">rel=next</span>. Decide whether to retain archive semantics or migrate to <span class="mono">WebPage</span>/<span class="mono">Service</span> and drop pagination. Avoid plugin overwrites either way.</span></li>
+            <li><span class="q">Which phone number is primary?</span><span class="why">Header/hotline shows <strong>(866) 708-2872</strong>; footer shows <strong>888-708-2872</strong>. Both preserved from source — confirm the correct number(s).</span></li>
+            <li><span class="q">“Back Sales Tax” card.</span><span class="why">Its source “Learn More” pointed (erroneously) at the Offer in Compromise URL and the page appears missing, so it’s currently a dead card. Provide the correct destination or confirm it stays disabled. Ties to PTR-WEB-2.</span></li>
+            <li><span class="q">Service icons hosted remotely.</span><span class="why">Cards reference live WP media-library URLs (<span class="mono">2023/06/…</span>). Confirm those stay or migrate to managed local assets.</span></li>
+            <li><span class="q">Keep the dark-mode toggle and the icons8 call GIF in production?</span><span class="why">Both are build conveniences — confirm before shipping (and verify the GIF’s license).</span></li>
+          </ol>
+        </section>
+
+      </div>
+    </article>
+
+
+    <!-- ===================================================== -->
+    <!-- TICKET 2 — SUB-PAGES                                   -->
+    <!-- ===================================================== -->
+    <article class="ticket">
+      <div class="ticket__head">
+        <span class="ticket__key">PTR-WEB-2</span>
+        <div class="ticket__title">
+          <h2>Build &amp; integrate the Services sub-pages (<span class="mono">/services/&hellip;</span>)</h2>
+          <div class="sub">Implement the 8 individual service sub-pages on a shared template; resolve the missing Back Sales Tax page.</div>
+        </div>
+      </div>
+
+      <dl class="fields">
+        <div><dt>Type</dt><dd>Story</dd></div>
+        <div><dt>Priority</dt><dd>High</dd></div>
+        <div><dt>Component</dt><dd>WordPress / Front-end</dd></div>
+        <div><dt>Est.</dt><dd>8–13 pts*</dd></div>
+        <div><dt>Labels</dt><dd>services, sub-pages, template, seo</dd></div>
+        <div><dt>Fix version</dt><dd>TBD</dd></div>
+        <div><dt>Depends on</dt><dd>PTR-WEB-1</dd></div>
+        <div><dt>Reporter</dt><dd>—</dd></div>
+      </dl>
+
+      <div class="ticket__body">
+
+        <section class="blk">
+          <h3 class="lbl">Description</h3>
+          <p>Stand up the individual service sub-pages from the approved build. They share a single template — a sub-hero (breadcrumb, H1, subtitle, dual CTA, per-page YouTube embed), an intro prose block, supporting content sections, and the same lead form — with shared header/footer chrome injected globally (<span class="mono">chrome.js</span>) rather than hand-written per page. Build the template once; populate the 8 pages’ content. Each page carries its own SEO (title, description, canonical, OG <span class="mono">type=article</span>, and a per-page JSON-LD <span class="mono">WebPage</span>/<span class="mono">BreadcrumbList</span> graph) preserved exactly.</p>
+        </section>
+
+        <section class="blk">
+          <h3 class="lbl">Pages in scope</h3>
+          <table>
+            <thead><tr><th>#</th><th>Service</th><th>Canonical slug</th><th>Status</th></tr></thead>
+            <tbody>
+              <tr><td>1</td><td>Offer in Compromise</td><td><code>/services/settle-back-taxes-with-irs-offer-in-compromise/</code></td><td><span class="tag tag--keep">Build</span></td></tr>
+              <tr><td>2</td><td>Penalty Abatement</td><td><code>/services/settle-back-taxes-with-irs-penalty-abatement/</code></td><td><span class="tag tag--keep">Build</span></td></tr>
+              <tr><td>3</td><td>Innocent Spouse Relief</td><td><code>/services/innocent-spouse-relief-for-back-taxes/</code></td><td><span class="tag tag--keep">Build</span></td></tr>
+              <tr><td>4</td><td>Currently Not Collectible (CNC)</td><td><code>/services/currently-not-collectible/</code></td><td><span class="tag tag--keep">Build</span></td></tr>
+              <tr><td>5</td><td>Installment Agreement</td><td><code>/services/installment-agreement-help-for-back-taxes/</code></td><td><span class="tag tag--keep">Build</span></td></tr>
+              <tr><td>6</td><td>Stop Wage Garnishment</td><td><code>/services/stop-wage-garnishment-for-irs-or-state-taxes/</code></td><td><span class="tag tag--keep">Build</span></td></tr>
+              <tr><td>7</td><td>Bank Levy Release</td><td><code>/services/settle-bank-levy-for-irs-or-state-taxes/</code></td><td><span class="tag tag--keep">Build</span></td></tr>
+              <tr><td>8</td><td>Back Payroll Taxes</td><td><code>/services/settle-back-payroll-tax/</code></td><td><span class="tag tag--keep">Build</span></td></tr>
+              <tr><td>9</td><td>Back Sales Tax</td><td>— not present in build —</td><td><span class="tag tag--missing">Missing</span></td></tr>
+            </tbody>
+          </table>
+          <div class="callout"><strong>Back Sales Tax is missing.</strong> There is no sub-page for it in the build, and its card on the landing page mis-linked to the Offer in Compromise URL in the source. Decision needed: author a new Back Sales Tax page (provide copy + slug + video), or keep the landing-page card disabled. This is the key dependency between the two tickets.</div>
+        </section>
+
+        <section class="blk">
+          <h3 class="lbl">Template components</h3>
+          <ul class="comp">
+            <li><span class="name">Shared chrome</span><span class="desc">Header + footer injected via <span class="mono">chrome.js</span> (the sub-pages use <span class="mono">&lt;div id="chrome-header"&gt;</span> rather than hand-written markup). Confirm whether to keep JS-injected chrome or render it server-side in the WP template.</span></li>
+            <li><span class="name">Sub-hero</span><span class="desc">Breadcrumb (Home › Services › [page]), H1, subtitle, dual CTA (free consultation + call), and a per-page YouTube embed.</span></li>
+            <li><span class="name">Intro prose</span><span class="desc">Lead paragraph with inline internal links (e.g. glossary terms).</span></li>
+            <li><span class="name">Content sections</span><span class="desc">Per-page supporting copy / qualification info (varies by page — content-managed).</span></li>
+            <li><span class="name">Lead form</span><span class="desc">Same pre-qualify form + behaviors as the landing page (single shared implementation).</span></li>
+          </ul>
+        </section>
+
+        <section class="blk">
+          <h3 class="lbl">Acceptance criteria</h3>
+          <ul class="ac">
+            <li>A single reusable sub-page template renders all 8 services; adding a service requires only content, not new markup.</li>
+            <li>Each page matches its approved build visually at desktop/tablet/mobile.</li>
+            <li>Breadcrumbs link correctly back to <span class="mono">/services/</span> and Home, and match the BreadcrumbList schema.</li>
+            <li>Each page’s SEO is preserved exactly: title, description, canonical (unique per page), OG <span class="mono">type=article</span>, Twitter card, and per-page JSON-LD (<span class="mono">WebPage</span> + <span class="mono">ImageObject</span> + <span class="mono">BreadcrumbList</span>), including <span class="mono">datePublished</span>/<span class="mono">dateModified</span>.</li>
+            <li>Per-page YouTube embeds load lazily and responsively.</li>
+            <li>Shared header/footer chrome renders on every sub-page (decide injected vs. server-rendered).</li>
+            <li>The lead form on each sub-page submits to the same production backend and fires conversion tracking.</li>
+            <li>Landing-page service cards link to the correct, live sub-page URLs (closes the loop with PTR-WEB-1).</li>
+            <li>Back Sales Tax resolved per the Open Question (page authored, or card stays disabled — no broken/mis-linked card).</li>
+            <li>Pages pass the QA + accessibility checklists (same standard as PTR-WEB-1).</li>
+          </ul>
+        </section>
+
+        <section class="blk">
+          <h3 class="lbl">Asset manifest / inventory</h3>
+          <table>
+            <thead><tr><th>Asset</th><th>Path</th><th>Notes</th></tr></thead>
+            <tbody>
+              <tr><td>Sub-page markup (×8)</td><td>e.g. <code>Offer in Compromise.html</code></td><td><span class="tag tag--keep">Port</span> Per-page content + SEO</td></tr>
+              <tr><td>Shared chrome injector</td><td><code>assets/js/chrome.js</code></td><td>Header/footer injection</td></tr>
+              <tr><td>Shared styles / interactions</td><td><code>assets/css/site.css</code>, <code>assets/css/pages.css</code>, <code>assets/js/site.js</code></td><td><span class="tag tag--keep">Shared with PTR-WEB-1</span></td></tr>
+              <tr><td>Per-page hero videos</td><td>YouTube embeds (unique per page)</td><td>e.g. OIC → <code>1BR4fTL_RMw</code></td></tr>
+              <tr><td>OG / primary images</td><td><span class="tag tag--remote">Remote</span> live WP media (<span class="mono">2023/06/*.jpg</span>)</td><td>Per-page; confirm retention</td></tr>
+              <tr><td>Internal links</td><td>glossary + cross-service links</td><td>Verify all resolve post-migration</td></tr>
+              <tr><td>Back Sales Tax page</td><td>—</td><td><span class="tag tag--missing">To author or drop</span></td></tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section class="blk">
+          <h3 class="lbl">QA &amp; accessibility</h3>
+          <p>Apply the same QA and accessibility checklists as PTR-WEB-1 to every sub-page, plus:</p>
+          <ul class="check">
+            <li>Each page has a unique, correct canonical URL and title</li>
+            <li>Breadcrumb UI matches BreadcrumbList schema on every page</li>
+            <li>Per-page video is the correct one for that service</li>
+            <li>No two pages share duplicate meta/schema; <span class="mono">dateModified</span> values are sane</li>
+            <li>Shared chrome renders consistently; the active nav state reflects the current page</li>
+          </ul>
+        </section>
+
+        <section class="blk">
+          <h3 class="lbl">Open questions</h3>
+          <ol class="oq">
+            <li><span class="q">Author the Back Sales Tax page, or drop the card?</span><span class="why">Need copy, slug, hero video and SEO if it’s to be built — otherwise confirm the landing-page card stays disabled.</span></li>
+            <li><span class="q">Injected vs. server-rendered chrome.</span><span class="why">Sub-pages inject header/footer via <span class="mono">chrome.js</span>. In WP this is likely better as the theme header/footer — confirm the approach.</span></li>
+            <li><span class="q">Same WordPress integration + editability decisions as PTR-WEB-1.</span><span class="why">Template approach, what’s content-managed (hero copy, intro, video ID, body sections), and where the form submits should be resolved once and applied to both tickets.</span></li>
+            <li><span class="q">Per-page media — keep remote WP URLs?</span><span class="why">Hero/OG images resolve to the live media library; confirm retention vs. managed assets.</span></li>
+          </ol>
+        </section>
+
+      </div>
+    </article>
+
+    <p class="note" style="margin-top:28px">* Story-point estimates are placeholders pending the WordPress-integration decision (Open Question 1 on PTR-WEB-1), which materially changes effort. Re-estimate at refinement.</p>
+
+  </div>
+</div>
+
+<div class="docfoot">
+  <span>Priority Tax Relief</span>
+  <span>Engineering ticket · Services pages</span>
+</div>
+
+</body>
+</html>
