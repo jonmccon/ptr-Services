@@ -1,15 +1,17 @@
-# Priority Tax Relief — Static Site (dist)
+# What's in here
 
-A self-contained static build of the Priority Tax Relief marketing site,
-ready to publish on **GitHub Pages**. No build step, no server, no
-dependencies to install — just static HTML, CSS, JS and images.
+Basically I downloaded the rendered pages from the existing website, dragged them through claude, added a design component system, and tried to keep all the exisiting page architecture and content as consistent as I could. Then output a bunch of static html files that are this repo. Implementation plan is stil TBD on whether we're going to rebuild this all in WP or drop in the completed page into a WP container. BUT the goal is to carry through the existing work from Rise either way. There is a migration analysis document available to provide a starting point for what was changed. 
 
-**Drop-in update:** replace the contents of your published folder/branch with
-the contents of this `dist/` folder. Everything is self-contained and uses
-relative paths, so it works whether deployed at a domain root or under a
-`/<repo>/` project-page path.
+[Eng Handoff for Wordpress integration](/handoff/)
+[Content / SEO Migration Audit](migration-audit-services.md)
+[Original rendered WP pages](/PTR-Pages-Download/)
 
-## What's in here
+If there are any questions or just want to talk through this lemme know jmcconnell@taxresolutionteam.com
+
+cheers, 
+J
+
+---
 
 ```
 index.html                  ← site landing (the Services page)
@@ -34,19 +36,6 @@ CONTENT-LOG.md              ← source-fidelity + known-issue log (handoff ref)
 The whole package deploys as one folder: the live marketing demo at the root,
 and the engineering handoff under `/handoff/`. Open `handoff/index.html` for the
 integration guide; all of its links resolve within this build.
-
-## Deploy to GitHub Pages
-
-1. Push the **contents of this folder** to the repo root (so `index.html`
-   sits at the top level of the repo).
-2. In the repo, go to **Settings → Pages**.
-3. Under **Build and deployment → Source**, choose **Deploy from a branch**.
-4. Pick your branch (e.g. `main`) and folder **`/ (root)`**, then **Save**.
-5. Wait ~1 minute. Your site goes live at
-   `https://<username>.github.io/<repo>/`.
-
-> The included `.nojekyll` file is important — it stops GitHub from running
-> Jekyll, which can otherwise interfere with file serving.
 
 ## Notes
 
