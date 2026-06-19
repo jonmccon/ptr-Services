@@ -605,9 +605,13 @@ body[data-carousel="coverflow"] .s-card.is-focus { opacity: 1; transform: scale(
 /* Variant A — press / publications band on PTR green */
 .press-band { background: var(--ptr-green); padding-block: 50px; }
 .press-band__label { text-align: center; color: var(--ptr-bone); font-size: 13px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; margin: 0 0 30px; opacity: .82; }
-.press-band__logos { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 30px 56px; }
-.press-band__logos img { height: 30px; width: auto; object-fit: contain; }
-.press-band__logos img.is-round { height: 38px; }
+.press-band__logos { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 30px 60px; }
+.press-band__logos img { height: 28px; width: auto; object-fit: contain; }
+.press-band__logos img.p-forbes { height: 30px; }
+.press-band__logos img.p-bestmoney { height: 32px; }
+.press-band__logos img.p-bestguide { height: 28px; }
+.press-band__logos img.p-fortune { height: 28px; }
+.press-band__logos img.p-consumeraffairs { height: 30px; }
 
 /* Variant B — review badges bar on bone */
 .review-band { background: var(--ptr-bone); padding-block: 26px; }
