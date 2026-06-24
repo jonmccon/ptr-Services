@@ -908,6 +908,9 @@ html[data-theme="dark"] .footer-flag { filter: brightness(0) invert(1); }
 
 /* Outline button + hotline: light outline, dark text on the light hover fill */
 html[data-theme="dark"] .btn--ghost:hover { color: #141515; }
+/* Ghost button INSIDE the light-gray lead-form card needs dark ink (the card is light in dark mode) */
+html[data-theme="dark"] .lead-form .btn--ghost { --btn-fg: #141515; border-color: #141515; }
+html[data-theme="dark"] .lead-form .btn--ghost:hover { background: #141515; color: #fff; }
 html[data-theme="dark"] .hotline:hover { color: #141515; }
 /* Phone icon: invert its colors for dark mode so it reads on the dark header */
 html[data-theme="dark"] .hotline__icon { mix-blend-mode: normal; filter: invert(1); }
@@ -934,12 +937,19 @@ html[data-theme="dark"] .field textarea { background: var(--surface-2); color: v
 html[data-theme="dark"] .lead-form { background: #D6D6CF; border-color: rgb(0 0 0 / .12); box-shadow: 0 10px 30px -8px rgb(0 0 0 / .6); }
 html[data-theme="dark"] .lead-form .field label,
 html[data-theme="dark"] .lead-form .field__labelrow label,
+html[data-theme="dark"] .lead-form .form-card__head h2,
+html[data-theme="dark"] .lead-form__title,
 html[data-theme="dark"] .lead-form .debt-slider__val { color: #141515; }
+html[data-theme="dark"] .lead-form .form-card__head p,
+html[data-theme="dark"] .lead-form .star-rating__label,
 html[data-theme="dark"] .lead-form .consent { color: #33332F; }
 html[data-theme="dark"] .lead-form .debt-slider__scale { color: #5A5A54; }
 html[data-theme="dark"] .lead-form .field input,
 html[data-theme="dark"] .lead-form .field select,
 html[data-theme="dark"] .lead-form .field textarea { background: #fff; color: #141515; }
+/* Yes/No toggle buttons: white fill, dark text (match the white input fields). Active = green/white stays. */
+html[data-theme="dark"] .lead-form .toggle-btn { color: #141515; }
+html[data-theme="dark"] .lead-form .toggle-btn.is-active { color: #fff; }
 html[data-theme="dark"] .debt-slider::-webkit-slider-thumb { border-color: var(--surface-2); }
 html[data-theme="dark"] .debt-slider::-moz-range-thumb { border-color: var(--surface-2); }
 html[data-theme="dark"] .carousel__arrow { background: var(--surface-1); }

@@ -390,3 +390,77 @@ html[data-theme="dark"] .contact-note { background: var(--surface-1); }
 .review-actions { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; margin-top: 6px; }
 .review-actions .btn { white-space: nowrap; }
 .btn--video svg { width: 18px; height: 18px; }
+
+/* ============================================================
+   LEGAL / POLICY PAGES (Terms, DNC/TCPA) + FAQ
+   ============================================================ */
+/* Small "Last updated" meta line under a policy H1 */
+.legal-meta {
+  display: inline-flex; align-items: center; gap: 9px;
+  font-size: 13px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase;
+  color: var(--ptr-graphite); margin: 4px 0 0;
+}
+.legal-meta::before { content: ""; width: 8px; height: 8px; border-radius: 2px; background: var(--ptr-orange); }
+
+/* Callout used for the arbitration / "please review" emphasis blocks */
+.legal-callout {
+  background: var(--ptr-bone); border-left: 4px solid var(--ptr-orange); border-radius: var(--radius-box);
+  padding: 22px 26px; margin: 32px 0;
+}
+.legal-callout p { margin: 0; font-size: 16px; line-height: 1.6; color: var(--ptr-ink); font-weight: 600; }
+.legal-callout p + p { margin-top: 12px; }
+html[data-theme="dark"] .legal-callout { background: var(--surface-1); }
+
+/* In-page anchor jump list for long policies */
+.legal-toc {
+  margin: 0 0 8px; padding: 24px 28px; background: var(--ptr-bone);
+  border: 1px solid var(--color-base-200); border-radius: var(--radius-box);
+}
+.legal-toc__label { font-size: 12.5px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: var(--ptr-graphite); margin: 0 0 14px; }
+.legal-toc ul { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 10px 32px; }
+.legal-toc ul li::before { display: none; }
+.legal-toc li { padding-left: 0; }
+.legal-toc a { color: var(--ptr-ink); font-weight: 600; font-size: 15px; text-decoration: none; border-bottom: 1px solid transparent; transition: color 120ms var(--ease), border-color 120ms var(--ease); }
+.legal-toc a:hover { color: var(--ptr-green); border-bottom-color: var(--ptr-green); }
+@media (max-width: 640px) { .legal-toc ul { grid-template-columns: 1fr; } }
+html[data-theme="dark"] .legal-toc { background: var(--surface-1); }
+html[data-theme="dark"] .legal-toc a { color: var(--text-1); }
+html[data-theme="dark"] .legal-toc a:hover { color: var(--ptr-green-bright); border-bottom-color: var(--ptr-green-bright); }
+
+/* Make .prose section anchors clear the sticky header when jumped to */
+.prose h2[id], .prose h3[id] { scroll-margin-top: 96px; }
+
+/* ---------- FAQ accordion ---------- */
+.faq { display: grid; gap: 14px; max-width: 1040px; }
+.faq__item {
+  border: 1px solid var(--color-base-200); border-radius: var(--radius-box);
+  background: #fff; overflow: hidden; transition: box-shadow 140ms var(--ease), border-color 140ms var(--ease);
+}
+.faq__item[open] { border-color: var(--color-base-300); box-shadow: var(--shadow-md); }
+.faq__item:hover { box-shadow: var(--shadow-md); }
+.faq__q {
+  list-style: none; cursor: pointer; display: flex; align-items: center; gap: 18px;
+  padding: 22px 26px; font-size: clamp(17px, 1.7vw, 19px); font-weight: 700;
+  letter-spacing: -0.01em; color: var(--ptr-ink); line-height: 1.35;
+}
+.faq__q::-webkit-details-marker { display: none; }
+.faq__q:focus-visible { outline: 2px solid var(--ptr-green); outline-offset: -2px; border-radius: var(--radius-box); }
+.faq__icon {
+  flex-shrink: 0; margin-left: auto; width: 30px; height: 30px; border-radius: 50%;
+  background: rgb(4 123 68 / .1); color: var(--ptr-green);
+  display: flex; align-items: center; justify-content: center;
+  transition: background 140ms var(--ease), transform 200ms var(--ease);
+}
+.faq__icon svg { width: 16px; height: 16px; }
+.faq__item[open] .faq__icon { background: var(--ptr-green); color: #fff; transform: rotate(180deg); }
+.faq__a { padding: 0 26px 24px; }
+.faq__a p { margin: 0; font-size: 17px; line-height: 1.65; color: var(--ptr-graphite); }
+.faq__a p + p { margin-top: 14px; }
+.faq__a a { color: var(--ptr-green); font-weight: 700; }
+@media (prefers-reduced-motion: no-preference) {
+  .faq__item[open] .faq__a { animation: faqReveal 220ms var(--ease); }
+}
+@keyframes faqReveal { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
+html[data-theme="dark"] .faq__item { background: var(--surface-1); border-color: var(--border-1); }
+html[data-theme="dark"] .faq__icon { color: var(--ptr-green-bright); }
+html[data-theme="dark"] .faq__item[open] .faq__icon { background: var(--ptr-green); color: #fff; }

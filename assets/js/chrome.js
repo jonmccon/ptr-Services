@@ -160,12 +160,12 @@
       '<div class="footer-col"><ul>' +
         '<li><a href="About.html">About</a></li>' +
         '<li><a href="Contact.html">Contact</a></li>' +
-        '<li><a href="' + HOME + 'faqs/">FAQs</a></li>' +
-        '<li><a href="' + HOME + 'priority-tax-terms-and-conditions/">Terms &amp; Conditions</a></li>' +
+        '<li><a href="Frequently Asked Questions.html">FAQs</a></li>' +
+        '<li><a href="Priority Tax Terms and Conditions.html">Terms &amp; Conditions</a></li>' +
       '</ul></div>' +
       '<div class="footer-col"><ul>' +
-        '<li><a href="' + HOME + 'privacy-policy/">Privacy Policy</a></li>' +
-        '<li><a href="' + HOME + 'dnc-tcpa/">DNC / TCPA</a></li>' +
+        '<li><a href="Priority Tax Terms and Conditions.html">Privacy Policy</a></li>' +
+        '<li><a href="DNC TCPA Policy.html">DNC / TCPA</a></li>' +
       '</ul></div>' +
     '</div>' +
     '<div class="container footer-legal"><p>' + CONSENT + '</p></div>' +
