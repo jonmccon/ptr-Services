@@ -19,7 +19,7 @@
   a{color:var(--green);text-decoration:none}
   a:hover{color:var(--green-deep);text-decoration:underline}
   code,.mono{font-family:"Source Code Pro",monospace;font-size:.92em}
-  .wrap{max-width:1080px;margin: 30px 87px 0px;padding:0 32px}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 32px}
 
   /* Masthead */
   header.mast{background:var(--green);color:#fff;padding:64px 0 56px}
@@ -102,9 +102,9 @@ Assets → enqueued once.</p>
     <div class="quicklinks">
       <a class="chip chip--solid" href="README.md" style="background:#fff;border-color:#fff;color:var(--orange)">📄 Integration guide (README)</a>
       <a class="chip" href="seo/seo-manifest.md">SEO &amp; schema manifest</a>
-      <a class="chip" href="https://prioritytaxrelief.atlassian.net/browse/PE0-432">Engineering ticket</a>
+      <a class="chip" href="../Engineering Ticket - Services.html">Engineering ticket</a>
       <a class="chip" href="../CONTENT-LOG.md">Content log</a>
-      <a class="chip" href="../index.html">Full static demo build</a>
+      <a class="chip" href="../dist/index.html">Full static demo build (dist)</a>
     </div>
   </div>
 </header>
@@ -162,7 +162,10 @@ Assets → enqueued once.</p>
           <tr class="row-muted"><td class="rowname">Our Team <span class="badge wip">WIP</span></td><td><span class="slug">/our-team/</span></td><td class="links"><a href="content-fragments/our-team.html">Fragment</a><a href="../Our Team.html">Preview</a></td></tr>
           <tr class="row-muted"><td class="rowname">Tax News <span class="badge wip">WIP</span></td><td><span class="slug">/tax-news/</span></td><td class="links"><a href="content-fragments/tax-news.html">Fragment</a><a href="../Tax News.html">Preview</a></td></tr>
           <tr class="row-muted"><td class="rowname">Tax News article <span class="badge wip">WIP</span> <span class="note">(sample)</span></td><td><span class="slug">(blog post)</span></td><td class="links"><a href="content-fragments/uncommon-tax-deductions.html">Fragment</a><a href="../Uncommon Tax Deductions You Might Be Missing.html">Preview</a></td></tr>
-          <tr class="row-muted"><td class="rowname">Client portal <span class="badge demo">Demo</span></td><td><span class="slug">/clients/</span></td><td class="links"><span class="note">Front-end demo, no backend. Separate scoping — not a drop-in.</span></td></tr>
+          <tr class="row-muted"><td class="rowname">FAQs</td><td><span class="slug">/faqs/</span></td><td class="links"><a href="content-fragments/faqs.html">Fragment</a><a href="../Frequently Asked Questions.html">Preview</a></td></tr>
+          <tr class="row-muted"><td class="rowname">Terms &amp; Conditions</td><td><span class="slug">/priority-tax-terms-and-conditions/</span></td><td class="links"><a href="content-fragments/priority-tax-terms-and-conditions.html">Fragment</a><a href="../Priority Tax Terms and Conditions.html">Preview</a></td></tr>
+          <tr class="row-muted"><td class="rowname">DNC / TCPA Policy</td><td><span class="slug">/dnc-tcpa-policy/</span></td><td class="links"><a href="content-fragments/dnc-tcpa.html">Fragment</a><a href="../DNC TCPA Policy.html">Preview</a></td></tr>
+          <tr class="row-muted"><td class="rowname">Client Services</td><td><span class="slug">/clients/</span></td><td class="links"><a href="content-fragments/client-services.html">Fragment</a><a href="../clients.html">Preview</a></td></tr>
         </tbody>
       </table>
     </div>
@@ -174,7 +177,7 @@ Assets → enqueued once.</p>
     <p>These three pieces repeat on every page. Build them once at the theme level rather than per page. Wherever a fragment shows <code>&lt;!-- PTR-PARTIAL: insert shared Lead Form here --&gt;</code>, drop in the form block.</p>
     <div class="partials">
       <div class="card green"><span class="arrow">→ header.php</span><h3>Header</h3><p>Logo, Services + Tax News dropdowns, About, Careers, hotline, Clients button, mobile nav. Convert nav to WP menus; keep classes.</p><p><a href="theme-partials/header.html">header.html</a></p></div>
-      <div class="card green"><span class="arrow">→ footer.php</span><h3>Footer</h3><p>"Not a current client" call row, brand + BBB, link columns, full TCPA legal text.</p><p><a href="theme-partials/footer.html">footer.html</a></p></div>
+      <div class="card green"><span class="arrow">→ footer.php</span><h3>Footer</h3><p>"Not a current client" call row, brand + BBB, link columns (now pointing at the in-site FAQs / Terms / DNC-TCPA pages), full TCPA legal text.</p><p><a href="theme-partials/footer.html">footer.html</a></p></div>
       <div class="card orange"><span class="arrow">→ Formidable form</span><h3>Lead form</h3><p>Multi-step pre-qualify form. <b>Demo only</b> — being rebuilt in <b>Formidable Forms</b>. See the migration guide for the field map, behavior, CSS skin &amp; conversion tracking.</p><p><a href="theme-partials/lead-form.html">lead-form.html</a> · <a href="theme-partials/lead-form-formidable.md">Formidable guide</a> · <a href="theme-partials/lead-form-formidable.css">skin.css</a> · <a href="theme-partials/lead-form-formidable.xml">import.xml</a></p></div>
     </div>
   </section>

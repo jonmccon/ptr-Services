@@ -29,7 +29,7 @@ handoff/
     seo-manifest.md        <- per-page title / description / canonical / OG / JSON-LD
 ```
 
-CSS, JS, and images are **not** copied here - they live in this build at `../assets/`.
+CSS, JS, and images are **not** copied here - they live at `../assets/` and ship in `../dist/`.
 Use those; don't fork them.
 
 ---
@@ -95,11 +95,14 @@ The build has two layers. Keep them separate in WordPress:
 | About | `/about/` | `about.html` | Leaflet map loads from CDN (online only); inline map-init kept in fragment. |
 | Careers | `/careers/` | `careers.html` | Needs `pages.css`. |
 | Contact | `/contact/` | `contact.html` | Contact form is a front-end demo. |
-| Our Team | `/our-team/` | `our-team.html` | Roster from an inline data script (kept); B&W SVG filter kept. Consider CMS-driving. |
+| Our Team | `/our-team/` | `our-team.html` | Redesigned as the "ace team" radial halo (was the org-chart roster, now archived). Roster comes from an inline data script (kept); B&W SVG filter kept. Page-specific CSS travels at the top of the fragment—move it into the theme stylesheet. |
 | Tax News | `/tax-news/` | `tax-news.html` | Needs `pages.css`. In WP this is a real post archive. |
 | Tax News article | (blog post) | `uncommon-tax-deductions.html` | Sample article; uses a build-only `<image-slot>` - swap for the real featured image. |
 | Thank You | `/thank-you/` | `thank-you.html` | Lead-form redirect target in the prototype. |
-| Client portal | `/clients/` | - | **Front-end demo only** - no backend. Uses `portal.css` / `portal.js`. Scope separately; not a drop-in. |
+| FAQs | `/faqs/` | `faqs.html` | Footer-linked. Has **FAQPage** JSON-LD (Q/A rich-result schema) - preserve it. |
+| Terms & Conditions | `/priority-tax-terms-and-conditions/` | `priority-tax-terms-and-conditions.html` | Footer-linked. The footer "Privacy Policy" link also points here (no separate privacy page in the build). |
+| DNC / TCPA Policy | `/dnc-tcpa-policy/` | `dnc-tcpa.html` | Footer-linked compliance page. |
+| Client Services | `/clients/` | `client-services.html` | Case-process timeline (content page). Replaces the old login-style "Client portal" demo, now archived. Page-specific CSS travels at the top of the fragment—move it into the theme stylesheet. |
 
 ---
 
@@ -109,7 +112,7 @@ The build hardcodes these lists in JS - flag them for the editability decision:
 
 - **Services carousel** - 9 cards from `SERVICES[]` in `site.js` (title, icon, description,
   link, order). `Back Sales Tax` is `url: null` (dead) by design.
-- **Our Team roster** - inline data array.
+- **Our Team roster** - inline data array (the "ace team" halo design).
 - **Tax News** - front-end article list / category filter; a real post archive in WP.
 
 ---
@@ -135,7 +138,7 @@ The build hardcodes these lists in JS - flag them for the editability decision:
 
 ## Previewing
 
-Open the full pages from this build root (`../`) to see them styled with the real
+Open the full pages from the project root (or `../dist/`) to see them styled with the real
 chrome. The `content-fragments/` files are **unstyled on their own** by design - no `<head>`,
 no CSS link - and render correctly only once pasted under a theme that enqueues `site.css`.
 Start from `index.html` in this folder.

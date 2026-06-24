@@ -1,0 +1,355 @@
+<!-- ============================================================
+  PTR CONTENT FRAGMENT — Client Services
+  Target slug: /clients/
+  This is page CONTENT ONLY. No <html>/<head>, no site header,
+  no footer. Paste into the WP page body (Custom HTML block / page
+  template the_content). The theme supplies header, footer, <head>
+  + SEO, and enqueues assets/css/site.css + assets/js/site.js.
+  Body attributes on the source page (apply to <body> via theme):
+    class="" data-layout="editorial" data-page="clients"
+============================================================ -->
+
+<!-- ------------------------------------------------------------
+  PAGE-SPECIFIC CSS (carried from the source page <head>).
+  Move this into the theme stylesheet (or a page-scoped block) during
+  integration rather than leaving an inline <style> in the body — it's
+  reproduced here so the fragment renders correctly on its own.
+------------------------------------------------------------ -->
+<style>
+/* ===========================================================
+   Client Services — process timeline (page-scoped)
+   =========================================================== */
+/* A warmer, greener client experience — distinct from the marketing pages */
+body[data-page="clients"] .subhero {
+  background: linear-gradient(165deg, #E6F5EC 0%, #F3FAF6 55%, var(--ptr-white) 100%);
+}
+.section--mint { background: linear-gradient(180deg, #F1FAF4 0%, #E9F6EF 100%); }
+html[data-theme="dark"] body[data-page="clients"] .subhero,
+html[data-theme="dark"] .section--mint { background: var(--surface-1); }
+
+.ptl-wrap { max-width: 100%; margin-inline: auto; }
+
+/* The chart */
+.ptl { position: relative; }
+.ptl__steps {
+  list-style: none; margin: 0; padding: 0;
+  display: grid; grid-template-columns: repeat(6, 1fr);
+}
+/* The connecting rail sits behind the nodes, from first node centre to last */
+.ptl__rail {
+  position: absolute; top: 22px; height: 4px;
+  left: calc(100% / 12); right: calc(100% / 12);
+  background: linear-gradient(90deg, var(--ptr-orange) 0%, var(--ptr-green-deep) 18%, var(--ptr-green) 60%, var(--ptr-green-bright) 100%);
+  border-radius: 2px; z-index: 0;
+}
+.ptl__step {
+  position: relative; z-index: 1;
+  display: flex; flex-direction: column; align-items: center; text-align: center;
+  padding: 0 12px;
+}
+.ptl__node {
+  width: 50px; height: 50px; border-radius: 50%;
+  background: var(--ptr-green); color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 800; font-size: 19px; letter-spacing: -0.01em;
+  box-shadow: 0 0 0 5px var(--ptr-white), 0 4px 12px rgb(4 123 68 / .22);
+  flex-shrink: 0;
+}
+html[data-theme="dark"] .ptl__node { box-shadow: 0 0 0 5px var(--surface-1), 0 4px 12px rgb(0 0 0 / .35); }
+.ptl__node svg { width: 24px; height: 24px; }
+
+/* Opening marker is the orange kickoff flag; green then lightens stage by stage toward resolution */
+.ptl__step:nth-child(1) .ptl__node { background: var(--ptr-orange); box-shadow: 0 0 0 5px var(--ptr-white), 0 4px 12px rgb(254 80 0 / .26); }
+.ptl__step:nth-child(2) .ptl__node { background: var(--ptr-green-deep); }
+.ptl__step:nth-child(3) .ptl__node { background: #035A30; }
+.ptl__step:nth-child(4) .ptl__node { background: #047B44; }
+.ptl__step:nth-child(5) .ptl__node { background: #079A55; }
+.ptl__step:nth-child(6) .ptl__node { background: #0CCF76; }
+
+.ptl__phase { margin-top: 8px; font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--color-base-400); }
+.ptl__name { margin-top: 6px; font-size: 17px; font-weight: 800; line-height: 1.2; letter-spacing: -0.01em; color: var(--ptr-ink); text-wrap: balance; }
+.ptl__sub { margin: 4px 0 0; font-size: 13.5px; line-height: 1.45; color: var(--ptr-graphite); }
+.ptl__dur {
+  margin-top: 14px; display: inline-flex; align-items: center; gap: 6px;
+  font-size: 13px; font-weight: 700; letter-spacing: .01em;
+  color: var(--ptr-green); background: rgb(4 123 68 / .1);
+  padding: 6px 12px; border-radius: 999px;
+}
+.ptl__dur--end { color: var(--ptr-graphite); background: #fff; border: 1px solid var(--color-base-300); }
+
+.ptl-foot { margin: 36px 0 0; font-size: 13.5px; line-height: 1.6; color: var(--color-base-400); max-width: 80ch; }
+
+/* Stack vertically on narrow screens */
+@media (max-width: 880px) {
+  .ptl__steps { grid-template-columns: 1fr; gap: 0; }
+  .ptl__rail { display: none; }
+  .ptl__step {
+    flex-direction: row; align-items: flex-start; text-align: left;
+    gap: 18px; padding: 0 0 28px 0;
+  }
+  /* vertical connector down the left through the nodes */
+  .ptl__step::before {
+    content: ""; position: absolute; left: 23px; top: 50px; bottom: -6px;
+    width: 4px; background: var(--ptr-green); z-index: 0;
+  }
+  .ptl__step:last-child { padding-bottom: 0; }
+  .ptl__step:last-child::before { display: none; }
+  .ptl__node { position: relative; z-index: 1; }
+  .ptl__rail { display: none; }
+  .ptl__phase { margin-top: 4px; }
+  .ptl__dur { margin-top: 10px; }
+  .ptl__body { padding-top: 2px; }
+}
+@media (min-width: 881px) { .ptl__body { display: contents; } }
+
+/* Client-services contact heading sits left of the standard contact grid */
+.cs-grid { align-items: start; }
+
+/* Client-services section: white in light mode (per design), proper dark surface in dark mode */
+#client-services { background-color: #fff; }
+html[data-theme="dark"] #client-services { background-color: var(--surface-1); }
+/* "Resolved" end pill keeps contrast in dark mode (white bg + light text would be unreadable) */
+html[data-theme="dark"] .ptl__dur--end { background: var(--surface-2); color: var(--ptr-ink); border-color: var(--color-base-300); }
+</style>
+
+<!-- ============================ SUBPAGE HERO ============================ -->
+  <section class="subhero">
+    <div class="container">
+      <nav class="breadcrumb reveal" aria-label="Breadcrumb">
+        <a href="Services Page.html">Home</a> ›
+        <span aria-current="page">Client Services</span>
+      </nav>
+      <h1 class="reveal" data-d="1" style="max-width:18ch">Your case, step by step</h1>
+      <p class="subhero__sub reveal" data-d="1" style="max-width:40ch">What to expect once you're a client</p>
+      <p class="hero__lead reveal" data-d="2" style="max-width:64ch">Every case is different, but the path is the same. Here's how we move a tax matter from the day we open it through to the day it's resolved — and how to reach our client services team whenever you want a real-time update.</p>
+    </div>
+  </section>
+
+  <!-- ============================ PROCESS TIMELINE ============================ -->
+  <section class="section section--mint">
+    <div class="container">
+      <div class="section__head reveal">
+        <p class="eyebrow eyebrow--green">The resolution process</p>
+        <h2>A typical case, start to finish</h2>
+        <p class="section__intro">Six stages take most cases from intake to closed, and most run <strong style="color:var(--ptr-green)">6–12 months</strong> end to end. The ranges below are typical — your actual timeline depends on case complexity and how quickly the IRS responds.</p>
+      </div>
+
+      <div class="ptl-wrap reveal" data-d="1">
+        <div class="ptl">
+          <div class="ptl__rail"></div>
+          <ol class="ptl__steps">
+
+            <li class="ptl__step">
+              <span class="ptl__node">1</span>
+              <div class="ptl__body">
+                <span class="ptl__phase">Stage 1</span>
+                <h3 class="ptl__name">Initial Case Prep</h3>
+                <p class="ptl__sub">We open your case and file IRS authorization to act on your behalf.</p>
+                <span class="ptl__dur">Typical: 1–2 weeks</span>
+              </div>
+            </li>
+
+            <li class="ptl__step">
+              <span class="ptl__node">2</span>
+              <div class="ptl__body">
+                <span class="ptl__phase">Stage 2</span>
+                <h3 class="ptl__name">Case Analysis</h3>
+                <p class="ptl__sub">We pull your IRS transcripts and review your full financial picture.</p>
+                <span class="ptl__dur">Typical: 2–4 weeks</span>
+              </div>
+            </li>
+
+            <li class="ptl__step">
+              <span class="ptl__node">3</span>
+              <div class="ptl__body">
+                <span class="ptl__phase">Stage 3</span>
+                <h3 class="ptl__name">Documentation</h3>
+                <p class="ptl__sub">We gather supporting documents and prepare the required forms.</p>
+                <span class="ptl__dur">Typical: 3–6 weeks</span>
+              </div>
+            </li>
+
+            <li class="ptl__step">
+              <span class="ptl__node">4</span>
+              <div class="ptl__body">
+                <span class="ptl__phase">Stage 4</span>
+                <h3 class="ptl__name">Resolution</h3>
+                <p class="ptl__sub">We negotiate and present your most beneficial resolution to the IRS.</p>
+                <span class="ptl__dur">Typical: 2–4 months</span>
+              </div>
+            </li>
+
+            <li class="ptl__step">
+              <span class="ptl__node">5</span>
+              <div class="ptl__body">
+                <span class="ptl__phase">Stage 5</span>
+                <h3 class="ptl__name">Case Finalization</h3>
+                <p class="ptl__sub">The IRS reviews and approves; we confirm the final terms with you.</p>
+                <span class="ptl__dur">Typical: 2–6 weeks</span>
+              </div>
+            </li>
+
+            <li class="ptl__step ptl__step--end">
+              <span class="ptl__node"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
+              <div class="ptl__body">
+                <span class="ptl__phase">Stage 6</span>
+                <h3 class="ptl__name">Case Closed</h3>
+                <p class="ptl__sub">Your resolution is in place and we confirm everything is complete.</p>
+                <span class="ptl__dur ptl__dur--end">Resolved</span>
+              </div>
+            </li>
+
+          </ol>
+        </div>
+
+        <p class="ptl-foot">Timelines shown are typical estimates for planning purposes only and are not a guarantee. IRS processing times, the complexity of your case, and how quickly requested documents are returned all affect how long each stage takes.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ CLIENT SERVICES + CONTACT FORM ============================ -->
+  <section class="section section--bone" id="client-services">
+    <div class="container contact-grid cs-grid">
+
+      <!-- How to reach us -->
+      <div class="contact-info reveal">
+        <p class="eyebrow eyebrow--green">Client services</p>
+        <h2>Want a real-time update?</h2>
+        <hr class="contact-info__rule">
+        <p style="color:var(--ptr-graphite); font-size:17px; line-height:1.7; margin:0 0 26px; max-width:46ch">Our client services team can tell you exactly where your case stands at any point. Call or email during business hours, or send the message below and we'll get back to you — usually the same business day.</p>
+        <ul class="contact-list">
+          <li>
+            <span class="contact-list__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span>
+            <div>
+              <p class="contact-list__label">Phone</p>
+              <a class="contact-list__val" href="tel:18887082872">888-708-2872</a>
+            </div>
+          </li>
+          <li>
+            <span class="contact-list__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></span>
+            <div>
+              <p class="contact-list__label">Email</p>
+              <a class="contact-list__val" href="mailto:info@prioritytaxrelief.com">info@prioritytaxrelief.com</a>
+            </div>
+          </li>
+          <li>
+            <span class="contact-list__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span>
+            <div>
+              <p class="contact-list__label">Hours</p>
+              <span class="contact-list__val">Mon – Fri, 5:00am – 6:00pm PT</span>
+            </div>
+          </li>
+        </ul>
+        <p class="contact-note"><strong>Have your case number handy.</strong> It helps us pull up your file and give you an answer faster. You'll find it on any email from your resolution team.</p>
+      </div>
+
+      <!-- Contact form (reused from the contact page) -->
+      <form class="lead-form reveal" data-d="1" id="contactForm" novalidate>
+        <div class="lead-form__fields">
+          <div class="form-card__head">
+            <h2>Send us a message</h2>
+            <p>For existing clients and general inquiries. We typically respond within one business day.</p>
+          </div>
+          <div class="row">
+            <div class="field"><label for="cf-first">First name</label><input id="cf-first" name="first" type="text" autocomplete="given-name" required><span class="err">Please enter your first name.</span></div>
+            <div class="field"><label for="cf-last">Last name</label><input id="cf-last" name="last" type="text" autocomplete="family-name" required><span class="err">Please enter your last name.</span></div>
+          </div>
+          <div class="row">
+            <div class="field"><label for="cf-email">Email</label><input id="cf-email" name="email" type="email" autocomplete="email" placeholder="you@example.com" required><span class="err">Please enter a valid email.</span></div>
+            <div class="field"><label for="cf-phone">Phone</label><input id="cf-phone" name="phone" type="tel" autocomplete="tel" placeholder="(555) 555-5555" required><span class="err">Please enter a valid phone number.</span></div>
+          </div>
+          <div class="row">
+            <div class="field"><label for="cf-topic">Topic</label>
+              <select id="cf-topic" name="topic" required>
+                <option value="" disabled selected>Select a topic…</option>
+                <option value="case-update">Case Update</option>
+                <option value="billing">Billing</option>
+                <option value="customer-service">Customer Service</option>
+                <option value="general">General Question</option>
+                <option value="technical">Technical Issue</option>
+              </select>
+              <span class="err">Please choose a topic.</span>
+            </div>
+            <div class="field"><label for="cf-case">Case Number</label>
+              <input type="text" id="cf-case" name="case" placeholder="Enter your case number">
+            </div>
+          </div>
+          <div class="field"><label for="cf-time">Preferred contact time</label>
+            <select id="cf-time" name="time">
+              <option value="anytime" selected>Anytime</option>
+              <option value="morning">Morning (8am – 12pm PT)</option>
+              <option value="afternoon">Afternoon (12pm – 4pm PT)</option>
+              <option value="evening">Evening (4pm – 6pm PT)</option>
+            </select>
+          </div>
+          <div class="field"><label for="cf-msg">How can we help?</label>
+            <textarea id="cf-msg" name="message" rows="4" placeholder="Tell us a bit about your question or request" required></textarea>
+            <span class="err">Please add a short message.</span>
+          </div>
+          <button type="submit" class="btn btn--lg" style="width:100%">Send message</button>
+        </div>
+        <div class="form-success">Thank you — your message has been received. A member of our team will get back to you within one business day.</div>
+      </form>
+
+    </div>
+  </section>
+
+  <!-- ============================ RELATED ARTICLES ============================ -->
+  <section class="section">
+    <div class="container">
+      <div class="section__head reveal">
+        <p class="eyebrow eyebrow--green">Keep reading</p>
+        <h2>Where to start</h2>
+      </div>
+      <div class="news-grid">
+        <article class="post-card reveal">
+          <a class="post-card__media" href="https://www.prioritytaxrelief.com/how-to-respond-effectively-to-irs-letter-4800c/" target="_blank" rel="noopener" tabindex="-1"><img src="assets/img/news/letter-4800c.jpg" alt="How to Respond Effectively to IRS Letter 4800C" loading="lazy"></a>
+          <div class="post-card__body">
+            <span class="post-card__tag">IRS Letters &amp; Notices</span>
+            <h3 class="post-card__title"><a href="https://www.prioritytaxrelief.com/how-to-respond-effectively-to-irs-letter-4800c/" target="_blank" rel="noopener">How to Respond Effectively to IRS Letter 4800C</a></h3>
+            <div class="post-card__date">May 2025</div>
+          </div>
+        </article>
+        <article class="post-card reveal" data-d="1">
+          <a class="post-card__media" href="https://www.prioritytaxrelief.com/owe-the-irs-on-a-w-2-job-heres-how-full-time-workers-can-get-tax-relief/" target="_blank" rel="noopener" tabindex="-1"><img src="assets/img/news/owe-w2.jpg" alt="Owe the IRS on a W-2 Job" loading="lazy"></a>
+          <div class="post-card__body">
+            <span class="post-card__tag">Tax Relief</span>
+            <h3 class="post-card__title"><a href="https://www.prioritytaxrelief.com/owe-the-irs-on-a-w-2-job-heres-how-full-time-workers-can-get-tax-relief/" target="_blank" rel="noopener">Owe the IRS on a W-2 Job? Here's How Full-Time Workers Can Get Tax Relief</a></h3>
+            <div class="post-card__date">May 2025</div>
+          </div>
+        </article>
+        <article class="post-card reveal" data-d="2">
+          <a class="post-card__media" href="https://www.prioritytaxrelief.com/inflation-based-tax-adjustments-for-2025/" target="_blank" rel="noopener" tabindex="-1"><img src="assets/img/news/inflation-2025.jpg" alt="Inflation-Based Tax Adjustments for 2025" loading="lazy"></a>
+          <div class="post-card__body">
+            <span class="post-card__tag">Tax News</span>
+            <h3 class="post-card__title"><a href="https://www.prioritytaxrelief.com/inflation-based-tax-adjustments-for-2025/" target="_blank" rel="noopener">Inflation-Based Tax Adjustments for 2025</a></h3>
+            <div class="post-card__date">July 2025</div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+<!-- Page-specific inline script(s): render dynamic content / interactions (consider CMS-driving). -->
+<script>
+/* Contact form is a visual-only mockup: validate, then show the in-card success state. */
+(function () {
+  var form = document.getElementById("contactForm");
+  if (!form) return;
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    var ok = true;
+    form.querySelectorAll("input[required], select[required], textarea[required]").forEach(function (el) {
+      var valid = el.checkValidity() && el.value.trim() !== "";
+      el.classList.toggle("invalid", !valid);
+      if (!valid) ok = false;
+    });
+    if (!ok) return;
+    form.classList.add("sent");
+  });
+  form.querySelectorAll("input, select, textarea").forEach(function (el) {
+    el.addEventListener("input", function () { el.classList.remove("invalid"); });
+    el.addEventListener("change", function () { el.classList.remove("invalid"); });
+  });
+})();
+</script>

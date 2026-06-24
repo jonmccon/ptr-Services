@@ -112,6 +112,60 @@ Preserve these **exactly** when the pages go live. Configure your SEO plugin (Yo
 | OG type / title | article / Back Payroll Tax |
 | JSON-LD @graph | WebPage, BreadcrumbList, WebSite, Organization |
 
+## FAQs
+
+| Field | Value |
+|---|---|
+| Source file | `Frequently Asked Questions.html` |
+| Fragment | `faqs.html` |
+| Canonical | `https://www.prioritytaxrelief.com/faqs/` |
+| `<title>` | Frequently Asked Questions - Priority Tax Relief |
+| Meta description | Answers to common questions about Priority Tax Relief - free consultations, money-back guarantee, qualifying for tax relief, our experience, and how to reach us. |
+| Robots | index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1 |
+| OG type / title | website / Frequently Asked Questions |
+| JSON-LD @graph | **FAQPage** (Question/Answer pairs) - copy verbatim from the source `<head>`; lets Google show FAQ rich results. |
+
+## Terms & Conditions
+
+| Field | Value |
+|---|---|
+| Source file | `Priority Tax Terms and Conditions.html` |
+| Fragment | `priority-tax-terms-and-conditions.html` |
+| Canonical | `https://www.prioritytaxrelief.com/priority-tax-terms-and-conditions/` |
+| `<title>` | Priority Tax Terms and Conditions - Priority Tax Relief |
+| Meta description | Priority Tax Relief Terms of Use Agreement, including service scope, eligibility, prohibited use, warranty disclaimers, limitation of liability, and the binding arbitration agreement and class action waiver. |
+| Robots | index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1 |
+| OG type / title | article / Priority Tax Terms and Conditions |
+| JSON-LD @graph | - |
+| Note | The footer **Privacy Policy** link also points here - the build has no separate privacy page. |
+
+## DNC / TCPA Policy
+
+| Field | Value |
+|---|---|
+| Source file | `DNC TCPA Policy.html` |
+| Fragment | `dnc-tcpa.html` |
+| Canonical | `https://www.prioritytaxrelief.com/dnc-tcpa-policy/` |
+| `<title>` | DNC/TCPA Policy - Priority Tax Relief |
+| Meta description | Priority Tax Relief's Do Not Call and TCPA compliance policy - how we obtain consent, honor opt-outs, observe calling-time limits, and protect consumer communication preferences. |
+| Robots | index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1 |
+| OG type / title | article / DNC/TCPA Policy |
+| JSON-LD @graph | - |
+
+## Client Services
+
+| Field | Value |
+|---|---|
+| Source file | `clients.html` |
+| Fragment | `client-services.html` |
+| Canonical | `https://www.prioritytaxrelief.com/clients/` |
+| `<title>` | Client Services - Priority Tax Relief |
+| Meta description | See how a typical tax-resolution case moves from initial prep to closed, with typical timelines for each stage - and how to reach our client services team for real-time updates. |
+| Robots | - (no robots meta in source; set per launch decision) |
+| OG type / title | - / - |
+| JSON-LD @graph | - |
+| Note | Replaces the earlier login-style "Client portal" demo (now archived). This is a content/marketing page - a normal drop-in fragment. |
+
 ## About
 
 | Field | Value |
@@ -155,7 +209,7 @@ Preserve these **exactly** when the pages go live. Configure your SEO plugin (Yo
 | Source file | `Our Team.html` |
 | Canonical | `https://www.prioritytaxrelief.com/our-team/` |
 | `<title>` | Our Team - Priority Tax Relief |
-| Meta description | Meet the team behind every resolution at Priority Tax Relief - our Tax Attorneys, Enrolled Agents, CPAs and Client Care specialists, organized by the department that fights for you. |
+| Meta description | Meet your ace team at Priority Tax Relief - the seven specialists who surround and support you on every case, from first call to final resolution. |
 | Robots | index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1 |
 | OG type / title | article / Our Team |
 | JSON-LD @graph | - |

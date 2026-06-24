@@ -11,8 +11,11 @@
     from the header's (866) number. CONFIRM primary number (Open Q6).
   • The full TCPA/consent paragraph below is duplicated from the lead
     form's consent text — keep it identical to whatever the form uses.
-  • Policy links (FAQs, Terms, Privacy, DNC/TCPA) point at the live
-    prioritytaxrelief.com pages by design — repoint to the WP equivalents.
+  • Policy links (FAQs, Terms, Privacy, DNC/TCPA) now resolve to the
+    in-site pages (faqs.html / priority-tax-terms-and-conditions.html /
+    dnc-tcpa.html in the build). Repoint to the WP slugs below. NOTE: the
+    build has no separate privacy page — "Privacy Policy" reuses the Terms &
+    Conditions page; give it its own slug if a distinct policy is added.
 ============================================================ -->
 <footer class="site-footer">
   <div class="container footer-call-row">
@@ -29,14 +32,14 @@
       <ul>
         <li><a href="/about/">About</a></li>
         <li><a href="/contact/">Contact</a></li>
-        <li><a href="https://www.prioritytaxrelief.com/faqs/">FAQs</a></li>
-        <li><a href="https://www.prioritytaxrelief.com/priority-tax-terms-and-conditions/">Terms &amp; Conditions</a></li>
+        <li><a href="/faqs/">FAQs</a></li>
+        <li><a href="/priority-tax-terms-and-conditions/">Terms &amp; Conditions</a></li>
       </ul>
     </div>
     <div class="footer-col">
       <ul>
-        <li><a href="https://www.prioritytaxrelief.com/privacy-policy/">Privacy Policy</a></li>
-        <li><a href="https://www.prioritytaxrelief.com/dnc-tcpa/">DNC / TCPA</a></li>
+        <li><a href="/priority-tax-terms-and-conditions/">Privacy Policy</a></li>
+        <li><a href="/dnc-tcpa-policy/">DNC / TCPA</a></li>
       </ul>
     </div>
   </div>
