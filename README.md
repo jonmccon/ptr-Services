@@ -3,7 +3,9 @@
 Basically I downloaded the rendered pages from the existing website, dragged them through claude, added a design component system, and tried to keep all the exisiting page architecture and content as consistent as I could. Then output a bunch of static html files that are this repo. Implementation plan is stil TBD on whether we're going to rebuild this all in WP or drop in the completed page into a WP container. BUT the goal is to carry through the existing work from Rise either way. There is a migration analysis document available to provide a starting point for what was changed. 
 
 [Eng Handoff for Wordpress integration](/handoff/)
+
 [Content / SEO Migration Audit](migration-audit-services.md)
+
 [Original rendered WP pages](/PTR-Pages-Download/)
 
 If there are any questions or just want to talk through this lemme know jmcconnell@taxresolutionteam.com
@@ -11,7 +13,6 @@ If there are any questions or just want to talk through this lemme know jmcconne
 cheers, 
 J
 
----
 
 ```
 index.html                  ← site landing (the Services page)
@@ -21,7 +22,9 @@ Offer in Compromise.html  Penalty Abatement.html  Innocent Spouse Relief.html
 Currently Not Collectible.html  Installment Agreement.html
 Stop Wage Garnishment.html  Bank Levy Release.html  Back Payroll Taxes.html
 Uncommon Tax Deductions You Might Be Missing.html   ← Tax News article
-clients.html                ← client portal (status lookup)
+Frequently Asked Questions.html   Priority Tax Terms and Conditions.html
+DNC TCPA Policy.html        ← footer policy pages (linked from every page)
+clients.html                ← Client Services (case-process timeline)
 Thank You.html
 404.html                    ← branded not-found page
 assets/                     ← css / js / img (logos, badges, photos, icons)
@@ -37,6 +40,7 @@ The whole package deploys as one folder: the live marketing demo at the root,
 and the engineering handoff under `/handoff/`. Open `handoff/index.html` for the
 integration guide; all of its links resolve within this build.
 
+
 ## Notes
 
 - **Filenames contain spaces** (e.g. `Offer in Compromise.html`). This is
@@ -49,10 +53,13 @@ integration guide; all of its links resolve within this build.
 - **Service-card icons** reference the live `prioritytaxrelief.com` media
   library (so they resolve once dropped back into WordPress); a branded
   fallback renders if an image fails to load.
-- **External links** (the logo, "Contact us today", footer policy links) point
-  to the live `prioritytaxrelief.com` site by design.
-- The client portal (`clients.html`) and lead forms are **front-end demos** —
-  they validate and show success states but don't submit to a backend.
+- **External links** (the logo, "Contact us today") point to the live
+  `prioritytaxrelief.com` site by design. The footer policy links (FAQs,
+  Terms & Conditions, Privacy Policy, DNC/TCPA) now resolve to the **local**
+  pages bundled in this folder.
+- `clients.html` is the **Client Services** page — a case-process timeline.
+  Lead forms throughout the site are **front-end demos** — they validate and
+  show success states but don't submit to a backend.
 - The preview-only design **"Tweaks"** panel has been stripped from this
   production build; the page renders with its default hero/layout/accent.
 - **Engineering handoff** lives under `handoff/` and is published alongside the

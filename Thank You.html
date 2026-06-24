@@ -25,8 +25,13 @@
 
 <link rel="stylesheet" href="assets/css/site.css">
 <link rel="stylesheet" href="assets/css/pages.css">
+<style>
+  /* Warm bone confirmation background in light mode; flip to the dark page surface in dark mode */
+  body { background-color: #EBEBDC; }
+  html[data-theme="dark"] body { background-color: var(--ptr-white); }
+</style>
 </head>
-<body data-layout="editorial" style="background-color: rgb(235, 235, 219)">
+<body data-layout="editorial">
 
 <div id="chrome-header"></div>
 
