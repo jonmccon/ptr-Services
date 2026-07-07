@@ -92,30 +92,62 @@
     transition: border-color 160ms var(--ease), box-shadow 160ms var(--ease);
   }
   .role-card:hover { border-color: var(--ptr-green); box-shadow: var(--shadow-md); }
-  .role-card__badge { width: 104px; height: 104px; border-radius: 50%; background: var(--ptr-bone); border: 2px solid var(--color-base-200); display: grid; place-items: center; padding: 14px; }
+  .role-card__badge { width: 104px; height: 104px; border-radius: 50%; background: #fff; border: 2px solid var(--color-base-200); display: grid; place-items: center; padding: 14px; }
   .role-card__badge img { width: 100%; height: 100%; object-fit: contain; }
   .role-card__name { font-size: 16px; font-weight: 800; letter-spacing: -0.01em; color: var(--ptr-ink); margin: 0 0 4px; }
   .role-card__blurb { font-size: 14px; line-height: 1.55; color: var(--ptr-graphite); margin: 0; }
 
-  /* responsive: swap halo → grid */
+  /* responsive: swap halo → centered "spine" (client hub pinned at the top,
+     specialists hang off a vertical dashed connector with green junction dots —
+     the desktop ring, unrolled, so the client still reads as the center). */
   @media (max-width: 980px) {
     .halo { display: none; }
-    .ace-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 44px; }
-    .ace-client-card {
-      grid-column: 1 / -1; display: flex; align-items: center; gap: 20px;
-      background: #fff; border: 1px solid var(--color-base-300); border-top: 4px solid var(--ptr-orange);
-      border-radius: var(--radius-box); padding: 22px 24px; box-shadow: var(--shadow-md); margin-bottom: 8px;
+
+    .ace-grid {
+      display: block; position: relative;
+      max-width: 460px; margin: 40px auto 0;
     }
-    .ace-client-card .client-badge { width: 110px; height: 110px; margin: 0; border-width: 3px; box-shadow: var(--shadow-sm); flex-shrink: 0; padding: 8px; }
-    .ace-client-card .client-badge svg { width: 58px; height: 58px; }
-    .ace-client-card h3 { font-size: 21px; font-weight: 900; letter-spacing: -0.02em; color: var(--ptr-ink); margin: 0 0 4px; }
-    .ace-client-card p { font-size: 14.5px; line-height: 1.5; color: var(--ptr-graphite); margin: 0; }
+    /* the dashed spine, echoing the desktop ring; sits behind the cards,
+       visible only in the gaps where each green dot taps into it */
+    .ace-grid::before {
+      content: ""; position: absolute; left: 50%; top: 132px; bottom: 22px;
+      transform: translateX(-50%); border-left: 1.5px dashed var(--color-base-300);
+      z-index: 0;
+    }
+
+    /* client hub: centered + sticky, so it stays in view while you scroll the team */
+    .ace-client-card {
+      position: sticky; top: 84px; z-index: 5;
+      display: flex; flex-direction: column; align-items: center; text-align: center;
+      gap: 0; max-width: 320px; margin: 0 auto;
+      background: #fff; border: 1px solid var(--color-base-300); border-top: 4px solid var(--ptr-orange);
+      border-radius: var(--radius-box); padding: 24px 26px; box-shadow: var(--shadow-lg);
+    }
+    .ace-client-card .client-badge { width: 96px; height: 96px; margin: 0 0 14px; border-width: 3px; box-shadow: var(--shadow-sm); padding: 8px; }
+    .ace-client-card .client-badge svg { width: 54px; height: 54px; }
+    .ace-client-card h3 { font-size: 21px; font-weight: 900; letter-spacing: -0.02em; color: var(--ptr-ink); margin: 0 0 7px; }
+    .ace-client-card p { font-size: 14px; line-height: 1.55; color: var(--ptr-graphite); margin: 0; max-width: 28ch; }
     .ace-client-card .ace__eyebrow { color: var(--ptr-orange); margin-bottom: 6px; }
+
+    /* specialists descend from the hub, each connected to the spine by a green dot */
+    .role-card {
+      position: relative; z-index: 1;
+      grid-template-columns: 76px 1fr; gap: 16px;
+      max-width: 380px; margin: 30px auto 0;
+      box-shadow: var(--shadow-sm);
+    }
+    .role-card::before {
+      content: ""; position: absolute; top: -20px; left: 50%; transform: translateX(-50%);
+      width: 9px; height: 9px; border-radius: 50%; background: var(--ptr-green);
+      box-shadow: 0 0 0 5px var(--ptr-bone); z-index: 2;
+    }
+    .role-card__badge { width: 76px; height: 76px; padding: 12px; }
   }
   @media (max-width: 560px) {
-    .ace-grid { grid-template-columns: 1fr; }
-    .ace-client-card { flex-direction: column; text-align: center; align-items: center; }
+    .ace-grid { max-width: 100%; }
+    .ace-client-card, .role-card { max-width: 100%; }
   }
+  html[data-theme="dark"] .role-card::before { box-shadow: 0 0 0 5px var(--surface-1); }
 
   .ace__eyebrow { font-weight: 700; font-size: 12px; letter-spacing: .16em; text-transform: uppercase; margin: 0; }
 
@@ -140,11 +172,12 @@
   .join p { color: rgb(255 255 255 / .82); font-size: 18px; line-height: 1.6; margin: 0 0 26px; max-width: 56ch; }
 
   /* ---------- Dark mode surfaces ---------- */
-  html[data-theme="dark"] .client-badge,
-  html[data-theme="dark"] .node__badge,
   html[data-theme="dark"] .role-card,
   html[data-theme="dark"] .ace-client-card { background: var(--surface-1); }
-  html[data-theme="dark"] .role-card__badge { background: var(--surface-2); }
+  /* Badge circles stay white in every theme so the green line-art icons always read */
+  html[data-theme="dark"] .client-badge,
+  html[data-theme="dark"] .node__badge,
+  html[data-theme="dark"] .role-card__badge { background: #fff; }
   html[data-theme="dark"] .halo { --halo-glow: #141515; }
   html[data-theme="dark"] .join h2 { color: #141515; }
   html[data-theme="dark"] .join p { color: rgb(20 21 21 / .78); }
@@ -159,7 +192,7 @@
       </nav>
       <h1 class="reveal" data-d="1" style="max-width:18ch">Your ace team</h1>
       <p class="subhero__sub reveal" data-d="1" style="max-width:34ch">Seven specialists on every case</p>
-      <p class="hero__lead reveal" data-d="2" style="max-width:64ch">At Priority Tax Relief, you don't get handed off to a call center. From your first call to the final resolution, a dedicated lineup of specialists surrounds your case — each one an expert at their position, all of them playing for the same result. They're the <strong class="emph">backbone of every resolution</strong> we deliver.</p>
+      <p class="hero__lead reveal" data-d="2" style="max-width:64ch">At Priority Tax Relief, you don't get handed off to a call center. From your first call to the final resolution, a dedicated lineup of specialists surrounds your case. Each one is an expert at their position, all of them playing for the same result. They're the <strong class="emph">backbone of every resolution</strong> we deliver.</p>
     </div>
   </section>
 
@@ -170,7 +203,7 @@
         <div class="stat reveal"><div class="stat__num" data-count="5">5</div><div class="stat__label">Tax Attorneys</div></div>
         <div class="stat reveal" data-d="1"><div class="stat__num" data-count="11">11</div><div class="stat__label">Enrolled Agents</div></div>
         <div class="stat reveal" data-d="2"><div class="stat__num" data-count="8">8</div><div class="stat__label">CPAs &amp; Accountants</div></div>
-        <div class="stat reveal" data-d="3"><div class="stat__num" data-count="175">175<span class="suffix">+</span></div><div class="stat__label">Team Members</div></div>
+        <div class="stat reveal" data-d="3"><div class="stat__num" data-count="220">220<span class="suffix">+</span></div><div class="stat__label">Team Members</div></div>
       </div>
     </div>
   </section>
@@ -183,7 +216,7 @@
         <h2>One client. Seven specialists. One game plan.</h2>
       </div>
       <div class="ace__intro reveal" data-d="1">
-        <p>Every case is worked by a full team — not a single rep juggling your file alongside a hundred others. Here's who's in your corner, and exactly what each of them does to move your case toward resolution.</p>
+        <p>Every case is worked by a full team, not a single rep juggling your file alongside a hundred others. Here's who's in your corner, and exactly what each of them does to move your case toward resolution.</p>
       </div>
 
       <!-- Desktop: radial halo (rendered by JS) -->
@@ -215,7 +248,7 @@
         <div class="value reveal" data-d="2">
           <h3>Speed Wins</h3>
           <hr class="value__rule">
-          <p>If it matters, we move now. You hear back from a real person — usually the same day.</p>
+          <p>If it matters, we move now. You hear back from a real person, usually the same day.</p>
         </div>
         <div class="value reveal" data-d="3">
           <h3>Straight Answers</h3>
@@ -231,7 +264,7 @@
     <div class="container">
       <p class="eyebrow">Now recruiting</p>
       <h2>We're always looking for people who play to win.</h2>
-      <p>175+ team members across WA, CA, NJ, MA and FL — and growing. If you want to do the best work of your career on a team that has each other's backs, we should talk.</p>
+      <p>220+ team members across WA, CA, NJ, MA and FL, and growing. If you want to do the best work of your career on a team that has each other's backs, we should talk.</p>
       <a class="btn btn--lg" href="Careers.html">See open roles</a>
     </div>
   </section>
@@ -244,12 +277,12 @@
   var BASE = "assets/img/team/";
   var ROLES = [
     { id: "tax-consultant",      name: "Tax Consultant",     blurb: "Maps your full situation on day one and builds the strategy that wins." },
-    { id: "case-manager",        name: "Case Manager",       blurb: "Owns your file end to end — every deadline, document and next step." },
+    { id: "case-manager",        name: "Case Manager",       blurb: "Owns your file end to end, tracking every deadline, document and next step." },
     { id: "document-specialist", name: "Document Specialist", blurb: "Pulls and organizes every transcript, notice and record the IRS needs." },
     { id: "cpa",                 name: "CPA",                blurb: "Reconciles the numbers and files clean returns that hold up to scrutiny." },
     { id: "enrolled-agent",      name: "Enrolled Agent",     blurb: "Federally licensed to represent you before the IRS, in their language." },
-    { id: "tax-attorney",        name: "Tax Attorney",       blurb: "Legal firepower when it's needed — from appeals to the toughest talks." },
-    { id: "client-services",     name: "Client Services Rep.", blurb: "Your direct line for straight answers — same day, always a real person." }
+    { id: "tax-attorney",        name: "Tax Attorney",       blurb: "Legal firepower when it's needed, from appeals to the toughest talks." },
+    { id: "client-services",     name: "Client Services",    blurb: "Your direct line for straight answers. Same day, always a real person." }
   ];
 
   var CLIENT_SVG = '<img src="' + BASE + 'client.png" alt="Customer" loading="lazy">';
@@ -326,7 +359,7 @@
       '<div class="ace-client-card">' +
         '<div class="client-badge">' + CLIENT_SVG + '</div>' +
         '<div><h3>You</h3>' +
-        '<p>Every specialist below is working your case at the same time — toward one resolution.</p></div>' +
+        '<p>Every specialist below is working your case at the same time, toward one resolution.</p></div>' +
       '</div>';
     html += ROLES.map(function (r) {
       return '<div class="role-card">' +

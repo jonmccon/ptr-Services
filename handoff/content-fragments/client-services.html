@@ -12,95 +12,164 @@
 <!-- ------------------------------------------------------------
   PAGE-SPECIFIC CSS (carried from the source page <head>).
   Move this into the theme stylesheet (or a page-scoped block) during
-  integration rather than leaving an inline <style> in the body — it's
-  reproduced here so the fragment renders correctly on its own.
------------------------------------------------------------- -->
-<style>
+  integration rather than leaving an inline <style>
 /* ===========================================================
    Client Services — process timeline (page-scoped)
    =========================================================== */
 /* A warmer, greener client experience — distinct from the marketing pages */
 body[data-page="clients"] .subhero {
   background: linear-gradient(165deg, #E6F5EC 0%, #F3FAF6 55%, var(--ptr-white) 100%);
+  padding-block: 48px 24px;
 }
 .section--mint { background: linear-gradient(180deg, #F1FAF4 0%, #E9F6EF 100%); }
 html[data-theme="dark"] body[data-page="clients"] .subhero,
 html[data-theme="dark"] .section--mint { background: var(--surface-1); }
 
-.ptl-wrap { max-width: 100%; margin-inline: auto; }
+/* ===========================================================
+   The team diagram (halo) — carried over from Our Team
+   =========================================================== */
+.ace__intro { max-width: 64ch; margin-top: 4px; }
+.ace__intro p { color: var(--ptr-graphite); font-size: 18px; line-height: 1.7; margin: 0; }
 
-/* The chart */
-.ptl { position: relative; }
-.ptl__steps {
-  list-style: none; margin: 0; padding: 0;
-  display: grid; grid-template-columns: repeat(6, 1fr);
+/* ---------- The halo ---------- */
+.halo {
+  --stage: 880px;          /* square stage size */
+  --radius: 330px;         /* ring radius (node centers) */
+  --node: 196px;           /* node width */
+  position: relative;
+  width: var(--stage); height: var(--stage);
+  margin: 8px auto 0;
+  max-width: 100%;
 }
-/* The connecting rail sits behind the nodes, from first node centre to last */
-.ptl__rail {
-  position: absolute; top: 22px; height: 4px;
-  left: calc(100% / 12); right: calc(100% / 12);
-  background: linear-gradient(90deg, var(--ptr-orange) 0%, var(--ptr-green-deep) 18%, var(--ptr-green) 60%, var(--ptr-green-bright) 100%);
-  border-radius: 2px; z-index: 0;
-}
-.ptl__step {
-  position: relative; z-index: 1;
-  display: flex; flex-direction: column; align-items: center; text-align: center;
-  padding: 0 12px;
-}
-.ptl__node {
-  width: 50px; height: 50px; border-radius: 50%;
-  background: var(--ptr-green); color: #fff;
-  display: flex; align-items: center; justify-content: center;
-  font-weight: 800; font-size: 19px; letter-spacing: -0.01em;
-  box-shadow: 0 0 0 5px var(--ptr-white), 0 4px 12px rgb(4 123 68 / .22);
-  flex-shrink: 0;
-}
-html[data-theme="dark"] .ptl__node { box-shadow: 0 0 0 5px var(--surface-1), 0 4px 12px rgb(0 0 0 / .35); }
-.ptl__node svg { width: 24px; height: 24px; }
+.halo__svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
 
-/* Opening marker is the orange kickoff flag; green then lightens stage by stage toward resolution */
-.ptl__step:nth-child(1) .ptl__node { background: var(--ptr-orange); box-shadow: 0 0 0 5px var(--ptr-white), 0 4px 12px rgb(254 80 0 / .26); }
-.ptl__step:nth-child(2) .ptl__node { background: var(--ptr-green-deep); }
-.ptl__step:nth-child(3) .ptl__node { background: #035A30; }
-.ptl__step:nth-child(4) .ptl__node { background: #047B44; }
-.ptl__step:nth-child(5) .ptl__node { background: #079A55; }
-.ptl__step:nth-child(6) .ptl__node { background: #0CCF76; }
-
-.ptl__phase { margin-top: 8px; font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--color-base-400); }
-.ptl__name { margin-top: 6px; font-size: 17px; font-weight: 800; line-height: 1.2; letter-spacing: -0.01em; color: var(--ptr-ink); text-wrap: balance; }
-.ptl__sub { margin: 4px 0 0; font-size: 13.5px; line-height: 1.45; color: var(--ptr-graphite); }
-.ptl__dur {
-  margin-top: 14px; display: inline-flex; align-items: center; gap: 6px;
-  font-size: 13px; font-weight: 700; letter-spacing: .01em;
-  color: var(--ptr-green); background: rgb(4 123 68 / .1);
-  padding: 6px 12px; border-radius: 999px;
+/* center client */
+.halo__client {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  width: 230px; text-align: center; z-index: 3;
 }
-.ptl__dur--end { color: var(--ptr-graphite); background: #fff; border: 1px solid var(--color-base-300); }
+.client-badge {
+  width: 200px; height: 200px; margin: 0 auto 16px; border-radius: 50%;
+  background: #fff; border: 3px solid var(--ptr-orange);
+  box-shadow: var(--shadow-lg);
+  display: grid; place-items: center; padding: 12px; overflow: hidden;
+}
+.client-badge svg { width: 116px; height: 116px; color: var(--ptr-green); }
+.client-badge img { width: 100%; height: 100%; object-fit: contain; }
+.halo__client .ace__eyebrow { color: var(--ptr-orange); margin-bottom: 6px; }
+.halo__client h3 { font-size: 26px; font-weight: 900; letter-spacing: -0.02em; color: var(--ptr-ink); margin: 0 0 8px; }
+.halo__client p { font-size: 14px; line-height: 1.5; color: var(--ptr-graphite); margin: 0 auto; max-width: 30ch; }
 
-.ptl-foot { margin: 36px 0 0; font-size: 13.5px; line-height: 1.6; color: var(--color-base-400); max-width: 80ch; }
+/* a role node */
+.node {
+  position: absolute; top: 50%; left: 50%;
+  width: var(--node); margin-left: calc(var(--node) / -2); margin-top: -116px;
+  text-align: center; z-index: 2;
+  transition: transform 160ms var(--ease);
+}
+.node__badge {
+  width: 116px; height: 116px; margin: 0 auto 14px; border-radius: 50%;
+  background: #fff; border: 2px solid var(--color-base-300);
+  box-shadow: var(--shadow-sm);
+  display: grid; place-items: center; padding: 16px;
+  transition: transform 160ms var(--ease), border-color 160ms var(--ease), box-shadow 160ms var(--ease);
+}
+.node__badge img { width: 100%; height: 100%; object-fit: contain; }
+.node:hover { transform: translateY(-4px); }
+.node:hover .node__badge { border-color: var(--ptr-green); box-shadow: var(--shadow-md); }
+.node__name { position: relative; font-size: 15.5px; font-weight: 800; letter-spacing: -0.01em; color: var(--ptr-ink); margin: 0 0 5px; line-height: 1.15; }
+.node__blurb { position: relative; font-size: 12.5px; line-height: 1.5; color: var(--ptr-graphite); margin: 0; text-wrap: pretty; }
+.node::after {
+  content: ""; position: absolute; left: 50%; bottom: -8px; transform: translateX(-50%);
+  width: 210px; height: 96px; z-index: -1; pointer-events: none;
+  background: radial-gradient(52% 58% at 50% 60%, var(--halo-glow, #F3FAF6) 54%, transparent 100%);
+}
 
-/* Stack vertically on narrow screens */
-@media (max-width: 880px) {
-  .ptl__steps { grid-template-columns: 1fr; gap: 0; }
-  .ptl__rail { display: none; }
-  .ptl__step {
-    flex-direction: row; align-items: flex-start; text-align: left;
-    gap: 18px; padding: 0 0 28px 0;
+/* ---------- Fallback grid (mobile / narrow) ---------- */
+.ace-grid { display: none; }
+.role-card {
+  display: grid; grid-template-columns: 104px 1fr; gap: 18px; align-items: center;
+  background: #fff; border: 1px solid var(--color-base-300); border-radius: var(--radius-box);
+  padding: 18px 20px;
+  transition: border-color 160ms var(--ease), box-shadow 160ms var(--ease);
+}
+.role-card:hover { border-color: var(--ptr-green); box-shadow: var(--shadow-md); }
+.role-card__badge { width: 104px; height: 104px; border-radius: 50%; background: #fff; border: 2px solid var(--color-base-200); display: grid; place-items: center; padding: 14px; }
+.role-card__badge img { width: 100%; height: 100%; object-fit: contain; }
+.role-card__name { font-size: 16px; font-weight: 800; letter-spacing: -0.01em; color: var(--ptr-ink); margin: 0 0 4px; }
+.role-card__blurb { font-size: 14px; line-height: 1.55; color: var(--ptr-graphite); margin: 0; }
+
+@media (max-width: 980px) {
+  .halo { display: none; }
+  .ace-grid { display: block; position: relative; max-width: 460px; margin: 40px auto 0; }
+  .ace-grid::before {
+    content: ""; position: absolute; left: 50%; top: 132px; bottom: 22px;
+    transform: translateX(-50%); border-left: 1.5px dashed var(--color-base-300); z-index: 0;
   }
-  /* vertical connector down the left through the nodes */
-  .ptl__step::before {
-    content: ""; position: absolute; left: 23px; top: 50px; bottom: -6px;
-    width: 4px; background: var(--ptr-green); z-index: 0;
+  .ace-client-card {
+    position: sticky; top: 84px; z-index: 5;
+    display: flex; flex-direction: column; align-items: center; text-align: center;
+    gap: 0; max-width: 320px; margin: 0 auto;
+    background: #fff; border: 1px solid var(--color-base-300); border-top: 4px solid var(--ptr-orange);
+    border-radius: var(--radius-box); padding: 24px 26px; box-shadow: var(--shadow-lg);
   }
-  .ptl__step:last-child { padding-bottom: 0; }
-  .ptl__step:last-child::before { display: none; }
-  .ptl__node { position: relative; z-index: 1; }
-  .ptl__rail { display: none; }
-  .ptl__phase { margin-top: 4px; }
-  .ptl__dur { margin-top: 10px; }
-  .ptl__body { padding-top: 2px; }
+  .ace-client-card .client-badge { width: 96px; height: 96px; margin: 0 0 14px; border-width: 3px; box-shadow: var(--shadow-sm); padding: 8px; }
+  .ace-client-card .client-badge svg { width: 54px; height: 54px; }
+  .ace-client-card h3 { font-size: 21px; font-weight: 900; letter-spacing: -0.02em; color: var(--ptr-ink); margin: 0 0 7px; }
+  .ace-client-card p { font-size: 14px; line-height: 1.55; color: var(--ptr-graphite); margin: 0; max-width: 28ch; }
+  .ace-client-card .ace__eyebrow { color: var(--ptr-orange); margin-bottom: 6px; }
+  .role-card {
+    position: relative; z-index: 1;
+    grid-template-columns: 76px 1fr; gap: 16px;
+    max-width: 380px; margin: 30px auto 0;
+    box-shadow: var(--shadow-sm);
+  }
+  .role-card::before {
+    content: ""; position: absolute; top: -20px; left: 50%; transform: translateX(-50%);
+    width: 9px; height: 9px; border-radius: 50%; background: var(--ptr-green);
+    box-shadow: 0 0 0 5px var(--ptr-bone); z-index: 2;
+  }
+  .role-card__badge { width: 76px; height: 76px; padding: 12px; }
 }
-@media (min-width: 881px) { .ptl__body { display: contents; } }
+@media (max-width: 560px) {
+  .ace-grid { max-width: 100%; }
+  .ace-client-card, .role-card { max-width: 100%; }
+}
+.ace__eyebrow { font-weight: 700; font-size: 12px; letter-spacing: .16em; text-transform: uppercase; margin: 0; }
+html[data-theme="dark"] .role-card::before { box-shadow: 0 0 0 5px var(--surface-1); }
+html[data-theme="dark"] .role-card,
+html[data-theme="dark"] .ace-client-card { background: var(--surface-1); }
+/* Badge circles stay white in every theme so the green line-art icons always read */
+html[data-theme="dark"] .client-badge,
+html[data-theme="dark"] .node__badge,
+html[data-theme="dark"] .role-card__badge { background: #fff; }
+html[data-theme="dark"] .halo { --halo-glow: #141515; }
+
+/* ---------- Timeline note + factors ---------- */
+.timeline-note { max-width: 62ch; margin: 64px auto 0; text-align: center; }
+.timeline-note p { color: var(--ptr-graphite); font-size: 17px; line-height: 1.7; margin: 0; }
+.timeline-note .lead-in { font-size: 19px; color: var(--ptr-ink); }
+.factors {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+  max-width: 980px; margin: 40px auto 0;
+}
+.factor {
+  background: #fff; border: 1px solid var(--color-base-300); border-radius: var(--radius-box);
+  border-top: 4px solid var(--ptr-green); padding: 24px 24px 26px;
+}
+.factor__num { font-size: 13px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: var(--ptr-green); margin: 0 0 10px; }
+.factor__name { font-size: 18px; font-weight: 800; letter-spacing: -0.01em; color: var(--ptr-ink); margin: 0 0 8px; }
+.factor__desc { font-size: 14.5px; line-height: 1.6; color: var(--ptr-graphite); margin: 0; }
+.expedite {
+  max-width: 720px; margin: 36px auto 0;
+  background: rgb(254 80 0 / .06); border-left: 4px solid var(--ptr-orange);
+  border-radius: var(--radius-box); padding: 20px 24px;
+  font-size: 15px; line-height: 1.65; color: var(--ptr-graphite);
+}
+.expedite strong { color: var(--ptr-ink); }
+@media (max-width: 860px) { .factors { grid-template-columns: 1fr; max-width: 460px; } }
+html[data-theme="dark"] .factor,
+html[data-theme="dark"] .expedite { background: var(--surface-1); }
 
 /* Client-services contact heading sits left of the standard contact grid */
 .cs-grid { align-items: start; }
@@ -112,97 +181,48 @@ html[data-theme="dark"] #client-services { background-color: var(--surface-1); }
 html[data-theme="dark"] .ptl__dur--end { background: var(--surface-2); color: var(--ptr-ink); border-color: var(--color-base-300); }
 </style>
 
-<!-- ============================ SUBPAGE HERO ============================ -->
+  <!-- ============================ SUBPAGE HERO ============================ -->
   <section class="subhero">
     <div class="container">
       <nav class="breadcrumb reveal" aria-label="Breadcrumb">
         <a href="Services Page.html">Home</a> ›
         <span aria-current="page">Client Services</span>
       </nav>
-      <h1 class="reveal" data-d="1" style="max-width:18ch">Your case, step by step</h1>
-      <p class="subhero__sub reveal" data-d="1" style="max-width:40ch">What to expect once you're a client</p>
-      <p class="hero__lead reveal" data-d="2" style="max-width:64ch">Every case is different, but the path is the same. Here's how we move a tax matter from the day we open it through to the day it's resolved — and how to reach our client services team whenever you want a real-time update.</p>
+      <h1 class="reveal" data-d="1" style="max-width:18ch">Your case, your team</h1>
+      <p class="hero__lead reveal" data-d="2" style="max-width:64ch">You have a full lineup of dedicated specialists working side by side on your file and handling all direct correspondence with the IRS.</p>
     </div>
   </section>
 
-  <!-- ============================ PROCESS TIMELINE ============================ -->
-  <section class="section section--mint">
+  <!-- ============================ YOUR TEAM ============================ -->
+  <section class="section section--mint" id="your-team">
     <div class="container">
-      <div class="section__head reveal">
-        <p class="eyebrow eyebrow--green">The resolution process</p>
-        <h2>A typical case, start to finish</h2>
-        <p class="section__intro">Six stages take most cases from intake to closed, and most run <strong style="color:var(--ptr-green)">6–12 months</strong> end to end. The ranges below are typical — your actual timeline depends on case complexity and how quickly the IRS responds.</p>
+      <!-- Desktop: radial halo (rendered by JS) -->
+      <div class="halo reveal" data-d="1" id="halo" aria-hidden="true"></div>
+
+      <!-- Mobile / narrow: stacked cards (rendered by JS) -->
+      <div class="ace-grid" id="aceGrid"></div>
+
+      <!-- Timeline expectations -->
+      <div class="timeline-note reveal" data-d="1">
+        <p class="lead-in">While we work aggressively on your behalf, navigating IRS bureaucracy takes time. Due to agency processing delays, cases typically close out within <strong style="color:var(--ptr-green)">6 to 12 months</strong>. <strong>To help us expedite your case,</strong> please stay highly responsive to our communications and upload your requested documents as promptly as possible.</p>
       </div>
 
-      <div class="ptl-wrap reveal" data-d="1">
-        <div class="ptl">
-          <div class="ptl__rail"></div>
-          <ol class="ptl__steps">
-
-            <li class="ptl__step">
-              <span class="ptl__node">1</span>
-              <div class="ptl__body">
-                <span class="ptl__phase">Stage 1</span>
-                <h3 class="ptl__name">Initial Case Prep</h3>
-                <p class="ptl__sub">We open your case and file IRS authorization to act on your behalf.</p>
-                <span class="ptl__dur">Typical: 1–2 weeks</span>
-              </div>
-            </li>
-
-            <li class="ptl__step">
-              <span class="ptl__node">2</span>
-              <div class="ptl__body">
-                <span class="ptl__phase">Stage 2</span>
-                <h3 class="ptl__name">Case Analysis</h3>
-                <p class="ptl__sub">We pull your IRS transcripts and review your full financial picture.</p>
-                <span class="ptl__dur">Typical: 2–4 weeks</span>
-              </div>
-            </li>
-
-            <li class="ptl__step">
-              <span class="ptl__node">3</span>
-              <div class="ptl__body">
-                <span class="ptl__phase">Stage 3</span>
-                <h3 class="ptl__name">Documentation</h3>
-                <p class="ptl__sub">We gather supporting documents and prepare the required forms.</p>
-                <span class="ptl__dur">Typical: 3–6 weeks</span>
-              </div>
-            </li>
-
-            <li class="ptl__step">
-              <span class="ptl__node">4</span>
-              <div class="ptl__body">
-                <span class="ptl__phase">Stage 4</span>
-                <h3 class="ptl__name">Resolution</h3>
-                <p class="ptl__sub">We negotiate and present your most beneficial resolution to the IRS.</p>
-                <span class="ptl__dur">Typical: 2–4 months</span>
-              </div>
-            </li>
-
-            <li class="ptl__step">
-              <span class="ptl__node">5</span>
-              <div class="ptl__body">
-                <span class="ptl__phase">Stage 5</span>
-                <h3 class="ptl__name">Case Finalization</h3>
-                <p class="ptl__sub">The IRS reviews and approves; we confirm the final terms with you.</p>
-                <span class="ptl__dur">Typical: 2–6 weeks</span>
-              </div>
-            </li>
-
-            <li class="ptl__step ptl__step--end">
-              <span class="ptl__node"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
-              <div class="ptl__body">
-                <span class="ptl__phase">Stage 6</span>
-                <h3 class="ptl__name">Case Closed</h3>
-                <p class="ptl__sub">Your resolution is in place and we confirm everything is complete.</p>
-                <span class="ptl__dur ptl__dur--end">Resolved</span>
-              </div>
-            </li>
-
-          </ol>
+      <div class="factors reveal" data-d="1">
+        <div class="factor">
+          <p class="factor__num">Factor 1</p>
+          <h3 class="factor__name">Case Complexity</h3>
+          <p class="factor__desc">The specific tax issues we are resolving for you.</p>
         </div>
-
-        <p class="ptl-foot">Timelines shown are typical estimates for planning purposes only and are not a guarantee. IRS processing times, the complexity of your case, and how quickly requested documents are returned all affect how long each stage takes.</p>
+        <div class="factor">
+          <p class="factor__num">Factor 2</p>
+          <h3 class="factor__name">IRS Response Times</h3>
+          <p class="factor__desc">The agency's internal processing and systemic delays.</p>
+        </div>
+        <div class="factor">
+          <p class="factor__num">Factor 3</p>
+          <h3 class="factor__name">Your Responsiveness</h3>
+          <p class="factor__desc">How quickly you can deliver requested documentation to our team.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -330,7 +350,106 @@ html[data-theme="dark"] .ptl__dur--end { background: var(--surface-2); color: va
     </div>
   </section>
 
-<!-- Page-specific inline script(s): render dynamic content / interactions (consider CMS-driving). -->
+<!-- Page-specific inline script(s): render dynamic content (consider CMS-driving). -->
+<!-- Team diagram (halo) data + render -->
+<script>
+(function () {
+  "use strict";
+
+  var BASE = "assets/img/team/";
+  var ROLES = [
+    { id: "tax-consultant",      name: "Tax Consultant",      blurb: "Maps your full situation on day one and builds the strategy that wins." },
+    { id: "case-manager",        name: "Case Manager",        blurb: "Owns your file end to end, tracking every deadline, document and next step." },
+    { id: "document-specialist", name: "Document Specialist", blurb: "Pulls and organizes every transcript, notice and record the IRS needs." },
+    { id: "cpa",                 name: "CPA",                 blurb: "Reconciles the numbers and files clean returns that hold up to scrutiny." },
+    { id: "enrolled-agent",      name: "Enrolled Agent",      blurb: "Federally licensed to represent you before the IRS, in their language." },
+    { id: "tax-attorney",        name: "Tax Attorney",        blurb: "Legal firepower when it's needed, from appeals to the toughest talks." },
+    { id: "client-services",     name: "Client Services",     blurb: "Your direct line for straight answers. Same day, always a real person." }
+  ];
+
+  var CLIENT_SVG = '<img src="' + BASE + 'client.png" alt="You" loading="lazy">';
+
+  function esc(s){ return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+
+  /* ---------- Halo (desktop) ---------- */
+  var halo = document.getElementById("halo");
+  if (halo) {
+    var cs = getComputedStyle(halo);
+    var stage = parseFloat(cs.getPropertyValue("--stage")) || 880;
+    var radius = parseFloat(cs.getPropertyValue("--radius")) || 330;
+    var c = stage / 2;
+    var n = ROLES.length;
+
+    var ns = "http://www.w3.org/2000/svg";
+    var svg = document.createElementNS(ns, "svg");
+    svg.setAttribute("class", "halo__svg");
+    svg.setAttribute("viewBox", "0 0 " + stage + " " + stage);
+
+    var ring = document.createElementNS(ns, "circle");
+    ring.setAttribute("cx", c); ring.setAttribute("cy", c); ring.setAttribute("r", radius);
+    ring.setAttribute("fill", "none");
+    ring.setAttribute("stroke", "var(--color-base-300)");
+    ring.setAttribute("stroke-width", "1.5");
+    ring.setAttribute("stroke-dasharray", "2 9");
+    ring.setAttribute("stroke-linecap", "round");
+    svg.appendChild(ring);
+
+    var positions = [];
+    for (var i = 0; i < n; i++) {
+      var theta = (i * (2 * Math.PI / n)) - Math.PI / 2;
+      var x = c + radius * Math.cos(theta);
+      var y = c + radius * Math.sin(theta);
+      positions.push({ x: x, y: y });
+
+      var dot = document.createElementNS(ns, "circle");
+      dot.setAttribute("cx", x); dot.setAttribute("cy", y);
+      dot.setAttribute("r", "4"); dot.setAttribute("fill", "var(--ptr-green)");
+      svg.appendChild(dot);
+    }
+    halo.appendChild(svg);
+
+    var client = document.createElement("div");
+    client.className = "halo__client";
+    client.innerHTML =
+      '<div class="client-badge">' + CLIENT_SVG + '</div>' +
+      '<h3>You</h3>' +
+      '<p>Every position on the field is playing your case at the same time.</p>';
+    halo.appendChild(client);
+
+    for (var j = 0; j < n; j++) {
+      var p = positions[j];
+      var node = document.createElement("div");
+      node.className = "node";
+      node.style.left = (p.x / stage * 100) + "%";
+      node.style.top = (p.y / stage * 100) + "%";
+      node.innerHTML =
+        '<div class="node__badge"><img src="' + BASE + ROLES[j].id + '.png" alt="' + esc(ROLES[j].name) + '" loading="lazy"></div>' +
+        '<p class="node__name">' + esc(ROLES[j].name) + '</p>' +
+        '<p class="node__blurb">' + esc(ROLES[j].blurb) + '</p>';
+      halo.appendChild(node);
+    }
+  }
+
+  /* ---------- Grid (mobile fallback) ---------- */
+  var grid = document.getElementById("aceGrid");
+  if (grid) {
+    var gridHtml =
+      '<div class="ace-client-card">' +
+        '<div class="client-badge">' + CLIENT_SVG + '</div>' +
+        '<div><h3>You</h3>' +
+        '<p>Every specialist below is working your case at the same time, toward one resolution.</p></div>' +
+      '</div>';
+    gridHtml += ROLES.map(function (r) {
+      return '<div class="role-card">' +
+        '<div class="role-card__badge"><img src="' + BASE + r.id + '.png" alt="' + esc(r.name) + '" loading="lazy"></div>' +
+        '<div><p class="role-card__name">' + esc(r.name) + '</p><p class="role-card__blurb">' + esc(r.blurb) + '</p></div>' +
+      '</div>';
+    }).join("");
+    grid.innerHTML = gridHtml;
+  }
+})();
+</script>
+
 <script>
 /* Contact form is a visual-only mockup: validate, then show the in-card success state. */
 (function () {
