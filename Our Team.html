@@ -97,7 +97,7 @@
     transition: border-color 160ms var(--ease), box-shadow 160ms var(--ease);
   }
   .role-card:hover { border-color: var(--ptr-green); box-shadow: var(--shadow-md); }
-  .role-card__badge { width: 104px; height: 104px; border-radius: 50%; background: var(--ptr-bone); border: 2px solid var(--color-base-200); display: grid; place-items: center; padding: 14px; }
+  .role-card__badge { width: 104px; height: 104px; border-radius: 50%; background: #fff; border: 2px solid var(--color-base-200); display: grid; place-items: center; padding: 14px; }
   .role-card__badge img { width: 100%; height: 100%; object-fit: contain; }
   .role-card__name { font-size: 16px; font-weight: 800; letter-spacing: -0.01em; color: var(--ptr-ink); margin: 0 0 4px; }
   .role-card__blurb { font-size: 14px; line-height: 1.55; color: var(--ptr-graphite); margin: 0; }
@@ -177,11 +177,12 @@
   .join p { color: rgb(255 255 255 / .82); font-size: 18px; line-height: 1.6; margin: 0 0 26px; max-width: 56ch; }
 
   /* ---------- Dark mode surfaces ---------- */
-  html[data-theme="dark"] .client-badge,
-  html[data-theme="dark"] .node__badge,
   html[data-theme="dark"] .role-card,
   html[data-theme="dark"] .ace-client-card { background: var(--surface-1); }
-  html[data-theme="dark"] .role-card__badge { background: var(--surface-2); }
+  /* Badge circles stay white in every theme so the green line-art icons always read */
+  html[data-theme="dark"] .client-badge,
+  html[data-theme="dark"] .node__badge,
+  html[data-theme="dark"] .role-card__badge { background: #fff; }
   html[data-theme="dark"] .halo { --halo-glow: #141515; }
   html[data-theme="dark"] .join h2 { color: #141515; }
   html[data-theme="dark"] .join p { color: rgb(20 21 21 / .78); }
