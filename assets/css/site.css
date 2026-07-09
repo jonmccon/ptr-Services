@@ -462,7 +462,7 @@ body[data-carousel="coverflow"] .s-card.is-focus { opacity: 1; transform: scale(
   position: sticky; top: calc(var(--header-h) + 24px);
 }
 .process-cta .eyebrow { color: var(--ptr-green-bright); }
-.process-cta h3 { font-size: 28px; font-weight: 800; line-height: 1.15; margin: 0 0 12px; letter-spacing: -0.01em; }
+.process-cta h2 { font-size: 28px !important; font-weight: 800 !important; line-height: 1.15 !important; margin: 0 0 12px !important; letter-spacing: -0.01em !important; }
 .process-cta p { margin: 0 0 24px; color: rgb(255 255 255 / .85); font-size: 16px; }
 
 /* ============================================================
