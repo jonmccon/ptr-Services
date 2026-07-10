@@ -1,0 +1,373 @@
+<!-- ============================================================
+  PTR CONTENT FRAGMENT — Our Team
+  Target slug: /our-team/
+  This is page CONTENT ONLY. No <html>/<head>, no site header,
+  no footer. Paste into the WP page body (Custom HTML block / page
+  template the_content). The theme supplies header, footer, <head>
+  + SEO, and enqueues assets/css/site.css + assets/js/site.js.
+  Body attributes on the source page (apply to <body> via theme):
+    class="" data-layout="editorial" data-page="about"
+============================================================ -->
+
+<!-- ------------------------------------------------------------
+  PAGE-SPECIFIC CSS (carried from the source page <head>).
+  Move this into the theme stylesheet (or a page-scoped block) during
+  integration rather than leaving an inline <style> in the body — it's
+  reproduced here so the fragment renders correctly on its own.
+------------------------------------------------------------ -->
+<style>
+  /* ============================================================
+     OUR TEAM — "Your ace team" radial halo. Builds on site.css / pages.css.
+     ============================================================ */
+
+  /* ---------- Credentials strip ---------- */
+  .creds-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px; }
+  @media (max-width: 760px) { .creds-grid { grid-template-columns: 1fr 1fr; gap: 36px 20px; } }
+
+  /* ---------- Ace-team section ---------- */
+  .ace__intro { max-width: 64ch; margin-top: 4px; }
+  .ace__intro p { color: var(--ptr-graphite); font-size: 18px; line-height: 1.7; margin: 0; }
+
+  /* ---------- The halo ---------- */
+  .halo {
+    --stage: 880px;          /* square stage size */
+    --radius: 330px;         /* ring radius (node centers) */
+    --node: 196px;           /* node width */
+    position: relative;
+    width: var(--stage); height: var(--stage);
+    margin: 64px auto 0;
+    max-width: 100%;
+  }
+  .halo__svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
+
+  /* center client */
+  .halo__client {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    width: 230px; text-align: center; z-index: 3;
+  }
+  .client-badge {
+    width: 200px; height: 200px; margin: 0 auto 16px; border-radius: 50%;
+    background: #fff; border: 3px solid var(--ptr-orange);
+    box-shadow: var(--shadow-lg);
+    display: grid; place-items: center; padding: 12px; overflow: hidden;
+  }
+  .client-badge svg { width: 116px; height: 116px; color: var(--ptr-green); }
+  .client-badge img { width: 100%; height: 100%; object-fit: contain; }
+  .halo__client .ace__eyebrow { color: var(--ptr-orange); margin-bottom: 6px; }
+  .halo__client h3 { font-size: 26px; font-weight: 900; letter-spacing: -0.02em; color: var(--ptr-ink); margin: 0 0 8px; }
+  .halo__client p { font-size: 14px; line-height: 1.5; color: var(--ptr-graphite); margin: 0 auto; max-width: 30ch; }
+
+  /* a role node */
+  .node {
+    position: absolute; top: 50%; left: 50%;
+    width: var(--node); margin-left: calc(var(--node) / -2); margin-top: -116px;
+    text-align: center; z-index: 2;
+    transition: transform 160ms var(--ease);
+  }
+  .node__badge {
+    width: 116px; height: 116px; margin: 0 auto 14px; border-radius: 50%;
+    background: #fff; border: 2px solid var(--color-base-300);
+    box-shadow: var(--shadow-sm);
+    display: grid; place-items: center; padding: 16px;
+    transition: transform 160ms var(--ease), border-color 160ms var(--ease), box-shadow 160ms var(--ease);
+  }
+  .node__badge img { width: 100%; height: 100%; object-fit: contain; }
+  .node:hover { transform: translateY(-4px); }
+  .node:hover .node__badge { border-color: var(--ptr-green); box-shadow: var(--shadow-md); }
+  .node__name { position: relative; font-size: 15.5px; font-weight: 800; letter-spacing: -0.01em; color: var(--ptr-ink); margin: 0 0 5px; line-height: 1.15; }
+  .node__blurb { position: relative; font-size: 12.5px; line-height: 1.5; color: var(--ptr-graphite); margin: 0; text-wrap: pretty; }
+  /* soft white glow so node text stays readable over the dashed ring */
+  .node::after {
+    content: ""; position: absolute; left: 50%; bottom: -8px; transform: translateX(-50%);
+    width: 210px; height: 96px; z-index: -1; pointer-events: none;
+    background: radial-gradient(52% 58% at 50% 60%, var(--halo-glow, #fff) 54%, transparent 100%);
+  }
+
+  /* ---------- Fallback grid (mobile / narrow) ---------- */
+  .ace-grid { display: none; }
+  .role-card {
+    display: grid; grid-template-columns: 104px 1fr; gap: 18px; align-items: center;
+    background: #fff; border: 1px solid var(--color-base-300); border-radius: var(--radius-box);
+    padding: 18px 20px;
+    transition: border-color 160ms var(--ease), box-shadow 160ms var(--ease);
+  }
+  .role-card:hover { border-color: var(--ptr-green); box-shadow: var(--shadow-md); }
+  .role-card__badge { width: 104px; height: 104px; border-radius: 50%; background: #fff; border: 2px solid var(--color-base-200); display: grid; place-items: center; padding: 14px; }
+  .role-card__badge img { width: 100%; height: 100%; object-fit: contain; }
+  .role-card__name { font-size: 16px; font-weight: 800; letter-spacing: -0.01em; color: var(--ptr-ink); margin: 0 0 4px; }
+  .role-card__blurb { font-size: 14px; line-height: 1.55; color: var(--ptr-graphite); margin: 0; }
+
+  /* responsive: swap halo → centered "spine" (client hub pinned at the top,
+     specialists hang off a vertical dashed connector with green junction dots —
+     the desktop ring, unrolled, so the client still reads as the center). */
+  @media (max-width: 980px) {
+    .halo { display: none; }
+
+    .ace-grid {
+      display: block; position: relative;
+      max-width: 460px; margin: 40px auto 0;
+    }
+    /* the dashed spine, echoing the desktop ring; sits behind the cards,
+       visible only in the gaps where each green dot taps into it */
+    .ace-grid::before {
+      content: ""; position: absolute; left: 50%; top: 132px; bottom: 22px;
+      transform: translateX(-50%); border-left: 1.5px dashed var(--color-base-300);
+      z-index: 0;
+    }
+
+    /* client hub: centered + sticky, so it stays in view while you scroll the team */
+    .ace-client-card {
+      position: sticky; top: 84px; z-index: 5;
+      display: flex; flex-direction: column; align-items: center; text-align: center;
+      gap: 0; max-width: 320px; margin: 0 auto;
+      background: #fff; border: 1px solid var(--color-base-300); border-top: 4px solid var(--ptr-orange);
+      border-radius: var(--radius-box); padding: 24px 26px; box-shadow: var(--shadow-lg);
+    }
+    .ace-client-card .client-badge { width: 96px; height: 96px; margin: 0 0 14px; border-width: 3px; box-shadow: var(--shadow-sm); padding: 8px; }
+    .ace-client-card .client-badge svg { width: 54px; height: 54px; }
+    .ace-client-card h3 { font-size: 21px; font-weight: 900; letter-spacing: -0.02em; color: var(--ptr-ink); margin: 0 0 7px; }
+    .ace-client-card p { font-size: 14px; line-height: 1.55; color: var(--ptr-graphite); margin: 0; max-width: 28ch; }
+    .ace-client-card .ace__eyebrow { color: var(--ptr-orange); margin-bottom: 6px; }
+
+    /* specialists descend from the hub, each connected to the spine by a green dot */
+    .role-card {
+      position: relative; z-index: 1;
+      grid-template-columns: 76px 1fr; gap: 16px;
+      max-width: 380px; margin: 30px auto 0;
+      box-shadow: var(--shadow-sm);
+    }
+    .role-card::before {
+      content: ""; position: absolute; top: -20px; left: 50%; transform: translateX(-50%);
+      width: 9px; height: 9px; border-radius: 50%; background: var(--ptr-green);
+      box-shadow: 0 0 0 5px var(--ptr-bone); z-index: 2;
+    }
+    .role-card__badge { width: 76px; height: 76px; padding: 12px; }
+  }
+  @media (max-width: 560px) {
+    .ace-grid { max-width: 100%; }
+    .ace-client-card, .role-card { max-width: 100%; }
+  }
+  html[data-theme="dark"] .role-card::before { box-shadow: 0 0 0 5px var(--surface-1); }
+
+  .ace__eyebrow { font-weight: 700; font-size: 12px; letter-spacing: .16em; text-transform: uppercase; margin: 0; }
+
+  /* ---------- Values band (green) ---------- */
+  .values { background: var(--ptr-green); color: #fff; }
+  .values .container { padding-block: 88px; }
+  .values__head { max-width: 760px; margin-bottom: 44px; }
+  .values__head .eyebrow { color: var(--ptr-green-bright); }
+  .values__head h2 { color: #fff; font-size: clamp(28px, 3.2vw, 42px); font-weight: 800; letter-spacing: -0.02em; margin: 0; }
+  .values__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 36px 32px; }
+  .value h3 { font-size: 20px; font-weight: 800; color: #fff; letter-spacing: -0.01em; margin: 0 0 12px; }
+  .value__rule { width: 38px; height: 3px; background: var(--ptr-orange); border: 0; margin: 0 0 14px; }
+  .value p { font-size: 15.5px; line-height: 1.6; color: rgb(255 255 255 / .86); margin: 0; }
+  @media (max-width: 900px) { .values__grid { grid-template-columns: 1fr 1fr; gap: 32px 28px; } }
+  @media (max-width: 540px) { .values__grid { grid-template-columns: 1fr; } }
+
+  /* ---------- Join the team (dark band) ---------- */
+  .join { background: var(--ptr-ink); color: #fff; text-align: center; }
+  .join .container { padding-block: 76px; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+  .join .eyebrow { color: var(--ptr-orange); }
+  .join h2 { color: #fff; font-size: clamp(28px, 3.4vw, 44px); font-weight: 800; letter-spacing: -0.02em; margin: 0 0 12px; max-width: 18ch; }
+  .join p { color: rgb(255 255 255 / .82); font-size: 18px; line-height: 1.6; margin: 0 0 26px; max-width: 56ch; }
+
+  /* ---------- Dark mode surfaces ---------- */
+  html[data-theme="dark"] .role-card,
+  html[data-theme="dark"] .ace-client-card { background: var(--surface-1); }
+  /* Badge circles stay white in every theme so the green line-art icons always read */
+  html[data-theme="dark"] .client-badge,
+  html[data-theme="dark"] .node__badge,
+  html[data-theme="dark"] .role-card__badge { background: #fff; }
+  html[data-theme="dark"] .halo { --halo-glow: #141515; }
+  html[data-theme="dark"] .join h2 { color: #141515; }
+  html[data-theme="dark"] .join p { color: rgb(20 21 21 / .78); }
+</style>
+
+<!-- ============================ HERO ============================ -->
+  <section class="subhero">
+    <div class="container">
+      <nav class="breadcrumb reveal" aria-label="Breadcrumb">
+        <a href="About.html">About</a> ›
+        <span aria-current="page">Our Team</span>
+      </nav>
+      <h1 class="reveal" data-d="1" style="max-width:18ch">Your ace team</h1>
+      <p class="subhero__sub reveal" data-d="1" style="max-width:34ch">Seven specialists on every case</p>
+      <p class="hero__lead reveal" data-d="2" style="max-width:64ch">At Priority Tax Relief, you don't get handed off to a call center. From your first call to the final resolution, a dedicated lineup of specialists surrounds your case. Each one is an expert at their position, all of them playing for the same result. They're the <strong class="emph">backbone of every resolution</strong> we deliver.</p>
+    </div>
+  </section>
+
+  <!-- ============================ CREDENTIALS STRIP ============================ -->
+  <section class="section section--tight section--bone" style="padding: 20px 0px; min-height: 175px">
+    <div class="container">
+      <div class="creds-grid">
+        <div class="stat reveal"><div class="stat__num" data-count="5">5</div><div class="stat__label">Tax Attorneys</div></div>
+        <div class="stat reveal" data-d="1"><div class="stat__num" data-count="11">11</div><div class="stat__label">Enrolled Agents</div></div>
+        <div class="stat reveal" data-d="2"><div class="stat__num" data-count="8">8</div><div class="stat__label">CPAs &amp; Accountants</div></div>
+        <div class="stat reveal" data-d="3"><div class="stat__num" data-count="220">220<span class="suffix">+</span></div><div class="stat__label">Team Members</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ THE ACE TEAM (halo) ============================ -->
+  <section class="section" id="ace">
+    <div class="container">
+      <div class="section__head reveal">
+        <p class="eyebrow eyebrow--green">The lineup</p>
+        <h2>One client. Seven specialists. One game plan.</h2>
+      </div>
+      <div class="ace__intro reveal" data-d="1">
+        <p>Every case is worked by a full team, not a single rep juggling your file alongside a hundred others. Here's who's in your corner, and exactly what each of them does to move your case toward resolution.</p>
+      </div>
+
+      <!-- Desktop: radial halo (rendered by JS) -->
+      <div class="halo reveal" data-d="1" id="halo" aria-hidden="true"></div>
+
+      <!-- Mobile / narrow: stacked cards (rendered by JS) -->
+      <div class="ace-grid" id="aceGrid"></div>
+    </div>
+  </section>
+
+  <!-- ============================ VALUES / CULTURE ============================ -->
+  <section class="values">
+    <div class="container">
+      <div class="values__head reveal">
+        <p class="eyebrow">How we play</p>
+        <h2>The standards every specialist is held to.</h2>
+      </div>
+      <div class="values__grid">
+        <div class="value reveal">
+          <h3>Protect the Client</h3>
+          <hr class="value__rule">
+          <p>We stand between you and the IRS. Your outcome is the only scoreboard that matters.</p>
+        </div>
+        <div class="value reveal" data-d="1">
+          <h3>Extreme Ownership</h3>
+          <hr class="value__rule">
+          <p>No excuses. No blame. We own the case from the first call to the final resolution.</p>
+        </div>
+        <div class="value reveal" data-d="2">
+          <h3>Speed Wins</h3>
+          <hr class="value__rule">
+          <p>If it matters, we move now. You hear back from a real person, usually the same day.</p>
+        </div>
+        <div class="value reveal" data-d="3">
+          <h3>Straight Answers</h3>
+          <hr class="value__rule">
+          <p>No jargon. No black boxes. You always know exactly where your case stands.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ JOIN THE TEAM ============================ -->
+  <section class="join">
+    <div class="container">
+      <p class="eyebrow">Now recruiting</p>
+      <h2>We're always looking for people who play to win.</h2>
+      <p>220+ team members across WA, CA, NJ, MA and FL, and growing. If you want to do the best work of your career on a team that has each other's backs, we should talk.</p>
+      <a class="btn btn--lg" href="Careers.html">See open roles</a>
+    </div>
+  </section>
+
+<!-- Page-specific inline script(s): render dynamic content / interactions (consider CMS-driving). -->
+<script>
+(function () {
+  "use strict";
+
+  var BASE = "assets/img/team/";
+  var ROLES = [
+    { id: "tax-consultant",      name: "Tax Consultant",     blurb: "Maps your full situation on day one and builds the strategy that wins." },
+    { id: "case-manager",        name: "Case Manager",       blurb: "Owns your file end to end, tracking every deadline, document and next step." },
+    { id: "document-specialist", name: "Document Specialist", blurb: "Pulls and organizes every transcript, notice and record the IRS needs." },
+    { id: "cpa",                 name: "CPA",                blurb: "Reconciles the numbers and files clean returns that hold up to scrutiny." },
+    { id: "enrolled-agent",      name: "Enrolled Agent",     blurb: "Federally licensed to represent you before the IRS, in their language." },
+    { id: "tax-attorney",        name: "Tax Attorney",       blurb: "Legal firepower when it's needed, from appeals to the toughest talks." },
+    { id: "client-services",     name: "Client Services",    blurb: "Your direct line for straight answers. Same day, always a real person." }
+  ];
+
+  var CLIENT_SVG = '<img src="' + BASE + 'client.png" alt="Customer" loading="lazy">';
+
+  function esc(s){ return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+
+  /* ---------- Halo (desktop) ---------- */
+  var halo = document.getElementById("halo");
+  if (halo) {
+    var cs = getComputedStyle(halo);
+    var stage = parseFloat(cs.getPropertyValue("--stage")) || 880;
+    var radius = parseFloat(cs.getPropertyValue("--radius")) || 330;
+    var c = stage / 2;
+    var n = ROLES.length;
+
+    // connector lines + dashed ring (SVG)
+    var ns = "http://www.w3.org/2000/svg";
+    var svg = document.createElementNS(ns, "svg");
+    svg.setAttribute("class", "halo__svg");
+    svg.setAttribute("viewBox", "0 0 " + stage + " " + stage);
+
+    var ring = document.createElementNS(ns, "circle");
+    ring.setAttribute("cx", c); ring.setAttribute("cy", c); ring.setAttribute("r", radius);
+    ring.setAttribute("fill", "none");
+    ring.setAttribute("stroke", "var(--color-base-300)");
+    ring.setAttribute("stroke-width", "1.5");
+    ring.setAttribute("stroke-dasharray", "2 9");
+    ring.setAttribute("stroke-linecap", "round");
+    svg.appendChild(ring);
+
+    var positions = [];
+    for (var i = 0; i < n; i++) {
+      var theta = (i * (2 * Math.PI / n)) - Math.PI / 2; // start at top
+      var x = c + radius * Math.cos(theta);
+      var y = c + radius * Math.sin(theta);
+      positions.push({ x: x, y: y });
+
+      // junction dot on the ring
+      var dot = document.createElementNS(ns, "circle");
+      dot.setAttribute("cx", x); dot.setAttribute("cy", y);
+      dot.setAttribute("r", "4"); dot.setAttribute("fill", "var(--ptr-green)");
+      svg.appendChild(dot);
+    }
+    halo.appendChild(svg);
+
+    // center client
+    var client = document.createElement("div");
+    client.className = "halo__client";
+    client.innerHTML =
+      '<div class="client-badge">' + CLIENT_SVG + '</div>' +
+      '<h3>You</h3>' +
+      '<p>Every position on the field is playing your case at the same time.</p>';
+    halo.appendChild(client);
+
+    // nodes
+    for (var j = 0; j < n; j++) {
+      var p = positions[j];
+      var node = document.createElement("div");
+      node.className = "node";
+      node.style.left = (p.x / stage * 100) + "%";
+      node.style.top = (p.y / stage * 100) + "%";
+      node.innerHTML =
+        '<div class="node__badge"><img src="' + BASE + ROLES[j].id + '.png" alt="' + esc(ROLES[j].name) + '" loading="lazy"></div>' +
+        '<p class="node__name">' + esc(ROLES[j].name) + '</p>' +
+        '<p class="node__blurb">' + esc(ROLES[j].blurb) + '</p>';
+      halo.appendChild(node);
+    }
+  }
+
+  /* ---------- Grid (mobile fallback) ---------- */
+  var grid = document.getElementById("aceGrid");
+  if (grid) {
+    var html =
+      '<div class="ace-client-card">' +
+        '<div class="client-badge">' + CLIENT_SVG + '</div>' +
+        '<div><h3>You</h3>' +
+        '<p>Every specialist below is working your case at the same time, toward one resolution.</p></div>' +
+      '</div>';
+    html += ROLES.map(function (r) {
+      return '<div class="role-card">' +
+        '<div class="role-card__badge"><img src="' + BASE + r.id + '.png" alt="' + esc(r.name) + '" loading="lazy"></div>' +
+        '<div><p class="role-card__name">' + esc(r.name) + '</p><p class="role-card__blurb">' + esc(r.blurb) + '</p></div>' +
+      '</div>';
+    }).join("");
+    grid.innerHTML = html;
+  }
+})();
+</script>

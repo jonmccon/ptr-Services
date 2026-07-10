@@ -1,23 +1,24 @@
-<!DOCTYPE html>
-<html lang="en-US">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="icon" type="image/webp" href="assets/img/favicon.webp">
-<script>(function(){try{if(localStorage.getItem('ptr-theme')==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}})();</script>
+<!-- ============================================================
+  PTR CONTENT FRAGMENT — Client Services
+  Target slug: /clients/
+  This is page CONTENT ONLY. No <html>/<head>, no site header,
+  no footer. Paste into the WP page body (Custom HTML block / page
+  template the_content). The theme supplies header, footer, <head>
+  + SEO, and enqueues assets/css/site.css + assets/js/site.js.
+  Body attributes on the source page (apply to <body> via theme):
+    class="" data-layout="editorial" data-page="clients"
+============================================================ -->
 
-<title>Client Services — Priority Tax Relief</title>
-<meta name="description" content="Meet the full lineup of specialists working your tax-resolution case, what drives your timeline, and how to reach our client services team for real-time updates.">
-
-<link rel="stylesheet" href="assets/css/site.css">
-<link rel="stylesheet" href="assets/css/pages.css">
-
-<style>
+<!-- ------------------------------------------------------------
+  PAGE-SPECIFIC CSS (carried from the source page <head>).
+  Move this into the theme stylesheet (or a page-scoped block) during
+  integration rather than leaving an inline <style>
 /* ===========================================================
    Client Services — process timeline (page-scoped)
    =========================================================== */
 /* A warmer, greener client experience — distinct from the marketing pages */
 body[data-page="clients"] .subhero {
+  background: linear-gradient(165deg, #E6F5EC 0%, #F3FAF6 55%, var(--ptr-white) 100%);
   padding-block: 48px 24px;
 }
 .section--mint { background: linear-gradient(180deg, #F1FAF4 0%, #E9F6EF 100%); }
@@ -179,12 +180,6 @@ html[data-theme="dark"] #client-services { background-color: var(--surface-1); }
 /* "Resolved" end pill keeps contrast in dark mode (white bg + light text would be unreadable) */
 html[data-theme="dark"] .ptl__dur--end { background: var(--surface-2); color: var(--ptr-ink); border-color: var(--color-base-300); }
 </style>
-</head>
-<body data-layout="editorial" data-page="clients">
-
-<div id="chrome-header"></div>
-
-<main>
 
   <!-- ============================ SUBPAGE HERO ============================ -->
   <section class="subhero">
@@ -193,7 +188,42 @@ html[data-theme="dark"] .ptl__dur--end { background: var(--surface-2); color: va
         <a href="Services Page.html">Home</a> ›
         <span aria-current="page">Client Services</span>
       </nav>
-      <h1 class="reveal" data-d="1" style="max-width:20ch">Want a real-time update?</h1>
+      <h1 class="reveal" data-d="1" style="max-width:18ch">Your case, your team</h1>
+      <p class="hero__lead reveal" data-d="2" style="max-width:64ch">You have a full lineup of dedicated specialists working side by side on your file and handling all direct correspondence with the IRS.</p>
+    </div>
+  </section>
+
+  <!-- ============================ YOUR TEAM ============================ -->
+  <section class="section section--mint" id="your-team">
+    <div class="container">
+      <!-- Desktop: radial halo (rendered by JS) -->
+      <div class="halo reveal" data-d="1" id="halo" aria-hidden="true"></div>
+
+      <!-- Mobile / narrow: stacked cards (rendered by JS) -->
+      <div class="ace-grid" id="aceGrid"></div>
+
+      <!-- Timeline expectations -->
+      <div class="timeline-note reveal" data-d="1">
+        <p class="lead-in">While we work aggressively on your behalf, navigating IRS bureaucracy takes time. Due to agency processing delays, cases typically close out within <strong style="color:var(--ptr-green)">6 to 12 months</strong>. <strong>To help us expedite your case,</strong> please stay highly responsive to our communications and upload your requested documents as promptly as possible.</p>
+      </div>
+
+      <div class="factors reveal" data-d="1">
+        <div class="factor">
+          <p class="factor__num">Factor 1</p>
+          <h3 class="factor__name">Case Complexity</h3>
+          <p class="factor__desc">The specific tax issues we are resolving for you.</p>
+        </div>
+        <div class="factor">
+          <p class="factor__num">Factor 2</p>
+          <h3 class="factor__name">IRS Response Times</h3>
+          <p class="factor__desc">The agency's internal processing and systemic delays.</p>
+        </div>
+        <div class="factor">
+          <p class="factor__num">Factor 3</p>
+          <h3 class="factor__name">Your Responsiveness</h3>
+          <p class="factor__desc">How quickly you can deliver requested documentation to our team.</p>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -203,7 +233,10 @@ html[data-theme="dark"] .ptl__dur--end { background: var(--surface-2); color: va
 
       <!-- How to reach us -->
       <div class="contact-info reveal">
-        <p class="hero__lead" style="margin:0 0 26px; max-width:46ch">Our client services team can tell you exactly where your case stands at any point. Call or email during business hours, or send the message below and we'll get back to you — usually the same business day.</p>
+        <p class="eyebrow eyebrow--green">Client services</p>
+        <h2>Want a real-time update?</h2>
+        <hr class="contact-info__rule">
+        <p style="color:var(--ptr-graphite); font-size:17px; line-height:1.7; margin:0 0 26px; max-width:46ch">Our client services team can tell you exactly where your case stands at any point. Call or email during business hours, or send the message below and we'll get back to you — usually the same business day.</p>
         <ul class="contact-list">
           <li>
             <span class="contact-list__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span>
@@ -234,6 +267,7 @@ html[data-theme="dark"] .ptl__dur--end { background: var(--surface-2); color: va
       <form class="lead-form reveal" data-d="1" id="contactForm" novalidate>
         <div class="lead-form__fields">
           <div class="form-card__head">
+            <h2>Send us a message</h2>
             <p>For existing clients and general inquiries. We typically respond within one business day.</p>
           </div>
           <div class="row">
@@ -280,46 +314,6 @@ html[data-theme="dark"] .ptl__dur--end { background: var(--surface-2); color: va
     </div>
   </section>
 
-  <!-- ============================ YOUR TEAM ============================ -->
-  <section class="section section--mint" id="your-team">
-    <div class="container">
-      <!-- Intro to the team graphic -->
-      <div class="section__head is-center reveal" style="margin-bottom:56px">
-        <h2 style="max-width:18ch;margin-inline:auto">Your case, your team</h2>
-        <p style="max-width:64ch;margin:14px auto 0;color:var(--ptr-graphite);font-size:18px;line-height:1.7">You have a full lineup of dedicated specialists working side by side on your file and handling all direct correspondence with the IRS.</p>
-      </div>
-
-      <!-- Desktop: radial halo (rendered by JS) -->
-      <div class="halo reveal" data-d="1" id="halo" aria-hidden="true"></div>
-
-      <!-- Mobile / narrow: stacked cards (rendered by JS) -->
-      <div class="ace-grid" id="aceGrid"></div>
-
-      <!-- Timeline expectations -->
-      <div class="timeline-note reveal" data-d="1">
-        <p class="lead-in">While we work aggressively on your behalf, navigating IRS bureaucracy takes time. Due to agency processing delays, cases typically close out within <strong style="color:var(--ptr-green)">6 to 12 months</strong>. <strong>To help us expedite your case,</strong> please stay highly responsive to our communications and upload your requested documents as promptly as possible.</p>
-      </div>
-
-      <div class="factors reveal" data-d="1">
-        <div class="factor">
-          <p class="factor__num">Factor 1</p>
-          <h3 class="factor__name">Case Complexity</h3>
-          <p class="factor__desc">The specific tax issues we are resolving for you.</p>
-        </div>
-        <div class="factor">
-          <p class="factor__num">Factor 2</p>
-          <h3 class="factor__name">IRS Response Times</h3>
-          <p class="factor__desc">The agency's internal processing and systemic delays.</p>
-        </div>
-        <div class="factor">
-          <p class="factor__num">Factor 3</p>
-          <h3 class="factor__name">Your Responsiveness</h3>
-          <p class="factor__desc">How quickly you can deliver requested documentation to our team.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- ============================ RELATED ARTICLES ============================ -->
   <section class="section">
     <div class="container">
@@ -356,13 +350,7 @@ html[data-theme="dark"] .ptl__dur--end { background: var(--surface-2); color: va
     </div>
   </section>
 
-</main>
-
-<div id="chrome-footer"></div>
-
-<script src="assets/js/chrome.js"></script>
-<script src="assets/js/site.js"></script>
-
+<!-- Page-specific inline script(s): render dynamic content (consider CMS-driving). -->
 <!-- Team diagram (halo) data + render -->
 <script>
 (function () {
@@ -484,5 +472,3 @@ html[data-theme="dark"] .ptl__dur--end { background: var(--surface-2); color: va
   });
 })();
 </script>
-</body>
-</html>
