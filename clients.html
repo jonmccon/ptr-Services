@@ -193,8 +193,8 @@ html[data-theme="dark"] .ptl__dur--end { background: var(--surface-2); color: va
         <a href="Services Page.html">Home</a> ›
         <span aria-current="page">Client Services</span>
       </nav>
-      <h1 class="reveal" data-d="1" style="max-width:20ch">Want a real-time update?</h1>
-      <p class="hero__lead reveal" data-d="2" style="max-width:60ch">Our client services team can tell you exactly where your case stands at any point. Call or email during business hours, or send the message below and we'll get back to you — usually the same business day.</p>
+      <h1 class="reveal" data-d="1" style="max-width:20ch">We care about providing the support you need.</h1>
+      <p class="hero__lead reveal" data-d="2" style="max-width:60ch">Our client services team can tell you exactly where your case stands at any point. Call or email during business hours, or send a message below and we'll get back to you.</p>
     </div>
   </section>
 
@@ -297,7 +297,7 @@ html[data-theme="dark"] .ptl__dur--end { background: var(--surface-2); color: va
 
       <!-- Timeline expectations -->
       <div class="timeline-note reveal" data-d="1">
-        <p class="lead-in">While we work aggressively on your behalf, navigating IRS bureaucracy takes time. Due to agency processing delays, cases typically close out within <strong style="color:var(--ptr-green)">6 to 12 months</strong>. <strong>To help us expedite your case,</strong> please stay highly responsive to our communications and upload your requested documents as promptly as possible.</p>
+        <p class="lead-in">The pace of your case closure is dependent on three key factors.</p>
       </div>
 
       <div class="factors reveal" data-d="1">
@@ -370,13 +370,13 @@ html[data-theme="dark"] .ptl__dur--end { background: var(--surface-2); color: va
 
   var BASE = "assets/img/team/";
   var ROLES = [
-    { id: "tax-consultant",      name: "Tax Consultant",      blurb: "Maps your full situation on day one and builds the strategy that wins." },
-    { id: "case-manager",        name: "Case Manager",        blurb: "Owns your file end to end, tracking every deadline, document and next step." },
-    { id: "document-specialist", name: "Document Specialist", blurb: "Pulls and organizes every transcript, notice and record the IRS needs." },
-    { id: "cpa",                 name: "CPA",                 blurb: "Reconciles the numbers and files clean returns that hold up to scrutiny." },
-    { id: "enrolled-agent",      name: "Enrolled Agent",      blurb: "Federally licensed to represent you before the IRS, in their language." },
-    { id: "tax-attorney",        name: "Tax Attorney",        blurb: "Legal firepower when it's needed, from appeals to the toughest talks." },
-    { id: "client-services",     name: "Client Services",     blurb: "Your direct line for straight answers. Same day, always a real person." }
+    { id: "tax-consultant",      name: "Tax Consultant",      blurb: "Analyzes your situation to design your initial strategic relief plan." },
+    { id: "case-manager",        name: "Case Manager",        blurb: "Manages your timeline, ensuring your case moves forward smoothly." },
+    { id: "document-specialist", name: "Document Specialist", blurb: "Gathers and organizes all required files to streamline your case." },
+    { id: "cpa",                 name: "CPA",                 blurb: "Provides licensed financial review to ensure accurate, compliant, and optimized filings." },
+    { id: "enrolled-agent",      name: "Enrolled Agent",      blurb: "Represents you directly before the IRS." },
+    { id: "tax-attorney",        name: "Tax Attorney",        blurb: "Provides legal oversight to defend your assets and ensure absolute compliance." },
+    { id: "client-services",     name: "Client Services",     blurb: "Always available to provide clear updates on your case." }
   ];
 
   var CLIENT_SVG = '<img src="' + BASE + 'client.png" alt="You" loading="lazy">';
@@ -425,7 +425,7 @@ html[data-theme="dark"] .ptl__dur--end { background: var(--surface-2); color: va
     client.innerHTML =
       '<div class="client-badge">' + CLIENT_SVG + '</div>' +
       '<h3>You</h3>' +
-      '<p>Every position on the field is playing your case at the same time.</p>';
+      '<p>You are the priority. Backed by a dedicated, multi-disciplinary team at every single step.</p>';
     halo.appendChild(client);
 
     for (var j = 0; j < n; j++) {
@@ -449,7 +449,7 @@ html[data-theme="dark"] .ptl__dur--end { background: var(--surface-2); color: va
       '<div class="ace-client-card">' +
         '<div class="client-badge">' + CLIENT_SVG + '</div>' +
         '<div><h3>You</h3>' +
-        '<p>Every specialist below is working your case at the same time, toward one resolution.</p></div>' +
+        '<p>You are the priority. Backed by a dedicated, multi-disciplinary team at every single step.</p></div>' +
       '</div>';
     gridHtml += ROLES.map(function (r) {
       return '<div class="role-card">' +

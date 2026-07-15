@@ -160,7 +160,7 @@ Preserve these **exactly** when the pages go live. Configure your SEO plugin (Yo
 | Fragment | `client-services.html` |
 | Canonical | `https://www.prioritytaxrelief.com/clients/` |
 | `<title>` | Client Services - Priority Tax Relief |
-| Meta description | See how a typical tax-resolution case moves from initial prep to closed, with typical timelines for each stage - and how to reach our client services team for real-time updates. |
+| Meta description | Meet the full lineup of specialists working your tax-resolution case, what drives your timeline, and how to reach our client services team for a real-time update. |
 | Robots | - (no robots meta in source; set per launch decision) |
 | OG type / title | - / - |
 | JSON-LD @graph | - |

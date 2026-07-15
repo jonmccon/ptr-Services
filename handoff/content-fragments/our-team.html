@@ -276,13 +276,13 @@
 
   var BASE = "assets/img/team/";
   var ROLES = [
-    { id: "tax-consultant",      name: "Tax Consultant",     blurb: "Maps your full situation on day one and builds the strategy that wins." },
-    { id: "case-manager",        name: "Case Manager",       blurb: "Owns your file end to end, tracking every deadline, document and next step." },
-    { id: "document-specialist", name: "Document Specialist", blurb: "Pulls and organizes every transcript, notice and record the IRS needs." },
-    { id: "cpa",                 name: "CPA",                blurb: "Reconciles the numbers and files clean returns that hold up to scrutiny." },
-    { id: "enrolled-agent",      name: "Enrolled Agent",     blurb: "Federally licensed to represent you before the IRS, in their language." },
-    { id: "tax-attorney",        name: "Tax Attorney",       blurb: "Legal firepower when it's needed, from appeals to the toughest talks." },
-    { id: "client-services",     name: "Client Services",    blurb: "Your direct line for straight answers. Same day, always a real person." }
+    { id: "tax-consultant",      name: "Tax Consultant",     blurb: "Analyzes your situation to design your initial strategic relief plan." },
+    { id: "case-manager",        name: "Case Manager",       blurb: "Manages your timeline, ensuring your case moves forward smoothly." },
+    { id: "document-specialist", name: "Document Specialist", blurb: "Gathers and organizes all required files to streamline your case." },
+    { id: "cpa",                 name: "CPA",                blurb: "Provides licensed financial review to ensure accurate, compliant, and optimized filings." },
+    { id: "enrolled-agent",      name: "Enrolled Agent",     blurb: "Represents you directly before the IRS." },
+    { id: "tax-attorney",        name: "Tax Attorney",       blurb: "Provides legal oversight to defend your assets and ensure absolute compliance." },
+    { id: "client-services",     name: "Client Services",    blurb: "Always available to provide clear updates on your case." }
   ];
 
   var CLIENT_SVG = '<img src="' + BASE + 'client.png" alt="Customer" loading="lazy">';
@@ -334,7 +334,7 @@
     client.innerHTML =
       '<div class="client-badge">' + CLIENT_SVG + '</div>' +
       '<h3>You</h3>' +
-      '<p>Every position on the field is playing your case at the same time.</p>';
+      '<p>You are the priority. Backed by a dedicated, multi-disciplinary team at every single step.</p>';
     halo.appendChild(client);
 
     // nodes
@@ -359,7 +359,7 @@
       '<div class="ace-client-card">' +
         '<div class="client-badge">' + CLIENT_SVG + '</div>' +
         '<div><h3>You</h3>' +
-        '<p>Every specialist below is working your case at the same time, toward one resolution.</p></div>' +
+        '<p>You are the priority. Backed by a dedicated, multi-disciplinary team at every single step.</p></div>' +
       '</div>';
     html += ROLES.map(function (r) {
       return '<div class="role-card">' +

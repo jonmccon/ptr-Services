@@ -18,7 +18,6 @@
    =========================================================== */
 /* A warmer, greener client experience — distinct from the marketing pages */
 body[data-page="clients"] .subhero {
-  background: linear-gradient(165deg, #E6F5EC 0%, #F3FAF6 55%, var(--ptr-white) 100%);
   padding-block: 48px 24px;
 }
 .section--mint { background: linear-gradient(180deg, #F1FAF4 0%, #E9F6EF 100%); }
@@ -188,42 +187,8 @@ html[data-theme="dark"] .ptl__dur--end { background: var(--surface-2); color: va
         <a href="Services Page.html">Home</a> ›
         <span aria-current="page">Client Services</span>
       </nav>
-      <h1 class="reveal" data-d="1" style="max-width:18ch">Your case, your team</h1>
-      <p class="hero__lead reveal" data-d="2" style="max-width:64ch">You have a full lineup of dedicated specialists working side by side on your file and handling all direct correspondence with the IRS.</p>
-    </div>
-  </section>
-
-  <!-- ============================ YOUR TEAM ============================ -->
-  <section class="section section--mint" id="your-team">
-    <div class="container">
-      <!-- Desktop: radial halo (rendered by JS) -->
-      <div class="halo reveal" data-d="1" id="halo" aria-hidden="true"></div>
-
-      <!-- Mobile / narrow: stacked cards (rendered by JS) -->
-      <div class="ace-grid" id="aceGrid"></div>
-
-      <!-- Timeline expectations -->
-      <div class="timeline-note reveal" data-d="1">
-        <p class="lead-in">While we work aggressively on your behalf, navigating IRS bureaucracy takes time. Due to agency processing delays, cases typically close out within <strong style="color:var(--ptr-green)">6 to 12 months</strong>. <strong>To help us expedite your case,</strong> please stay highly responsive to our communications and upload your requested documents as promptly as possible.</p>
-      </div>
-
-      <div class="factors reveal" data-d="1">
-        <div class="factor">
-          <p class="factor__num">Factor 1</p>
-          <h3 class="factor__name">Case Complexity</h3>
-          <p class="factor__desc">The specific tax issues we are resolving for you.</p>
-        </div>
-        <div class="factor">
-          <p class="factor__num">Factor 2</p>
-          <h3 class="factor__name">IRS Response Times</h3>
-          <p class="factor__desc">The agency's internal processing and systemic delays.</p>
-        </div>
-        <div class="factor">
-          <p class="factor__num">Factor 3</p>
-          <h3 class="factor__name">Your Responsiveness</h3>
-          <p class="factor__desc">How quickly you can deliver requested documentation to our team.</p>
-        </div>
-      </div>
+      <h1 class="reveal" data-d="1" style="max-width:20ch">We care about providing the support you need.</h1>
+      <p class="hero__lead reveal" data-d="2" style="max-width:60ch">Our client services team can tell you exactly where your case stands at any point. Call or email during business hours, or send a message below and we'll get back to you.</p>
     </div>
   </section>
 
@@ -233,10 +198,6 @@ html[data-theme="dark"] .ptl__dur--end { background: var(--surface-2); color: va
 
       <!-- How to reach us -->
       <div class="contact-info reveal">
-        <p class="eyebrow eyebrow--green">Client services</p>
-        <h2>Want a real-time update?</h2>
-        <hr class="contact-info__rule">
-        <p style="color:var(--ptr-graphite); font-size:17px; line-height:1.7; margin:0 0 26px; max-width:46ch">Our client services team can tell you exactly where your case stands at any point. Call or email during business hours, or send the message below and we'll get back to you — usually the same business day.</p>
         <ul class="contact-list">
           <li>
             <span class="contact-list__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span>
@@ -267,7 +228,6 @@ html[data-theme="dark"] .ptl__dur--end { background: var(--surface-2); color: va
       <form class="lead-form reveal" data-d="1" id="contactForm" novalidate>
         <div class="lead-form__fields">
           <div class="form-card__head">
-            <h2>Send us a message</h2>
             <p>For existing clients and general inquiries. We typically respond within one business day.</p>
           </div>
           <div class="row">
@@ -311,6 +271,46 @@ html[data-theme="dark"] .ptl__dur--end { background: var(--surface-2); color: va
         <div class="form-success">Thank you — your message has been received. A member of our team will get back to you within one business day.</div>
       </form>
 
+    </div>
+  </section>
+
+  <!-- ============================ YOUR TEAM ============================ -->
+  <section class="section section--mint" id="your-team">
+    <div class="container">
+      <!-- Intro to the team graphic -->
+      <div class="section__head is-center reveal" style="margin-bottom:56px">
+        <h2 style="max-width:18ch;margin-inline:auto">Your case, your team</h2>
+        <p style="max-width:64ch;margin:14px auto 0;color:var(--ptr-graphite);font-size:18px;line-height:1.7">You have a full lineup of dedicated specialists working side by side on your file and handling all direct correspondence with the IRS.</p>
+      </div>
+
+      <!-- Desktop: radial halo (rendered by JS) -->
+      <div class="halo reveal" data-d="1" id="halo" aria-hidden="true"></div>
+
+      <!-- Mobile / narrow: stacked cards (rendered by JS) -->
+      <div class="ace-grid" id="aceGrid"></div>
+
+      <!-- Timeline expectations -->
+      <div class="timeline-note reveal" data-d="1">
+        <p class="lead-in">The pace of your case closure is dependent on three key factors.</p>
+      </div>
+
+      <div class="factors reveal" data-d="1">
+        <div class="factor">
+          <p class="factor__num">Factor 1</p>
+          <h3 class="factor__name">Case Complexity</h3>
+          <p class="factor__desc">The specific tax issues we are resolving for you.</p>
+        </div>
+        <div class="factor">
+          <p class="factor__num">Factor 2</p>
+          <h3 class="factor__name">IRS Response Times</h3>
+          <p class="factor__desc">The agency's internal processing and systemic delays.</p>
+        </div>
+        <div class="factor">
+          <p class="factor__num">Factor 3</p>
+          <h3 class="factor__name">Your Responsiveness</h3>
+          <p class="factor__desc">How quickly you can deliver requested documentation to our team.</p>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -358,13 +358,13 @@ html[data-theme="dark"] .ptl__dur--end { background: var(--surface-2); color: va
 
   var BASE = "assets/img/team/";
   var ROLES = [
-    { id: "tax-consultant",      name: "Tax Consultant",      blurb: "Maps your full situation on day one and builds the strategy that wins." },
-    { id: "case-manager",        name: "Case Manager",        blurb: "Owns your file end to end, tracking every deadline, document and next step." },
-    { id: "document-specialist", name: "Document Specialist", blurb: "Pulls and organizes every transcript, notice and record the IRS needs." },
-    { id: "cpa",                 name: "CPA",                 blurb: "Reconciles the numbers and files clean returns that hold up to scrutiny." },
-    { id: "enrolled-agent",      name: "Enrolled Agent",      blurb: "Federally licensed to represent you before the IRS, in their language." },
-    { id: "tax-attorney",        name: "Tax Attorney",        blurb: "Legal firepower when it's needed, from appeals to the toughest talks." },
-    { id: "client-services",     name: "Client Services",     blurb: "Your direct line for straight answers. Same day, always a real person." }
+    { id: "tax-consultant",      name: "Tax Consultant",      blurb: "Analyzes your situation to design your initial strategic relief plan." },
+    { id: "case-manager",        name: "Case Manager",        blurb: "Manages your timeline, ensuring your case moves forward smoothly." },
+    { id: "document-specialist", name: "Document Specialist", blurb: "Gathers and organizes all required files to streamline your case." },
+    { id: "cpa",                 name: "CPA",                 blurb: "Provides licensed financial review to ensure accurate, compliant, and optimized filings." },
+    { id: "enrolled-agent",      name: "Enrolled Agent",      blurb: "Represents you directly before the IRS." },
+    { id: "tax-attorney",        name: "Tax Attorney",        blurb: "Provides legal oversight to defend your assets and ensure absolute compliance." },
+    { id: "client-services",     name: "Client Services",     blurb: "Always available to provide clear updates on your case." }
   ];
 
   var CLIENT_SVG = '<img src="' + BASE + 'client.png" alt="You" loading="lazy">';
@@ -413,7 +413,7 @@ html[data-theme="dark"] .ptl__dur--end { background: var(--surface-2); color: va
     client.innerHTML =
       '<div class="client-badge">' + CLIENT_SVG + '</div>' +
       '<h3>You</h3>' +
-      '<p>Every position on the field is playing your case at the same time.</p>';
+      '<p>You are the priority. Backed by a dedicated, multi-disciplinary team at every single step.</p>';
     halo.appendChild(client);
 
     for (var j = 0; j < n; j++) {
@@ -437,7 +437,7 @@ html[data-theme="dark"] .ptl__dur--end { background: var(--surface-2); color: va
       '<div class="ace-client-card">' +
         '<div class="client-badge">' + CLIENT_SVG + '</div>' +
         '<div><h3>You</h3>' +
-        '<p>Every specialist below is working your case at the same time, toward one resolution.</p></div>' +
+        '<p>You are the priority. Backed by a dedicated, multi-disciplinary team at every single step.</p></div>' +
       '</div>';
     gridHtml += ROLES.map(function (r) {
       return '<div class="role-card">' +
