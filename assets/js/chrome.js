@@ -12,7 +12,7 @@
   var HEADER = '' +
   '<header class="site-header" id="siteHeader">' +
     '<div class="container header-inner">' +
-      '<a class="brand" href="Services Page.html" aria-label="Priority Tax Relief home">' +
+      '<a class="brand" href="Homepage.html" aria-label="Priority Tax Relief home">' +
         '<img class="brand__logo" src="assets/img/logo/ptr-logo.png" alt="Priority Tax Relief">' +
       '</a>' +
       '<nav class="main-nav" aria-label="Primary">' +
@@ -53,11 +53,13 @@
         '<a href="Careers.html">Careers</a>' +
       '</nav>' +
       '<div class="header-actions">' +
+        '<div class="header-cta">' +
         '<a class="hotline" href="tel:18667082872">' +
-          '<span>Tax Help Hotline (866)&nbsp;708-2872</span>' +
+          '<span>Tax Help Hotline<span class="hotline__num"> (866)&nbsp;708-2872</span></span>' +
           '<img class="hotline__icon" src="assets/img/icons8-call.gif" alt="">' +
         '</a>' +
         '<a class="btn" href="clients.html" style="color:#000">Clients</a>' +
+        '</div>' +
         '<button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">' +
           '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>' +
         '</button>' +
@@ -152,7 +154,7 @@
     '</div>' +
     '<div class="container footer-top">' +
       '<div class="footer-brand">' +
-        '<a class="brand" href="Services Page.html" aria-label="Priority Tax Relief home">' +
+        '<a class="brand" href="Homepage.html" aria-label="Priority Tax Relief home">' +
           '<img class="footer-flag" src="assets/img/logo/ptr-flag-footer.png" alt="Priority Tax Relief">' +
         '</a>' +
         '<img class="footer-bbb" src="assets/img/badges/bbb-accredited.svg" alt="BBB A+ Accredited Business" onerror="this.style.display=\'none\'">' +

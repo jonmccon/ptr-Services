@@ -1,0 +1,141 @@
+/* ============================================================
+   PTR Homepage — page-specific glue only.
+   Everything reuses site.css/pages.css patterns + ptr tokens;
+   these rules cover layouts that exist on no other page
+   (photo hero w/ green fade, calc split, support split).
+   ============================================================ */
+
+/* ---------- HERO (photo bg, green fade, form card right) ---------- */
+.home-hero { position: relative; overflow: hidden; background: var(--ptr-green); }
+/* photo pinned below the badge band with the heads mapped to a fixed offset; the transparent
+   cutout copy (same 2550x1664 canvas) renders ABOVE the band so the heads pop over it */
+.home-hero__bg, .home-hero__pop { position: absolute; inset: 0; z-index: 0; }
+.home-hero__bg img, .home-hero__pop img { position: absolute; left: 0; top: calc(58px - 8.47vw); width: 100%; height: auto; }
+.home-hero__pop { z-index: 2; pointer-events: none; }
+/* gray multiply scrim (figma), then the green fade into the press band below — above photo AND cutout */
+.home-hero__scrim { position: absolute; inset: 0; z-index: 3; pointer-events: none; }
+.home-hero__scrim::before { content: ""; position: absolute; inset: 30% 0 0 0; mix-blend-mode: multiply; background: linear-gradient(180deg, rgb(255 255 255 / 0) -4%, rgb(94 94 94 / .9) 62%); }
+.home-hero__scrim::after { content: ""; position: absolute; inset: 40% 0 0 0; background: linear-gradient(180deg, rgb(4 123 68 / 0) 15%, var(--ptr-green) 75%); }
+.home-hero__grid { position: relative; z-index: 4; display: grid; grid-template-columns: 1.05fr .95fr; gap: 56px; align-items: end; padding-block: 150px 56px; }
+.home-hero__text { color: #fff; text-align: center; align-self: center; margin-top: 120px; }
+.home-hero__text h1 { font-size: clamp(36px, 4.6vw, 52px); font-weight: 800; letter-spacing: -0.02em; line-height: 1.1; margin: 0 0 20px; color: #fff; text-wrap: balance; text-shadow: 0 2px 0 rgb(0 0 0 / .55); }
+.home-hero__lead { font-size: clamp(18px, 2vw, 24px); line-height: 1.35; color: #fff; margin: 0 auto; max-width: 42ch; text-shadow: 0 1px 0 rgb(0 0 0 / .35); }
+.home-hero__panel { display: flex; flex-direction: column; align-items: center; justify-self: center; width: min(100%, 430px); }
+.home-hero__seal { height: auto; filter: drop-shadow(0 6px 14px rgb(0 0 0 / .3)); }
+.home-hero__seal--desktop { width: 150px; margin-bottom: -26px; position: relative; z-index: 0; }
+.home-hero__seal--mobile { display: none; }
+.home-hero .lead-form { width: 100%; position: relative; z-index: 1; }
+.home-hero .lead-form__title { text-align: center; }
+/* the hero variant of the review badge strip: on desktop a top band the heads pop over;
+   on mobile it drops below the form via flex order */
+.home-hero .review-band { position: relative; z-index: 1; background: color-mix(in srgb, var(--ptr-green) 12%, #fff); padding-block: 16px; }
+html[data-theme="dark"] .home-hero .review-band { background: color-mix(in srgb, var(--ptr-green) 30%, #141515); }
+/* badge row centered; popped heads only graze the band bottom */
+.home-hero .review-band .container { justify-content: center; gap: 20px 28px; }
+
+/* ---------- widgets: full-bleed sections ---------- */
+.home-videos { padding: 0; }           /* .vc-root carries its own green bg + padding */
+.home-steps .relief-carousel { padding: 0; }
+.home-steps .relief-carousel .rc-panel { max-width: none; border-radius: 0; }
+.home-steps .rc-panel-head h2 { color: #fff; }
+/* dots match the video carousel's markers (white pills) */
+.home-steps .relief-carousel .rc-dot { width: 8px; height: 8px; border-radius: 999px; background: rgb(255 255 255 / .35); transform: none; transition: width 180ms var(--ease), background 180ms var(--ease); }
+.home-steps .relief-carousel .rc-dot.is-active { width: 28px; background: #fff; transform: none; }
+
+/* ---------- CALCULATOR promo (flag-tile pattern, copy left / phone flush right) ---------- */
+.home-calc { padding-block: 24px 0; overflow: hidden; }
+.home-calc__grid { display: grid; grid-template-columns: 1fr minmax(340px, 608px); gap: 32px; align-items: start; padding-left: max(var(--gutter), calc((100vw - var(--site-max)) / 2 + var(--gutter))); }
+.home-calc__copy { text-align: center; padding: 64px 24px; align-self: center; background: radial-gradient(closest-side, var(--ptr-white) 45%, rgb(255 255 255 / 0) 100%); }
+html[data-theme="dark"] .home-calc__copy { background: radial-gradient(closest-side, var(--surface-1) 45%, rgb(20 21 21 / 0) 100%); }
+.home-calc__copy h2 { margin-bottom: 28px; }
+.home-calc__copy .btn { margin-top: 4px; }
+.home-calc__grid #trc-root { max-width: 608px; width: 100%; margin: 0; justify-self: end; }
+
+/* ---------- REVIEWS (screenshot is the card; heading overlays its blank top strip) ---------- */
+.home-reviews { padding-block: 0 88px; }
+.home-reviews__card { position: relative; z-index: 2; margin-top: -170px; }
+.home-reviews__head { position: absolute; z-index: 2; top: 4.5%; left: 5%; right: 26%; display: flex; align-items: center; justify-content: flex-start; gap: 28px; flex-wrap: wrap; margin: 0; }
+.home-reviews__head h2 { margin: 0; font-size: clamp(24px, 2.6vw, 36px); font-weight: 800; letter-spacing: -0.02em; line-height: 1.1; color: #1d1d1d; }
+html[data-theme="dark"] .home-reviews__head h2 { color: #1d1d1d; }
+.home-reviews__aside { display: flex; align-items: center; gap: 24px; }
+.home-reviews__aside img { height: 42px; width: auto; }
+
+/* ---------- CLIENT SUPPORT split (orange band, orange H2 left, copy right) ---------- */
+.home-support { border-top: 26px solid var(--ptr-orange); background: var(--ptr-white); padding-block: 88px; }
+.home-support__grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: 64px; align-items: start; }
+.home-support__info h2 { color: var(--ptr-orange); font-size: clamp(34px, 4vw, 52px); font-weight: 800; letter-spacing: -0.02em; line-height: 1.05; margin: 0 0 32px; }
+.home-support__hours { font-size: 20px; line-height: 1.6; color: var(--ptr-ink); margin: 0 0 26px; }
+.home-support__contacts { display: flex; flex-direction: column; gap: 12px; align-items: flex-start; }
+.home-support__contacts a { display: inline-flex; align-items: center; gap: 10px; color: var(--ptr-ink); font-size: 20px; font-weight: 400; text-decoration: underline; text-underline-offset: 4px; transition: color 120ms var(--ease); }
+.home-support__contacts a svg { width: 22px; height: 22px; color: var(--ptr-orange); flex-shrink: 0; }
+.home-support__contacts a:hover { color: var(--ptr-orange); }
+.home-support__copy p { font-size: 20px; line-height: 1.5; letter-spacing: -0.01em; color: var(--ptr-ink); margin: 0 0 20px; }
+.home-support__copy p:last-child { margin-bottom: 0; }
+
+/* ---------- responsive ---------- */
+/* fig-mobile treatments (DSGN-47 K mobile) */
+.pb-mobile, .press-band--people .pb-mobile-only { display: none; }
+@media (max-width: 700px) {
+  /* mobile section order: form first in hero, badge band right below it;
+     press band moves down to sit above Current Client Support */
+  .home-hero { display: flex; flex-direction: column; }
+  .home-hero__grid { order: 1; }
+  .home-hero .review-band { order: 2; z-index: 4; }
+  main { display: flex; flex-direction: column; }
+  main > * { order: 1; }
+  main > .press-band--people { order: 2; }
+  main > .home-support, main > .home-support ~ * { order: 3; }
+  /* hero badge band: BBB + Google row, Trustpilot centered below */
+  .home-hero .review-band .container { display: grid; grid-template-columns: auto auto; gap: 14px 32px; justify-content: center; align-items: center; }
+  .home-hero .review-band__item:has(.review-band__tp) { grid-column: 1 / -1; justify-self: center; }
+  /* press band goes white with green monochrome logos in a 2-col grid */
+  .pb-desktop { display: none; }
+  .pb-mobile { display: inline; }
+  .press-band--people { background: var(--ptr-white); }
+  .press-band--people .press-band__label { color: var(--ptr-green); opacity: 1; }
+  /* dark mode: band bg is near-black — brighten label, render logos all-white (site-wide dark logo rule) */
+  html[data-theme="dark"] .press-band--people .press-band__label { color: var(--ptr-green-bright); }
+  html[data-theme="dark"] .press-band--people .press-band__logos img { filter: brightness(0) invert(1); }
+  .press-band--people .press-band__logos { display: grid; grid-template-columns: auto auto; gap: 30px 44px; justify-content: center; align-items: center; }
+  .press-band--people .p-fortune { display: none; }
+  .press-band--people .pb-mobile-only { display: block; }
+  .press-band--people .pp-consumeraffairs { order: 1; }
+  .press-band--people .pp-forbes { order: 2; }
+  .press-band--people .pp-bestmoney { order: 3; }
+  .press-band--people .pp-bestguide { order: 4; }
+  .press-band--people .p-google { order: 5; height: 36px; }
+  .press-band--people .p-trustpilot { order: 6; height: 26px; }
+}
+@media (max-width: 980px) {
+  .home-hero__pop { display: none; }
+  /* mobile-only comments: darker photo, seal above headline, badge band under the form */
+  .home-hero { display: flex; flex-direction: column; }
+  .home-hero__grid { order: 1; }
+  .home-hero .review-band { order: 2; z-index: 4; }
+  .home-hero__scrim { background: rgb(0 0 0 / .16); }
+  .home-hero__seal--desktop { display: none; }
+  .home-hero__seal--mobile { display: inline-block; }
+  .home-hero__bg img { position: absolute; inset: 0; top: 0; width: 100%; height: 100%; object-fit: cover; object-position: 36% top; }
+  /* leave a clear photo window up top so the couple's faces read; scrim starts below it */
+  .home-hero__grid { grid-template-columns: 1fr; gap: 36px; padding-block: clamp(150px, 36vw, 240px) 10px; }
+  .home-hero__text { margin-top: 0; }
+  .home-hero__scrim::before { inset: 24% 0 0 0; background: linear-gradient(180deg, rgb(255 255 255 / 0) 0%, rgb(70 70 70 / .95) 55%); }
+  .home-hero__scrim::after { inset: 30% 0 0 0; background: linear-gradient(180deg, rgb(4 123 68 / 0) 10%, var(--ptr-green) 62%); }
+  .home-hero__text h1 { font-size: clamp(30px, 8vw, 40px); text-shadow: 0 2px 8px rgb(0 0 0 / .55); }
+  .home-hero__lead { font-size: 18px; text-shadow: 0 1px 6px rgb(0 0 0 / .55); }
+  /* seal rides above the headline, smaller on mobile */
+  .home-hero__seal { width: 112px; margin-bottom: 12px; }
+  .home-calc__grid { grid-template-columns: 1fr; gap: 24px; padding-left: var(--gutter); padding-right: var(--gutter); }
+  .home-calc__grid #trc-root { justify-self: center; margin: 0 auto; }
+  .home-calc__copy { padding: 24px 8px; }
+  .home-reviews__card { margin-top: -60px; }
+  .home-reviews__head { position: static; margin-bottom: 16px; }
+  html[data-theme="dark"] .home-reviews__head h2 { color: var(--ptr-ink); }
+  .home-support__grid { grid-template-columns: 1fr; gap: 44px; }
+  .home-support { border-top-width: 16px; padding-block: 60px; }
+}
+
+/* phone-only zoomed hero crop: faces fill the top, seal/headline nest between them */
+@media (max-width: 700px) {
+  .home-hero__bg img { position: absolute; inset: auto; top: 0; left: 50%; width: 300%; max-width: none; height: auto; object-fit: unset; transform: translateX(-35%); }
+}

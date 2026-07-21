@@ -1,0 +1,374 @@
+/* ====== Root container ====== */
+  #trc-root {
+    width: 100%;
+    max-width: 480px;
+    margin: 0 auto;
+    background: transparent;
+    font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Inter", Arial, sans-serif;
+    -webkit-tap-highlight-color: transparent;
+  }
+  #trc-root *,
+  #trc-root *::before,
+  #trc-root *::after { box-sizing: border-box; }
+
+  #trc-root .trc-viewport {
+    width: 100%;
+    position: relative;
+    overflow: visible;
+  }
+  #trc-root .trc-stage {
+    position: relative;
+    /* width/height set by JS per platform */
+    transform-origin: top left;
+  }
+  #trc-root .trc-hand-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    display: block;
+    user-select: none;
+    -webkit-user-drag: none;
+  }
+
+  /* ====== Screen overlay (perspective via matrix3d) ====== */
+  #trc-root .trc-screen-overlay {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 1px;
+    height: 1px;
+    transform-origin: 0 0;
+    /* transform set by JS */
+  }
+  #trc-root .trc-calc {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 600px;
+    height: 1300px;
+    transform-origin: 0 0;
+    transform: scale(0.0016666667, 0.0007692308); /* 1/600, 1/1300 */
+    background: transparent;
+    color: #fff;
+    overflow: hidden;
+    user-select: none;
+  }
+  #trc-root .trc-calc.trc-hidden { display: none !important; }
+
+  /* ====== iOS calculator ====== */
+  #trc-root .trc-calc-ios {
+    display: flex;
+    flex-direction: column;
+    padding: 30px 22px 28px;
+  }
+  #trc-root .trc-calc-ios .trc-status {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 32px;
+    font-weight: 600;
+    color: #fff;
+    padding: 4px 14px 0;
+  }
+  #trc-root .trc-calc-ios .trc-display {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-end;
+    padding: 0 18px 16px;
+    overflow: hidden;
+    min-height: 360px;
+  }
+  #trc-root .trc-calc-ios .trc-expr {
+    font-size: 52px;
+    color: rgba(235,235,235,0.55);
+    font-weight: 300;
+    line-height: 1.05;
+    min-height: 60px;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+  }
+  #trc-root .trc-calc-ios .trc-result {
+    font-size: 130px;
+    color: #fff;
+    font-weight: 300;
+    line-height: 1;
+    letter-spacing: -2px;
+    white-space: nowrap;
+    text-align: right;
+  }
+  #trc-root .trc-calc-ios .trc-keypad {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: 128px;
+    gap: 14px;
+  }
+  #trc-root .trc-calc-ios .trc-btn {
+    border: 0;
+    border-radius: 9999px;
+    background: #4d4d4d;
+    color: #fff;
+    font-size: 54px;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    cursor: default;
+    padding: 0;
+    line-height: 1;
+    transition: background 0.12s, transform 0.08s;
+  }
+  #trc-root .trc-calc-ios .trc-btn.trc-util {
+    background: #d4d4d2;
+    color: #1c1c1c;
+    font-weight: 500;
+    font-size: 50px;
+  }
+  #trc-root .trc-calc-ios .trc-btn.trc-op {
+    background: #ff9f0a;
+    color: #fff;
+    font-weight: 500;
+  }
+  #trc-root .trc-calc-ios .trc-btn.trc-wide {
+    grid-column: span 2;
+    border-radius: 9999px;
+    justify-content: flex-start;
+    padding-left: 50px;
+  }
+  #trc-root .trc-calc-ios .trc-btn.trc-pressed {
+    transform: scale(0.95);
+    filter: brightness(1.35);
+  }
+
+  /* ====== Android calculator ====== */
+  #trc-root .trc-calc-android {
+    display: flex;
+    flex-direction: column;
+    background: transparent;
+  }
+  #trc-root .trc-calc-android .trc-status {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 28px;
+    color: #e5e5e5;
+    padding: 22px 38px 14px;
+    background: transparent;
+    border-radius: 0 0 36px 36px;
+  }
+  #trc-root .trc-calc-android .trc-display {
+    background: transparent;
+    padding: 30px 36px 110px;
+    text-align: right;
+    border-radius: 0 0 56px 56px;
+    margin-bottom: 0;
+    position: relative;
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    min-height: 280px;
+  }
+  #trc-root .trc-calc-android .trc-expr {
+    font-size: 72px;
+    color: rgba(220,220,220,0.65);
+    font-weight: 300;
+    line-height: 1;
+    margin-bottom: 18px;
+    letter-spacing: 0;
+    min-height: 80px;
+  }
+  #trc-root .trc-calc-android .trc-result {
+    font-size: 88px;
+    color: #fff;
+    font-weight: 300;
+    line-height: 1;
+    letter-spacing: 0;
+  }
+  #trc-root .trc-calc-android .trc-drawer-bar {
+    position: absolute;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 76px;
+    height: 8px;
+    border-radius: 4px;
+    background: rgba(255,255,255,0.18);
+  }
+  #trc-root .trc-calc-android .trc-util-row {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    padding: 22px 30px 10px;
+    gap: 8px;
+    align-items: center;
+  }
+  #trc-root .trc-calc-android .trc-util-row .trc-ut {
+    background: transparent;
+    border: 0;
+    color: #d8d8d8;
+    font-size: 44px;
+    font-weight: 300;
+    text-align: center;
+    line-height: 1;
+    padding: 12px 0;
+  }
+  #trc-root .trc-calc-android .trc-keypad {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: 112px;
+    gap: 12px;
+    padding: 8px 28px 38px;
+  }
+  #trc-root .trc-calc-android .trc-btn {
+    border: 0;
+    border-radius: 9999px;
+    background: #1d1d20;
+    color: #fff;
+    font-size: 52px;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 0;
+    line-height: 1;
+    transition: filter 0.12s, transform 0.08s;
+  }
+  #trc-root .trc-calc-android .trc-btn.trc-ac {
+    background: #0d6b3a;
+    color: #fff;
+    font-weight: 500;
+  }
+  #trc-root .trc-calc-android .trc-btn.trc-op {
+    background: #133a64;
+    color: #fff;
+    font-weight: 500;
+  }
+  #trc-root .trc-calc-android .trc-btn.trc-pressed {
+    transform: scale(0.95);
+    filter: brightness(1.45);
+  }
+
+  /* ====== Tap cursor / ripple ====== */
+  #trc-root .trc-fx-layer {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: visible;
+  }
+  #trc-root .trc-tap-cursor {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 170px;
+    height: 170px;
+    margin-left: -85px;
+    margin-top: -85px;
+    border-radius: 50%;
+    border: 8px solid rgba(255, 255, 255, 0.92);
+    background: rgba(255,255,255,0.10);
+    box-shadow:
+      0 0 0 3px rgba(0,0,0,0.35),
+      0 16px 40px rgba(0,0,0,0.55),
+      inset 0 0 0 2px rgba(0,0,0,0.15);
+    pointer-events: none;
+    transform: scale(1);
+    transition:
+      left 0.32s cubic-bezier(0.5, 0.02, 0.2, 1),
+      top 0.32s cubic-bezier(0.5, 0.02, 0.2, 1),
+      transform 0.10s cubic-bezier(0.4, 0, 0.6, 1),
+      opacity 0.25s ease;
+    opacity: 0;
+  }
+  #trc-root .trc-tap-cursor.trc-visible { opacity: 1; }
+  #trc-root .trc-tap-cursor.trc-tap { transform: scale(0.72); }
+
+  #trc-root .trc-ripple {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 60px;
+    height: 60px;
+    margin-left: -30px;
+    margin-top: -30px;
+    border-radius: 50%;
+    pointer-events: none;
+    background: radial-gradient(circle, rgba(255,255,255,0.85) 0%, rgba(255,255,255,0.4) 35%, rgba(255,255,255,0) 75%);
+    transform: scale(0.3);
+    opacity: 0.9;
+    animation: trc-ripple-anim 0.55s cubic-bezier(0.2, 0.7, 0.3, 1) forwards;
+  }
+  @keyframes trc-ripple-anim {
+    to { transform: scale(5.5); opacity: 0; }
+  }
+
+  /* ====== Success card ====== */
+  #trc-root .trc-calc.trc-calc-success {
+    background: #d9dadb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.65s ease;
+    pointer-events: none;
+  }
+  #trc-root .trc-calc.trc-calc-success.trc-visible {
+    opacity: 1;
+  }
+  #trc-root .trc-success-card {
+    width: 84%;
+    max-width: 1100px;
+    position: relative;
+    font-family: -apple-system, "Helvetica Neue", Arial, sans-serif;
+    color: #111;
+  }
+  #trc-root .trc-success-card .trc-row {
+    background: #fff;
+    text-align: center;
+    padding: 36px 24px;
+  }
+  #trc-root .trc-success-card .trc-row.trc-debt {
+    border: 10px solid #c8232c;
+    border-bottom-width: 0;
+  }
+  #trc-root .trc-success-card .trc-row.trc-savings {
+    border: 10px solid #1f7a3a;
+  }
+  #trc-root .trc-success-card .trc-amount {
+    font-size: 64px;
+    line-height: 1.05;
+    margin-bottom: 10px;
+    letter-spacing: -1px;
+  }
+  #trc-root .trc-success-card .trc-label {
+    font-size: 32px;
+    color: #1a1a1a;
+    line-height: 1.05;
+  }
+  #trc-root .trc-success-card .trc-row.trc-savings .trc-amount,
+  #trc-root .trc-success-card .trc-row.trc-savings .trc-label {
+    font-weight: 400;
+  }
+  #trc-root .trc-success-card .trc-cta {
+    position: absolute;
+    left: 50%;
+    bottom: -210px;
+    transform: translateX(-50%);
+    width: 106%;
+    background: #1f7a3a;
+    color: #fff;
+    font-size: 64px;
+    font-weight: 600;
+    text-align: center;
+    padding: 26px 18px;
+    border-radius: 22px;
+    text-decoration: none;
+    text-shadow: 0 3px 5px rgba(0,0,0,0.28);
+    box-shadow: 0 18px 36px rgba(0,0,0,0.25);
+    letter-spacing: 0.3px;
+    line-height: 1.1;
+  }
