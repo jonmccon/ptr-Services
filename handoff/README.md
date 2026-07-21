@@ -58,7 +58,12 @@ The build has two layers. Keep them separate in WordPress:
    - `assets/js/site.js` - all interactions (services carousel, single-open accordions,
      reveal-on-scroll, sticky-header shadow, mobile-nav toggle, the multi-step lead form, the
      dark-mode toggle). Load at the end of `<body>`.
-   - `assets/css/pages.css` - also needed by **Careers** and **Tax News**.
+   - `assets/css/pages.css` - also needed by **Home**, **Careers** and **Tax News**.
+   - **Home page extras**: `assets/css/home.css` + the three embed stylesheets
+     (`assets/embeds/rotate-carousel/styles.css`, `assets/embeds/relief-carousel/styles.css`,
+     `assets/embeds/calc-anim.css`), and their scripts after `site.js`
+     (`rotate-carousel/script.js`, `relief-carousel/script.js`, `calc-anim.js` deferred).
+     Only the homepage needs these.
    - `assets/css/portal.css` + `assets/js/portal.js` - **only** for the client portal.
    - Fonts: Inter, Newsreader, Source Code Pro, Outfit (Google Fonts, or self-host).
    - Move `assets/img/*` into the media library. Service-card icons currently point at live
@@ -82,6 +87,7 @@ The build has two layers. Keep them separate in WordPress:
 
 | Page | Slug | Fragment | Notes |
 |---|---|---|---|
+| Home | `/` | `home.html` | Site homepage. Needs `pages.css`, `home.css` + the three embed CSS/JS pairs (video carousel, 3-steps carousel, calculator animation). Hero lead form is an inline variant of the shared form (same Formidable rebuild). Video carousel list is hardcoded in `rotate-carousel/script.js` (Q2). |
 | Services (landing) | `/services/` | `services.html` | Carousel cards render from `SERVICES[]` in `site.js`. Header/footer inline in source. |
 | Offer in Compromise | `/services/settle-back-taxes-with-irs-offer-in-compromise/` | `offer-in-compromise.html` | |
 | Penalty Abatement | `/services/settle-back-taxes-with-irs-penalty-abatement/` | `penalty-abatement.html` | |
@@ -112,6 +118,10 @@ The build hardcodes these lists in JS - flag them for the editability decision:
 
 - **Services carousel** - 9 cards from `SERVICES[]` in `site.js` (title, icon, description,
   link, order). `Back Sales Tax` is `url: null` (dead) by design.
+- **Homepage video carousel** - YouTube video list in `VIDEOS[]` at the top of
+  `assets/embeds/rotate-carousel/script.js`.
+- **Homepage 3-steps carousel** - step copy/images configured in
+  `assets/embeds/relief-carousel/script.js`.
 - **Our Team roster** - inline data array (the "ace team" halo design).
 - **Tax News** - front-end article list / category filter; a real post archive in WP.
 

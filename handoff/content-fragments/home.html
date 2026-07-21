@@ -1,0 +1,279 @@
+<!-- ============================================================
+  PTR CONTENT FRAGMENT — Home (site homepage)
+  Target slug: /  (site root)
+  This is page CONTENT ONLY. No <html>/<head>, no site header,
+  no footer. Paste into the WP page body (Custom HTML block / page
+  template the_content). The theme supplies header, footer, <head>
+  + SEO, and enqueues shared assets.
+  Body attributes on the source page (apply to <body> via theme):
+    data-layout="editorial" data-page="home"
+  EXTRA ASSETS this page needs beyond site.css / site.js:
+    CSS: assets/css/pages.css, assets/css/home.css,
+         assets/embeds/rotate-carousel/styles.css,
+         assets/embeds/relief-carousel/styles.css,
+         assets/embeds/calc-anim.css
+    JS (end of body, after site.js):
+         assets/embeds/rotate-carousel/script.js   -> "Real People. Real Relief." YouTube video carousel (video list lives in its CONFIG block — likely CMS-driven, see Q2)
+         assets/embeds/relief-carousel/script.js   -> "3 Steps to Tax Relief" edge-cards carousel (step content in its config)
+         assets/embeds/calc-anim.js (defer)        -> animated tax-forgiveness calculator
+  NOTE: the hero lead form here is an INLINE copy of the shared
+  pre-qualify form (title variant "Pre-Qualify for Tax Forgiveness
+  Today", no surrounding section chrome). It is being rebuilt in
+  Formidable Forms like the shared one — see
+  theme-partials/lead-form-formidable.md. The chrome-injected lead
+  form section is NOT used on this page.
+============================================================ -->
+
+<main>
+  <!-- ============================ HERO ============================ -->
+  <section class="home-hero">
+    <div class="home-hero__bg" aria-hidden="true"><img src="assets/img/home/hero-bg.png" alt="" loading="eager"></div>
+    <div class="review-band" aria-label="Accreditations and reviews">
+      <div class="container reveal">
+        <div class="review-band__item"><img class="review-band__bbb" src="assets/img/badges/bbb-accredited.svg" alt="BBB A+ Accredited Business" onerror="this.style.display='none'"></div>
+        <span class="review-band__divider"></span>
+        <div class="review-band__item review-band__google"><img src="assets/img/badges/google-g.svg" alt="Google Reviews 450+ — 4.9/5 stars" onerror="this.style.display='none'"></div>
+        <span class="review-band__divider"></span>
+        <div class="review-band__item"><img class="review-band__tp" src="assets/img/badges/trustpilot.svg" alt="Trustpilot" onerror="this.style.display='none'"></div>
+      </div>
+    </div>
+    
+    <div class="home-hero__pop" aria-hidden="true"><img src="assets/img/home/hero-couple-cutout.png" alt="" loading="eager"></div>
+    <div class="home-hero__scrim" aria-hidden="true"></div>
+    <div class="container home-hero__grid">
+      <div class="home-hero__text reveal">
+        <img class="home-hero__seal home-hero__seal--mobile" src="assets/img/money-back-guarantee.png" alt="100% money-back guarantee">
+        <h1>Tax Relief Solutions for Your Tax Debt</h1>
+        <p class="home-hero__lead">Your right to dispute the amount you owe becomes more powerful with us.</p>
+      </div>
+      <div class="home-hero__panel reveal" data-d="1">
+        <img class="home-hero__seal home-hero__seal--desktop" src="assets/img/money-back-guarantee.png" alt="">
+        <form class="lead-form lead-form--steps" id="leadForm" novalidate>
+          <div class="lead-form__fields">
+            <h3 class="lead-form__title">Pre-Qualify for Tax Forgiveness Today</h3>
+            <div class="form-step is-active" data-step="1">
+              <div class="field"><label for="lf-owe">How much do they say you owe?</label>
+                <select id="lf-owe" name="owe" required>
+                  <option value="" disabled selected hidden>Select an amount</option>
+                  <option>Under $4,999</option>
+                  <option>$5,000 - $9,999</option>
+                  <option>$10,000 - $19,999</option>
+                  <option>$20,000 - $49,999</option>
+                  <option>$50,000 +</option>
+                </select><span class="err">Please select an amount.</span></div>
+              <button type="button" class="btn btn--lg" data-step-next style="width:100%">Get Started</button>
+            </div>
+            <div class="form-step" data-step="2">
+              <div class="field"><label>Do you have any Unfiled Tax Returns?</label>
+                <div class="toggle-group" role="radiogroup" aria-label="Do you have any Unfiled Tax Returns?">
+                  <button type="button" class="toggle-btn" data-toggle="unfiled" data-value="No" role="radio" aria-checked="false">No</button>
+                  <button type="button" class="toggle-btn" data-toggle="unfiled" data-value="Yes" role="radio" aria-checked="false">Yes</button>
+                </div>
+                <input type="hidden" id="lf-unfiled" name="unfiled" required><span class="err">Please choose one.</span></div>
+              <div class="field"><label for="lf-hear">How did you hear about us?</label>
+                <select id="lf-hear" name="hear">
+                  <option value="" disabled selected hidden>Select one</option>
+                  <option>Google / Bing</option>
+                  <option>TV</option>
+                  <option>Radio / Satellite Radio / Podcast</option>
+                  <option>Billboard</option>
+                  <option>Friend / Word of Mouth</option>
+                  <option>AI Chat</option>
+                  <option>Social Media</option>
+                  <option>Review or Finance Website</option>
+                  <option>Email</option>
+                  <option>Other (Please specify)</option>
+                </select><span class="err">Please select an option.</span></div>
+              <div class="field" id="lf-hear-other-field" hidden><label for="lf-hear-other">Please specify</label>
+                <input id="lf-hear-other" name="hearOther" type="text" placeholder="Tell us how you heard about us"><span class="err">Please tell us how.</span></div>
+              <button type="button" class="btn btn--lg" data-step-next style="width:100%">Next</button>
+            </div>
+            <div class="form-step" data-step="3">
+              <div class="field"><label for="lf-first">Contact Information <span class="req">*</span></label><input id="lf-first" name="first" type="text" autocomplete="given-name" placeholder="My Name is" required><span class="err">Please enter your name.</span></div>
+              <div class="field"><label for="lf-phone">Phone Number <span class="req">*</span></label><input id="lf-phone" name="phone" type="tel" autocomplete="tel" placeholder="(555) 123-4567" required><span class="err">Please enter a valid phone number.</span></div>
+              <div class="field"><label for="lf-email">Email Address</label><input id="lf-email" name="email" type="email" autocomplete="email" placeholder="My Email is"><span class="err">Please enter a valid email.</span></div>
+              <p class="consent">By clicking &ldquo;Pre-Qualify Now," I am consenting to and providing my electronic signature as express written consent for Priority Tax Relief to contact me regarding tax payment options by email, text or calls at the phone number and email provided using any automated or automatic telephone dialing device or system, prerecorded/artificial voice and/or artificial technology (Data and msg rates may apply, msg frequency varies: Text HELP for help; STOP to cancel) even if my telephone number is listed on any state or federal Do-Not-Call registry. This consent will not be shared with third parties for their marketing purposes. I may revoke this consent anytime and consent is not required as a condition to speak with Priority Tax, I can email: info@prioritytaxrelief.com</p>
+              <button type="submit" class="btn btn--lg" style="width:100%">Prequalify Now</button>
+            </div>
+          </div>
+          <div class="form-success">Thank you &mdash; your request has been received. A tax professional will reach out shortly.</div>
+        </form>
+      </div>
+    </div>
+    
+  </section>
+
+  <!-- ============================ PRESS BAND ============================ -->
+  <section class="press-band press-band--people">
+    <div class="container reveal">
+      <p class="press-band__label"><span class="pb-desktop">Trusted by the publications you trust</span><span class="pb-mobile">Trusted by the people you trust</span></p>
+      <div class="press-band__logos">
+        <picture class="pp-forbes"><source media="(max-width:700px)" srcset="assets/img/press/forbes-green.svg"><img class="p-forbes" src="assets/img/press/forbes.svg" alt="Forbes" onerror="this.style.display='none'"></picture>
+        <picture class="pp-bestmoney"><source media="(max-width:700px)" srcset="assets/img/press/bestmoney-green.svg"><img class="p-bestmoney" src="assets/img/press/bestmoney.svg" alt="BestMoney" onerror="this.style.display='none'"></picture>
+        <picture class="pp-bestguide"><source media="(max-width:700px)" srcset="assets/img/press/best-guide-green.svg"><img class="p-bestguide" src="assets/img/press/best-guide.svg" alt="Best Guide" onerror="this.style.display='none'"></picture>
+        <img class="p-fortune" src="assets/img/press/fortune.svg" alt="Fortune" onerror="this.style.display='none'">
+        <picture class="pp-consumeraffairs"><source media="(max-width:700px)" srcset="assets/img/press/consumeraffairs-green.svg"><img class="p-consumeraffairs" src="assets/img/press/consumeraffairs.svg" alt="ConsumerAffairs" onerror="this.style.display='none'"></picture>
+        <img class="p-google pb-mobile-only" src="assets/img/badges/google-g-green.svg" alt="Google Reviews 4.9/5" onerror="this.style.display='none'">
+        <img class="p-trustpilot pb-mobile-only" src="assets/img/badges/trustpilot-green.svg" alt="Trustpilot" onerror="this.style.display='none'">
+      </div>
+    </div>
+  </section>
+
+  <!-- ============== REAL PEOPLE. REAL RELIEF. (video carousel embed) ============== -->
+  <section class="home-videos" aria-label="Client stories">
+    <div class="vc-root" id="vc-root">
+      <h2 class="vc-title">Real People. Real Relief.</h2>
+      <div class="vc-stage">
+        <button class="vc-nav vc-nav--prev" id="vc-prev" type="button" aria-label="Previous"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
+        <div class="vc-carousel"><div class="vc-track" id="vc-track"></div></div>
+        <button class="vc-nav vc-nav--next" id="vc-next" type="button" aria-label="Next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
+      </div>
+      <div class="vc-controls">
+        <div class="vc-dots" id="vc-dots"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============== 3 STEPS TO RELIEF (edge-cards carousel embed) ============== -->
+  <section class="home-steps" aria-label="3 steps to relief">
+    <div class="relief-carousel" id="reliefCarousel">
+        <div class="rc-panel">
+          <div class="rc-panel-head">
+            <h2>3 Steps to Tax Relief</h2>
+            <p>Our experienced team of tax professionals understands the IRS system, procedures, and resolution programs. We act quickly to protect you, evaluate your full financial picture, and determine the most effective path toward resolution.</p>
+          </div>
+          <div class="rc-dots" data-rc-dots></div>
+          <div class="rc-carousel" data-rc-carousel>
+            <button class="rc-nav rc-prev" aria-label="Previous" data-rc-prev><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
+            <div class="rc-track" data-rc-track></div>
+            <button class="rc-nav rc-next" aria-label="Next" data-rc-next><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
+          </div>
+        </div>
+    </div>
+  </section>
+
+  <!-- ============== FREE TAX FORGIVENESS CALCULATOR ============== -->
+  <section class="section section--flagtile home-calc" aria-label="Tax forgiveness calculator">
+    <div class="home-calc__grid">
+      <div class="home-calc__copy reveal">
+        <h2>Try the Free Tax Forgiveness Calculator</h2>
+        <a class="btn btn--lg" href="https://www.prioritytaxrelief.com/forgiveness-estimator-bng/">Estimate Tax Savings</a>
+      </div>
+      <div class="reveal" data-d="1">
+        <div id="trc-root" data-platform="ios">
+          <div class="trc-viewport" id="trc-viewport">
+            <div class="trc-stage" id="trc-stage">
+              <img class="trc-hand-img" id="trc-hand-img" alt="">
+              <div class="trc-screen-overlay" id="trc-overlay">
+                <div class="trc-calc trc-calc-ios" id="trc-calc-ios">
+                  <div class="trc-status"><span>3:28</span><span style="font-size:22px;letter-spacing:2px;">&#9679;&#9679;&#9679; 5G &#9646;</span></div>
+                  <div class="trc-display"><div class="trc-expr" id="trc-ios-expr"></div><div class="trc-result" id="trc-ios-result">0</div></div>
+                  <div class="trc-keypad" id="trc-ios-keypad">
+                    <button class="trc-btn trc-util" data-key="C" type="button">C</button>
+                    <button class="trc-btn trc-util" data-key="+/-" type="button">+/&#8722;</button>
+                    <button class="trc-btn trc-util" data-key="%" type="button">%</button>
+                    <button class="trc-btn trc-op" data-key="&#247;" type="button">&#247;</button>
+                    <button class="trc-btn" data-key="7" type="button">7</button>
+                    <button class="trc-btn" data-key="8" type="button">8</button>
+                    <button class="trc-btn" data-key="9" type="button">9</button>
+                    <button class="trc-btn trc-op" data-key="&#215;" type="button">&#215;</button>
+                    <button class="trc-btn" data-key="4" type="button">4</button>
+                    <button class="trc-btn" data-key="5" type="button">5</button>
+                    <button class="trc-btn" data-key="6" type="button">6</button>
+                    <button class="trc-btn trc-op" data-key="-" type="button">&#8722;</button>
+                    <button class="trc-btn" data-key="1" type="button">1</button>
+                    <button class="trc-btn" data-key="2" type="button">2</button>
+                    <button class="trc-btn" data-key="3" type="button">3</button>
+                    <button class="trc-btn trc-op" data-key="+" type="button">+</button>
+                    <button class="trc-btn trc-wide" data-key="0" type="button">0</button>
+                    <button class="trc-btn" data-key="." type="button">.</button>
+                    <button class="trc-btn trc-op" data-key="=" type="button">=</button>
+                  </div>
+                </div>
+                <div class="trc-calc trc-calc-android trc-hidden" id="trc-calc-android">
+                  <div class="trc-status"><span>9:18</span><span style="font-size:22px;letter-spacing:2px;">&#9650; &#9646; &#9899;</span></div>
+                  <div class="trc-display"><div class="trc-expr" id="trc-and-expr"></div><div class="trc-result" id="trc-and-result">0</div><div class="trc-drawer-bar"></div></div>
+                  <div class="trc-util-row"><div class="trc-ut">&#8730;</div><div class="trc-ut">&#960;</div><div class="trc-ut">^</div><div class="trc-ut">!</div><div class="trc-ut">&#8964;</div></div>
+                  <div class="trc-keypad" id="trc-and-keypad">
+                    <button class="trc-btn trc-ac" data-key="C" type="button">AC</button>
+                    <button class="trc-btn trc-op" data-key="(" type="button">( )</button>
+                    <button class="trc-btn trc-op" data-key="%" type="button">%</button>
+                    <button class="trc-btn trc-op" data-key="&#247;" type="button">&#247;</button>
+                    <button class="trc-btn" data-key="7" type="button">7</button>
+                    <button class="trc-btn" data-key="8" type="button">8</button>
+                    <button class="trc-btn" data-key="9" type="button">9</button>
+                    <button class="trc-btn trc-op" data-key="&#215;" type="button">X</button>
+                    <button class="trc-btn" data-key="4" type="button">4</button>
+                    <button class="trc-btn" data-key="5" type="button">5</button>
+                    <button class="trc-btn" data-key="6" type="button">6</button>
+                    <button class="trc-btn trc-op" data-key="-" type="button">-</button>
+                    <button class="trc-btn" data-key="1" type="button">1</button>
+                    <button class="trc-btn" data-key="2" type="button">2</button>
+                    <button class="trc-btn" data-key="3" type="button">3</button>
+                    <button class="trc-btn trc-op" data-key="+" type="button">+</button>
+                    <button class="trc-btn" data-key="0" type="button">0</button>
+                    <button class="trc-btn" data-key="." type="button">,</button>
+                    <div></div>
+                    <button class="trc-btn trc-eq" data-key="=" type="button">=</button>
+                  </div>
+                </div>
+                <div class="trc-calc trc-fx-host" style="background:transparent;pointer-events:none;"><div class="trc-fx-layer" id="trc-fx-layer"><div class="trc-tap-cursor" id="trc-cursor"></div></div></div>
+                <div class="trc-calc trc-calc-success" id="trc-success-overlay">
+                  <div class="trc-success-card">
+                    <div class="trc-row trc-debt"><div class="trc-amount">$102,833</div><div class="trc-label">Tax Debt Amount</div></div>
+                    <div class="trc-row trc-savings"><div class="trc-amount">$77,833</div><div class="trc-label">Potential Savings</div></div>
+                    <a class="trc-cta" href="tel:8667082872">Call Now<br>866-708-2872</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============== WHAT OUR CLIENTS SAY ============== -->
+  <section class="section--flagtile home-reviews" aria-label="Client reviews">
+    <div class="container">
+      <div class="home-reviews__card reveal">
+        <div class="home-reviews__head">
+          <h2>What our clients say about us</h2>
+          <div class="home-reviews__aside">
+            <img src="assets/img/badges/google-g.svg" alt="Google Reviews 450+ — 4.9/5 stars" onerror="this.style.display='none'">
+          </div>
+        </div>
+        <div class="reviews-shot">
+          <img src="assets/img/about/reviews.png" alt="Five-star Google reviews from Priority Tax Relief clients" loading="lazy">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============== CURRENT CLIENT SUPPORT ============== -->
+  <section class="home-support" aria-label="Current client support">
+    <div class="container home-support__grid">
+      <div class="home-support__info reveal">
+        <h2>Current Client Support</h2>
+        <p class="home-support__hours">Hours of operation:<br>Monday&ndash;Friday<br>8AM&ndash;8PM ET</p>
+        <div class="home-support__contacts">
+          <a href="tel:18667082872">866-708-2872 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg></a>
+          <a href="mailto:ClientService@PriorityTaxRelief.com">ClientService@PriorityTaxRelief.com <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg></a>
+        </div>
+      </div>
+      <div class="home-support__copy reveal" data-d="1">
+        <p>Your peace of mind is our top priority. Our dedicated Client Services team is standing by to assist you with every step of your tax journey. Whether you need an immediate update on your case status, have questions about tax preparation or billing, or just received a new notice from the IRS, we are ready to help.</p>
+        <p>To help us route you to the right specialist and resolve your inquiry as efficiently as possible, please have your Case ID ready when contacting us.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============== MID-PAGE CTA ============== -->
+  <section class="cta-band">
+    <div class="container">
+      <div class="cta-inner reveal">
+        <a class="btn btn--lg" href="About.html">Why Priority Tax Relief</a>
+      </div>
+    </div>
+  </section>
+</main>

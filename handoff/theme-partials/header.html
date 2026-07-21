@@ -19,8 +19,8 @@
     shows 888-708-2872. CONFIRM the correct primary number (Open Q6).
   • assets/img/icons8-call.gif is a third-party (icons8) asset — confirm
     license before shipping (Open Q9).
-  • Logo / "Clients" button: in the live site the brand links to the WP
-    home; here it points at Services Page.html. Repoint to home_url().
+  • Logo / "Clients" button: the brand links to the homepage (in the
+    static build, Homepage.html). Repoint to home_url().
 ============================================================ -->
 <header class="site-header" id="siteHeader">
   <div class="container header-inner">
@@ -68,11 +68,17 @@
     </nav>
 
     <div class="header-actions">
-      <a class="hotline" href="tel:18667082872">
-        <span>Tax Help Hotline (866)&nbsp;708-2872</span>
-        <img class="hotline__icon" src="assets/img/icons8-call.gif" alt="">
-      </a>
-      <a class="btn" href="/clients/" style="color:#000">Clients</a>
+      <!-- .header-cta groups the hotline + Clients button so the stacked
+           mobile header (<=1000px) can wrap them onto their own full-width
+           row; .hotline__num lets CSS drop just the number when space runs
+           out. Keep both hooks — site.css depends on them. -->
+      <div class="header-cta">
+        <a class="hotline" href="tel:18667082872">
+          <span>Tax Help Hotline<span class="hotline__num"> (866)&nbsp;708-2872</span></span>
+          <img class="hotline__icon" src="assets/img/icons8-call.gif" alt="">
+        </a>
+        <a class="btn" href="/clients/" style="color:#000">Clients</a>
+      </div>
       <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
       </button>

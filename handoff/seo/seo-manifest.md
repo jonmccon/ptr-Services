@@ -4,6 +4,19 @@ Preserve these **exactly** when the pages go live. Configure your SEO plugin (Yo
 
 > Note: The landing page OG title is **"Services Archive"** and its schema is **CollectionPage** with a `rel=next` - leftovers from the original WP archive. Decide whether to keep archive semantics or migrate to `WebPage`/`Service`. See the Engineering Ticket, Open Question 5.
 
+## Home (site homepage)
+
+| Field | Value |
+|---|---|
+| Source file | `Homepage.html` |
+| Fragment | `home.html` |
+| Canonical | `https://www.prioritytaxrelief.com/` |
+| `<title>` | Priority Tax Relief - Tax Relief Solutions for Your Tax Debt |
+| Meta description | Priority Tax Relief negotiates with the IRS and state agencies on your behalf. Free consultation, money-back guarantee, and a proven 3-step path to tax relief. |
+| Robots | index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1 |
+| OG type / title | website / Priority Tax Relief - Tax Relief Solutions for Your Tax Debt |
+| JSON-LD @graph | - (none authored; add WebSite/Organization at launch if desired) |
+
 ## Services (landing)
 
 | Field | Value |
