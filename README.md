@@ -15,8 +15,9 @@ J
 
 
 ```
-index.html                  ← site landing (the Services page)
-Services Page.html          ← Services (same content; nav links point here)
+index.html                  ← site landing (the Homepage)
+Homepage.html               ← Homepage (same content; the logo links point here)
+Services Page.html          ← Services landing (nav "Services" points here)
 About.html  Careers.html  Contact.html  Our Team.html  Tax News.html
 Offer in Compromise.html  Penalty Abatement.html  Innocent Spouse Relief.html
 Currently Not Collectible.html  Installment Agreement.html
@@ -28,6 +29,8 @@ clients.html                ← Client Services (case-process timeline)
 Thank You.html
 404.html                    ← branded not-found page
 assets/                     ← css / js / img (logos, badges, photos, icons)
+                              assets/embeds/ holds the homepage's video carousel,
+                              3-steps carousel, and calculator-animation embeds
 handoff/                    ← WordPress engineering handoff (published at /handoff/)
                               open handoff/index.html — content fragments, theme
                               partials, SEO manifest, Formidable form guide + XML
@@ -46,15 +49,16 @@ integration guide; all of its links resolve within this build.
 - **Filenames contain spaces** (e.g. `Offer in Compromise.html`). This is
   intentional and works on GitHub Pages — every internal link already matches.
   Don't rename files unless you also update the links.
-- **Online-only pieces:** the homepage/service-page hero videos (YouTube
-  embeds), the team photos on *Our Team*, and the Leaflet map on *About* load
-  from the internet, so they appear only when the visitor is online. Everything
-  else is bundled locally.
+- **Online-only pieces:** the Services-page hero video and the homepage
+  "Real People. Real Relief." carousel (YouTube embeds), the team photos on
+  *Our Team*, and the Leaflet map on *About* load from the internet, so they
+  appear only when the visitor is online. Everything else is bundled locally.
 - **Service-card icons** reference the live `prioritytaxrelief.com` media
   library (so they resolve once dropped back into WordPress); a branded
   fallback renders if an image fails to load.
-- **External links** (the logo, "Contact us today") point to the live
-  `prioritytaxrelief.com` site by design. The footer policy links (FAQs,
+- **External links** ("Contact us today", the calculator's "Estimate Tax
+  Savings") point to the live `prioritytaxrelief.com` site by design; the
+  logo now links to the bundled `Homepage.html`. The footer policy links (FAQs,
   Terms & Conditions, Privacy Policy, DNC/TCPA) now resolve to the **local**
   pages bundled in this folder.
 - `clients.html` is the **Client Services** page — a case-process timeline.
