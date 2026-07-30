@@ -45,6 +45,7 @@
               '<a href="Tax News.html?cat=tax-relief" role="menuitem">Tax Relief</a>' +
               '<a href="Tax News.html?cat=professional-advice" role="menuitem">Professional Advice</a>' +
               '<a href="Tax News.html?cat=state-taxes" role="menuitem">State Taxes</a>' +
+              '<a href="Tax News.html?cat=press-releases" role="menuitem">Press Releases</a>' +
               '<a href="Tax News.html" role="menuitem">View All</a>' +
             '</div>' +
           '</div>' +
