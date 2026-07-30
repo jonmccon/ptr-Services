@@ -102,7 +102,7 @@ The build has two layers. Keep them separate in WordPress:
 | Careers | `/careers/` | `careers.html` | Needs `pages.css`. |
 | Contact | `/contact/` | `contact.html` | Contact form is a front-end demo. |
 | Our Team | `/our-team/` | `our-team.html` | Redesigned as the "ace team" radial halo (was the org-chart roster, now archived). Roster comes from an inline data script (kept); B&W SVG filter kept. Page-specific CSS travels at the top of the fragment—move it into the theme stylesheet. |
-| Tax News | `/tax-news/` | `tax-news.html` | Needs `pages.css`. In WP this is a real post archive. |
+| Tax News | `/tax-news/` | `tax-news.html` | Needs `pages.css`. In WP this is a real post archive. Nav/chips now include a **Press Releases** category (`?cat=press-releases`) - create the WP category with slug `press-releases`; it has no posts in the prototype and renders the empty state. |
 | Tax News article | (blog post) | `uncommon-tax-deductions.html` | Sample article; uses a build-only `<image-slot>` - swap for the real featured image. |
 | Thank You | `/thank-you/` | `thank-you.html` | Lead-form redirect target in the prototype. |
 | FAQs | `/faqs/` | `faqs.html` | Footer-linked. Has **FAQPage** JSON-LD (Q/A rich-result schema) - preserve it. |

@@ -37,6 +37,7 @@
         <a class="chip" data-cat="tax-relief" href="Tax News.html?cat=tax-relief">Tax Relief</a>
         <a class="chip" data-cat="professional-advice" href="Tax News.html?cat=professional-advice">Professional Advice</a>
         <a class="chip" data-cat="state-taxes" href="Tax News.html?cat=state-taxes">State Taxes</a>
+        <a class="chip" data-cat="press-releases" href="Tax News.html?cat=press-releases">Press Releases</a>
       </nav>
 
       <div class="news-grid" id="newsGrid">
@@ -145,13 +146,15 @@
     "tax-planning": "Tax Planning",
     "tax-relief": "Tax Relief",
     "professional-advice": "Professional Advice",
-    "state-taxes": "State Taxes"
+    "state-taxes": "State Taxes",
+    "press-releases": "Press Releases"
   };
   var INTROS = {
     "tax-relief": "Programs and strategies that reduce what you owe — and how to qualify.",
     "irs-letters-notices": "What that IRS letter actually means, and exactly how to respond.",
     "tax-compliance-and-strategy": "Staying compliant and planning ahead so the IRS stays out of your way.",
-    "professional-advice": "Practical guidance from the CPAs, attorneys and Enrolled Agents on our team."
+    "professional-advice": "Practical guidance from the CPAs, attorneys and Enrolled Agents on our team.",
+    "press-releases": "Company announcements and news from Priority Tax Relief."
   };
   var params = new URLSearchParams(window.location.search);
   var cat = (params.get("cat") || "all").toLowerCase();
